@@ -807,9 +807,44 @@ footer{
   .qs-section{padding:72px 22px}
 }
 
+/* ── FAQ ── */
+.faq-item{
+  border:1px solid var(--brd-2);border-radius:14px;
+  background:var(--card);overflow:hidden;transition:.3s;
+}
+.faq-item:hover{border-color:var(--brd-gold)}
+.faq-item.open{border-color:rgba(212,148,10,.4)}
+.faq-q{
+  width:100%;padding:22px 24px;text-align:left;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:15px;font-weight:600;color:var(--txt);gap:16px;
+  background:none;border:none;cursor:pointer;
+  transition:.2s;
+}
+.faq-q:hover{color:var(--gold-hi)}
+.faq-item.open .faq-q{color:var(--gold-hi)}
+.faq-arrow{flex-shrink:0;stroke:var(--txt-2);transition:transform .3s}
+.faq-item.open .faq-arrow{transform:rotate(180deg);stroke:var(--gold-hi)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  padding:0 24px;
+  font-size:14px;color:var(--txt-2);line-height:1.7;font-weight:300;
+  transition:max-height .4s cubic-bezier(.22,1,.36,1),padding .4s;
+}
+.faq-item.open .faq-a{max-height:200px;padding:0 24px 22px}
+
+/* Testimonios responsive */
+@media(max-width:900px){
+  .testi-grid{grid-template-columns:1fr!important}
+}
+
 /* ── REVEAL ── */
-.reveal{opacity:1;transform:translateY(0)}
-.reveal-d1{}.reveal-d2{}.reveal-d3{}.reveal-d4{}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.10s}
+.reveal-d2{transition-delay:.20s}
+.reveal-d3{transition-delay:.30s}
+.reveal-d4{transition-delay:.44s}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1100px){
@@ -829,8 +864,46 @@ footer{
   .earn-extras{grid-template-columns:1fr}
   .partners-grid{grid-template-columns:1fr}
   .section,.cta-wrap,.earn-section,.network-section{padding:72px 22px}
-  .hero-right{display:none}
+  /* Logo + tarjetas de beneficios — mostrar en mobile, versión compacta */
+  .hero-right{
+    display:flex;height:auto;margin-top:32px;
+    justify-content:center;
+  }
+  .logo-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto auto auto;
+    gap:10px;
+    width:100%;max-width:340px;
+    height:auto;
+  }
+  .logo-glow,.logo-glow-ring{display:none}
+  .logo-hex-wrap{
+    grid-column:span 2;justify-self:center;
+    width:160px;height:160px;animation:none;
+    position:relative;z-index:2;
+  }
+  /* Float cards → grid 2x2 debajo del logo */
+  .float-card{
+    position:static!important;
+    transform:none!important;
+    animation:none!important;
+    padding:12px 16px;
+    border-radius:14px;
+  }
+  .fc-num{font-size:20px}
+  .float-card.fc-1,.float-card.fc-2,
+  .float-card.fc-3,.float-card.fc-4{
+    position:static!important;
+    top:auto!important;right:auto!important;
+    bottom:auto!important;left:auto!important;
+  }
   footer{flex-direction:column;text-align:center}.ft-links{justify-content:center}
+}
+/* Garantizar visibilidad en mobile si JS tarda */
+@media(max-width:480px){
+  .reveal{opacity:1!important;transform:none!important;transition:none}
+  .bento-card,.step,.earn-card,.faq-item{opacity:1!important}
 }
 </style>
 </head>
@@ -1239,6 +1312,100 @@ footer{
   </div>
 </div>
 
+<div class="section-glow"></div>
+
+<!-- ══ TESTIMONIOS ══ -->
+<section class="section" id="testimonios" style="padding-top:100px;padding-bottom:0">
+  <div class="reveal">
+    <span class="eyebrow">Testimonios</span>
+    <h2 class="h2">Lo que dicen<br><em>los socios.</em></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px" class="testi-grid">
+    <div class="bento-card reveal reveal-d1" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:4px">
+        <span style="color:var(--gold-hi)">★★★★★</span>
+      </div>
+      <p style="font-size:15px;color:var(--txt-2);line-height:1.7;font-style:italic;font-family:'Playfair Display',serif">"Desde que me uní al Socio Genial ahorro en cada compra y ya empecé a generar ingresos por mi red. Es exactamente lo que buscaba."</p>
+      <div style="margin-top:auto;border-top:1px solid var(--brd);padding-top:14px;font-size:13px;color:var(--txt-2)"><strong style="color:var(--txt)">Jhonny M.</strong> · Santa Cruz</div>
+    </div>
+    <div class="bento-card reveal reveal-d2" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:4px">
+        <span style="color:var(--gold-hi)">★★★★★</span>
+      </div>
+      <p style="font-size:15px;color:var(--txt-2);line-height:1.7;font-style:italic;font-family:'Playfair Display',serif">"El 20% de descuento en Típicos ya vale la membresía sola. Todo lo demás es ganancia encima."</p>
+      <div style="margin-top:auto;border-top:1px solid var(--brd);padding-top:14px;font-size:13px;color:var(--txt-2)"><strong style="color:var(--txt)">Katherine A.</strong> · Santa Cruz</div>
+    </div>
+    <div class="bento-card reveal reveal-d3" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:4px">
+        <span style="color:var(--gold-hi)">★★★★★</span>
+      </div>
+      <p style="font-size:15px;color:var(--txt-2);line-height:1.7;font-style:italic;font-family:'Playfair Display',serif">"Edmar es un visionario. El modelo es simple, transparente y funciona. Recomendé a 3 personas y ya tengo comisiones pasivas."</p>
+      <div style="margin-top:auto;border-top:1px solid var(--brd);padding-top:14px;font-size:13px;color:var(--txt-2)"><strong style="color:var(--txt)">Luis G.</strong> · Santa Cruz</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-glow"></div>
+
+<!-- ══ FAQ ══ -->
+<section class="section" id="faq" style="padding-bottom:100px">
+  <div class="reveal">
+    <span class="eyebrow">Preguntas frecuentes</span>
+    <h2 class="h2">Todo lo que<br><em>querés saber.</em></h2>
+  </div>
+  <div style="max-width:760px;margin:56px auto 0;display:flex;flex-direction:column;gap:12px" class="faq-list">
+
+    <div class="faq-item reveal reveal-d1">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        ¿Cuánto cuesta la membresía?
+        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">El costo de la membresía anual está disponible contactando directamente con Edmar. Se ajusta según la economía y estrategia comercial del momento.</div>
+    </div>
+
+    <div class="faq-item reveal reveal-d2">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        ¿Qué pasa si no recomiendo a nadie?
+        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Igual tenés el 20% de descuento en todos los negocios de la red. Las comisiones son un beneficio adicional — no es obligatorio recomendar para disfrutar del descuento.</div>
+    </div>
+
+    <div class="faq-item reveal reveal-d3">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        ¿Qué negocios aceptan la membresía?
+        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Actualmente Típicos (café y sabores bolivianos en Santa Cruz). Próximamente supermercados y farmacias. La red de negocios se expande mes a mes.</div>
+    </div>
+
+    <div class="faq-item reveal reveal-d1">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        ¿Cómo recibo mis comisiones?
+        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Las comisiones se acumulan automáticamente en tu cuenta del Socio Genial y se procesan según las condiciones acordadas en tu membresía.</div>
+    </div>
+
+    <div class="faq-item reveal reveal-d2">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        ¿El modelo funciona fuera de Bolivia?
+        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Sí. El modelo está diseñado para expandirse internacionalmente. Tu red puede crecer en cualquier país, manteniendo la misma estructura de beneficios y comisiones.</div>
+    </div>
+
+    <div class="faq-item reveal reveal-d3">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        ¿Qué es el Fondo Navideño?
+        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Por cada persona en tus 3 primeros niveles de red, el 1% de su membresía se acumula en tu fondo personal. Se paga a fin de año como bono navideño garantizado.</div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ══ CTA ══ -->
 <div class="cta-wrap" id="unirse">
   <div class="cta-glow-l"></div>
@@ -1313,16 +1480,18 @@ footer{
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
-// Reveal on scroll
+// Reveal on scroll — threshold 0 con rootMargin generoso para disparar antes
 const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Fallback: muestra todo después de 1.5s por si el observer falla
+// Fallback de seguridad a 2s
 setTimeout(() => {
   document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
-}, 1500);
+}, 2000);
 
 // Nav scroll
 const nav = document.getElementById('nav');
