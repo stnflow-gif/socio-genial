@@ -829,7 +829,14 @@ footer{
   .earn-extras{grid-template-columns:1fr}
   .partners-grid{grid-template-columns:1fr}
   .section,.cta-wrap,.earn-section,.network-section{padding:72px 22px}
-  .hero-right{display:none}
+  /* Logo visible en mobile — compacto y centrado */
+  .hero-right{display:flex;height:260px;justify-content:center;overflow:visible}
+  .logo-wrap{width:220px;height:220px}
+  .logo-hex-wrap{width:220px;height:220px}
+  .logo-glow{inset:-30px;filter:blur(25px)}
+  .logo-glow-ring{inset:-8px;filter:blur(10px)}
+  /* Tarjetas flotantes — ocultar en mobile (overflow las corta) */
+  .float-card{display:none}
   footer{flex-direction:column;text-align:center}.ft-links{justify-content:center}
 }
 </style>
