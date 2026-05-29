@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>El Socio Genial · La red donde comprar es ganar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060504;
+  --card:#110D08;
+  --card-2:#171108;
+  --brd:rgba(255,255,255,0.05);
+  --brd-2:rgba(255,255,255,0.08);
+  /* Metallic gold */
+  --g1:#FFF4A0; --g2:#FFD84A; --g3:#D4940A; --g4:#8B5E05; --g5:#3D2703;
+  --gold:#D4940A;
+  --gold-hi:#FFD84A;
+  --gold-glow:rgba(212,148,10,0.5);
+  --gold-soft:rgba(212,148,10,0.10);
+  /* Electric blue */
+  --blue:#1A3AFF;
+  --blue-2:#4D6BFF;
+  --blue-hi:#7B94FF;
+  --blue-glow:rgba(26,58,255,0.4);
+  --blue-soft:rgba(26,58,255,0.10);
+  /* Text */
+  --txt:#F0EAE0;
+  --txt-2:#8A8070;
+  --mu:#4A4035;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  background:var(--bg);color:var(--txt);
+  font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;line-height:1.5;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ── AMBIENT LIGHTS — Velocity style (INTENSE) ── */
+.light{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(120px)}
+
+/* Gran orbe dorado superior izquierdo — MÁS INTENSO */
+.light-gold-tl{
+  width:1000px;height:800px;top:-300px;left:-250px;
+  background:radial-gradient(ellipse,rgba(212,120,5,.52) 0%,rgba(180,90,5,.28) 30%,transparent 65%);
+  animation:lightDrift1 20s ease-in-out infinite;
+}
+/* Gran orbe dorado inferior derecho */
+.light-gold-br{
+  width:1100px;height:900px;bottom:-300px;right:-250px;
+  background:radial-gradient(ellipse,rgba(212,120,5,.45) 0%,rgba(160,80,5,.22) 35%,transparent 65%);
+  animation:lightDrift2 25s ease-in-out infinite 5s;
+}
+/* Orbe azul lateral */
+.light-blue-tr{
+  width:700px;height:600px;top:50vh;right:-150px;
+  background:radial-gradient(ellipse,rgba(26,58,255,.22) 0%,transparent 60%);
+  animation:lightDrift3 18s ease-in-out infinite 3s;
+}
+/* Orbe dorado central — horizonte */
+.light-gold-mid{
+  position:fixed;width:1600px;height:500px;
+  top:55vh;left:50%;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(180,100,5,.28) 0%,rgba(140,75,5,.12) 40%,transparent 65%);
+  filter:blur(130px);pointer-events:none;z-index:0;
+  animation:lightDrift1 30s ease-in-out infinite 8s;
+}
+/* Orbe extra — parte alta de la página */
+.light-gold-top{
+  position:fixed;width:1200px;height:300px;
+  top:0;left:50%;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(212,120,5,.18) 0%,transparent 65%);
+  filter:blur(100px);pointer-events:none;z-index:0;
+}
+
+@keyframes lightDrift1{0%,100%{transform:translate(0,0)}33%{transform:translate(60px,50px)}66%{transform:translate(-30px,25px)}}
+@keyframes lightDrift2{0%,100%{transform:translate(0,0)}40%{transform:translate(-60px,-40px)}70%{transform:translate(40px,-15px)}}
+@keyframes lightDrift3{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,70px)}}
+
+/* ── SECTION HORIZON GLOWS ── */
+/* Línea brillante de transición entre secciones (como Velocity) */
+.section-glow{
+  height:1px;width:100%;
+  background:linear-gradient(90deg,transparent 0%,rgba(212,148,10,.6) 20%,rgba(212,148,10,.9) 50%,rgba(212,148,10,.6) 80%,transparent 100%);
+  position:relative;
+}
+.section-glow::after{
+  content:'';position:absolute;top:-60px;left:0;right:0;height:120px;
+  background:radial-gradient(ellipse 80% 100% at 50% 100%,rgba(212,120,5,.22),transparent 70%);
+  pointer-events:none;
+}
+
+/* ── GRAIN ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.03;mix-blend-mode:overlay;
+}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .4s,border-color .4s;
+  background:rgba(6,5,4,0);
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(6,5,4,.92);
+  border-bottom-color:var(--brd-2);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;
+  padding:22px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{
+  color:var(--txt-2);font-size:13px;padding:8px 16px;border-radius:8px;
+  transition:.2s;font-weight:500;letter-spacing:.3px;
+}
+.nav-links a:hover{color:var(--txt);background:rgba(255,255,255,.04)}
+.nav-cta{
+  padding:10px 22px;border-radius:9px;
+  border:1px solid rgba(26,58,255,.45);
+  background:rgba(26,58,255,.10);
+  color:var(--blue-hi)!important;font-weight:700;font-size:13px;
+  transition:.25s;letter-spacing:.3px;
+}
+.nav-cta:hover{background:rgba(26,58,255,.20)!important;border-color:var(--blue-2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,58,255,.25)}
+@media(max-width:640px){.nav-links a:not(.nav-cta){display:none}.nav-inner{padding:16px 22px}}
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero{
+  position:relative;min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  padding:120px 40px 80px;max-width:1280px;margin:0 auto;
+  overflow:visible;gap:40px;
+}
+.hero-left{position:relative;z-index:2}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:7px 16px;border-radius:100px;
+  border:1px solid rgba(26,58,255,.35);background:rgba(26,58,255,.08);
+  font-size:12px;font-weight:600;color:var(--blue-hi);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;
+}
+.hero-tag-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--blue-2);box-shadow:0 0 10px var(--blue-glow);
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,9vw,130px);
+  line-height:.92;letter-spacing:2px;
+  color:var(--txt);margin-bottom:0;
+}
+.hero-title .gold-word{
+  display:block;
+  background:linear-gradient(160deg,var(--g1) 0%,var(--g2) 25%,var(--g3) 55%,var(--g4) 80%,var(--g5) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 30px rgba(212,148,10,.5));
+}
+.hero-title .blue-word{
+  display:block;color:var(--txt);
+  -webkit-text-stroke:1px rgba(255,255,255,.15);
+}
+.hero-title .italic-word{
+  display:block;
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:700;
+  font-size:.72em;letter-spacing:0;
+  color:var(--txt-2);
+  background:none;-webkit-background-clip:unset;background-clip:unset;
+}
+
+.hero-sub{
+  margin-top:28px;font-size:16px;
+  color:var(--txt-2);max-width:480px;line-height:1.7;font-weight:300;
+}
+.hero-sub strong{color:var(--txt);font-weight:600}
+
+.hero-actions{
+  margin-top:40px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 30px;border-radius:11px;font-weight:800;font-size:14px;
+  background:linear-gradient(160deg,var(--g1) 0%,var(--g2) 30%,var(--g3) 70%,var(--g4) 100%);
+  color:#0A0600;
+  box-shadow:0 8px 32px rgba(212,148,10,.45),inset 0 1px 0 rgba(255,255,255,.6);
+  transition:.3s cubic-bezier(.22,1,.36,1);
+  position:relative;overflow:hidden;
+}
+.btn-gold::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transform:translateX(-100%);transition:.6s}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(212,148,10,.6)}
+.btn-gold:hover::after{transform:translateX(100%)}
+.btn-blue{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 30px;border-radius:11px;font-weight:700;font-size:14px;
+  border:1px solid rgba(26,58,255,.45);background:rgba(26,58,255,.10);
+  color:var(--blue-hi);
+  transition:.25s;
+}
+.btn-blue:hover{background:rgba(26,58,255,.22);border-color:var(--blue-2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(26,58,255,.3)}
+
+/* HERO RIGHT — Logo SG 3D metálico */
+.hero-right{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  height:580px;
+}
+.logo-wrap{
+  position:relative;width:420px;height:420px;
+  display:flex;align-items:center;justify-content:center;
+  /* NO isolation:isolate — necesario para que mix-blend-mode funcione con el fondo de página */
+}
+
+/* Glow dorado pulsante detrás del logo */
+.logo-glow{
+  position:absolute;inset:-70px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,148,10,.55) 0%,rgba(180,90,5,.28) 35%,transparent 65%);
+  filter:blur(50px);pointer-events:none;z-index:1;
+  animation:glowPulse 4s ease-in-out infinite;
+}
+.logo-glow-ring{
+  position:absolute;inset:-20px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,148,10,.25) 0%,transparent 60%);
+  filter:blur(20px);pointer-events:none;z-index:1;
+  animation:glowPulse 5s ease-in-out infinite .8s;
+}
+
+/* Logo SG */
+.logo-hex-wrap{
+  width:440px;height:440px;
+  position:relative;z-index:2;
+  animation:logoFloat 7s ease-in-out infinite;
+}
+.logo-hex-wrap img{
+  width:100%;height:100%;
+  object-fit:contain;display:block;
+  filter:
+    drop-shadow(0 0 30px rgba(212,148,10,.95))
+    drop-shadow(0 0 60px rgba(212,148,10,.65))
+    drop-shadow(0 0 110px rgba(212,148,10,.40));
+}
+
+/* Floating benefit cards */
+.float-card{
+  position:absolute;padding:12px 16px;border-radius:12px;
+  border:1px solid rgba(212,148,10,.22);
+  background:rgba(10,8,4,.88);backdrop-filter:blur(16px);
+  white-space:nowrap;z-index:3;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+}
+.fc-1{top:0%;right:-16%;animation:fc1 6s ease-in-out infinite}
+.fc-2{bottom:8%;right:-14%;animation:fc2 7s ease-in-out infinite .6s}
+.fc-3{bottom:0%;left:-18%;animation:fc1 5.5s ease-in-out infinite 1.2s}
+.fc-4{top:18%;left:-14%;animation:fc2 6.5s ease-in-out infinite 1.8s}
+.fc-num{
+  font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;
+  background:linear-gradient(135deg,#FFFEF0,#FFE14A,#D4900A);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;
+}
+.fc-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.8px;color:var(--txt-2);margin-top:3px}
+
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  40%{transform:translateY(-16px)}
+  70%{transform:translateY(8px)}
+}
+@keyframes glowPulse{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes fc1{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes fc2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+/* ══════════════════════════════
+   FULL-WIDTH DIVIDER
+══════════════════════════════ */
+.divider-band{
+  border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);
+  padding:28px 0;overflow:hidden;
+  background:linear-gradient(90deg,transparent,rgba(26,58,255,.04),transparent);
+  position:relative;
+}
+.divider-band::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(26,58,255,.4),var(--gold-hi),rgba(26,58,255,.4),transparent);
+}
+.ticker-wrap{overflow:hidden;position:relative}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.ticker{display:flex;gap:0;width:max-content;animation:ticker 24s linear infinite}
+.ticker-item{
+  display:flex;align-items:center;gap:16px;
+  padding:0 40px;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--txt-2);
+  border-right:1px solid var(--brd);
+}
+.ticker-item span{color:var(--gold-hi)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ══════════════════════════════
+   SECTIONS BASE
+══════════════════════════════ */
+.section{padding:110px 40px;max-width:1280px;margin:0 auto}
+.eyebrow{
+  font-size:11px;text-transform:uppercase;letter-spacing:5px;
+  color:var(--blue-hi);font-weight:700;margin-bottom:18px;display:block;
+}
+.eyebrow-gold{color:var(--gold-hi)}
+.h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,6vw,86px);
+  line-height:.95;letter-spacing:2px;color:var(--txt);
+}
+.h2 em{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-size:.72em;letter-spacing:0;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section-sub{margin-top:18px;font-size:16px;color:var(--txt-2);font-weight:300;line-height:1.7;max-width:500px}
+
+/* ══════════════════════════════
+   STEPS
+══════════════════════════════ */
+.steps-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  margin-top:64px;background:var(--brd-2);border-radius:20px;overflow:hidden;
+  border:1px solid var(--brd-2);
+}
+.step{
+  padding:44px 36px;background:var(--card);
+  position:relative;transition:.4s;
+}
+.step:hover{background:var(--card-2);z-index:1}
+.step::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .4s}
+.step:hover::before{background:linear-gradient(90deg,transparent,var(--blue-2),var(--gold-hi),var(--blue-2),transparent)}
+.step-num{
+  font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;
+  color:var(--brd-2);margin-bottom:20px;transition:.4s;
+}
+.step:hover .step-num{color:rgba(26,58,255,.2)}
+.step h3{font-size:20px;font-weight:700;margin-bottom:12px;line-height:1.2}
+.step p{font-size:14px;color:var(--txt-2);line-height:1.7;font-weight:300}
+.step-arrow{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:var(--blue-hi);opacity:0;transform:translateY(4px);transition:.3s;
+}
+.step:hover .step-arrow{opacity:1;transform:translateY(0)}
+
+/* ══════════════════════════════
+   EARNINGS / FRANQUICIA
+══════════════════════════════ */
+.earn-section{
+  padding:110px 40px;
+  position:relative;overflow:hidden;
+  border-top:1px solid var(--brd);
+}
+.earn-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 0% 50%,rgba(26,58,255,.06),transparent 60%),
+    radial-gradient(ellipse 50% 60% at 100% 50%,rgba(212,148,10,.05),transparent 60%);
+}
+.earn-inner{max-width:1280px;margin:0 auto}
+.earn-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:64px}
+
+.earn-card{
+  padding:44px 40px;border-radius:22px;
+  border:1px solid var(--brd-2);background:var(--card);
+  position:relative;overflow:hidden;
+  transition:.4s;
+}
+.earn-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:.4s}
+.earn-card.gold-card::before{background:linear-gradient(90deg,transparent,var(--gold-hi),transparent)}
+.earn-card.blue-card::before{background:linear-gradient(90deg,transparent,var(--blue-2),transparent)}
+.earn-card:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.earn-card.gold-card:hover{border-color:rgba(212,148,10,.35)}
+.earn-card.blue-card:hover{border-color:rgba(26,58,255,.35)}
+
+.earn-num{
+  font-family:'Bebas Neue',sans-serif;font-size:96px;letter-spacing:2px;
+  line-height:.88;margin-bottom:16px;
+}
+.earn-num.gold{
+  background:linear-gradient(160deg,var(--g1),var(--g2),var(--g3),var(--g4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 24px rgba(212,148,10,.4));
+}
+.earn-num.blue{
+  background:linear-gradient(160deg,#C0CCFF,var(--blue-hi),var(--blue-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 24px rgba(26,58,255,.4));
+}
+.earn-card h3{font-size:22px;font-weight:700;margin-bottom:12px;line-height:1.2}
+.earn-card p{font-size:15px;color:var(--txt-2);line-height:1.7;font-weight:300}
+.earn-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:22px;padding:7px 14px;border-radius:8px;
+  font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+}
+.earn-tag.gold{border:1px solid rgba(212,148,10,.3);background:rgba(212,148,10,.08);color:var(--gold-hi)}
+.earn-tag.blue{border:1px solid rgba(26,58,255,.3);background:rgba(26,58,255,.08);color:var(--blue-hi)}
+
+/* Extras row */
+.earn-extras{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
+.earn-extra{
+  padding:22px 20px;border-radius:16px;
+  border:1px solid var(--brd-2);background:var(--card);
+  text-align:center;transition:.3s;
+}
+.earn-extra:hover{border-color:rgba(212,148,10,.3)}
+.earn-extra-num{
+  font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.earn-extra.green .earn-extra-num{background:linear-gradient(135deg,#6EFFD8,#34D399);-webkit-background-clip:text;background-clip:text}
+.earn-extra.green{border-color:rgba(52,211,153,.2)}
+.earn-extra.green:hover{border-color:rgba(52,211,153,.4)}
+.earn-extra-lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt-2);margin-top:5px;font-weight:600;line-height:1.3}
+
+/* ══════════════════════════════
+   PARTNER NETWORK
+══════════════════════════════ */
+.network-section{
+  padding:110px 40px;
+  border-top:1px solid var(--brd);
+  position:relative;overflow:hidden;
+}
+.network-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 50% at 50% 100%,rgba(26,58,255,.06),transparent 60%);
+}
+.network-inner{max-width:1280px;margin:0 auto}
+.partners-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  margin-top:64px;
+}
+.partner-card{
+  padding:28px 24px;border-radius:20px;
+  border:1px solid var(--brd-2);background:var(--card);
+  position:relative;overflow:hidden;
+  transition:.4s;
+  display:flex;flex-direction:column;gap:14px;
+}
+.partner-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--brd-2),transparent)}
+.partner-card.active{border-color:rgba(212,148,10,.35);background:linear-gradient(145deg,rgba(212,148,10,.06),var(--card))}
+.partner-card.active::before{background:linear-gradient(90deg,transparent,var(--gold-hi),transparent)}
+.partner-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.partner-card.active:hover{border-color:rgba(212,148,10,.55);box-shadow:0 20px 50px rgba(212,148,10,.12)}
+
+.partner-status{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 12px;border-radius:100px;font-size:10px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;width:fit-content;
+}
+.partner-status.live{
+  background:rgba(212,148,10,.12);border:1px solid rgba(212,148,10,.35);color:var(--gold-hi);
+}
+.partner-status.live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-hi);box-shadow:0 0 8px var(--gold-glow);animation:blink 2s infinite}
+.partner-status.soon{
+  background:rgba(255,255,255,.04);border:1px solid var(--brd-2);color:var(--txt-2);
+}
+.partner-logo-wrap{
+  width:56px;height:56px;border-radius:14px;
+  background:#fff;border:1px solid rgba(212,148,10,.3);
+  display:grid;place-items:center;overflow:hidden;
+}
+.partner-logo-wrap img{width:80%;height:80%;object-fit:contain}
+.partner-logo-placeholder{
+  width:56px;height:56px;border-radius:14px;
+  background:var(--card-2);border:1px solid var(--brd-2);
+  display:grid;place-items:center;
+  font-size:22px;
+}
+.partner-name{font-size:17px;font-weight:700;color:var(--txt)}
+.partner-desc{font-size:13px;color:var(--txt-2);font-weight:300;line-height:1.5}
+.partner-pct{
+  font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.partner-pct-soon{
+  font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--brd-2);
+}
+.partner-more{
+  grid-column:span 1;
+  padding:28px 24px;border-radius:20px;
+  border:2px dashed var(--brd-2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  color:var(--txt-2);text-align:center;
+  transition:.3s;cursor:default;
+}
+.partner-more:hover{border-color:rgba(26,58,255,.35);color:var(--blue-hi)}
+
+/* ══════════════════════════════
+   BENEFITS BENTO
+══════════════════════════════ */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:16px;margin-top:64px;
+}
+.bento-card{
+  padding:36px 32px;border-radius:18px;
+  border:1px solid var(--brd-2);background:var(--card);
+  position:relative;overflow:hidden;transition:.4s;
+}
+.bento-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-glow),transparent);opacity:0;transition:.4s}
+.bento-card:hover::after{opacity:1}
+.bento-card:hover{border-color:rgba(212,148,10,.3);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.bento-card.span-2{grid-column:span 2}
+.bento-card.blue-tint{
+  border-color:rgba(26,58,255,.2);
+  background:linear-gradient(135deg,rgba(26,58,255,.08),var(--card));
+}
+.bento-card.blue-tint::after{background:linear-gradient(90deg,transparent,var(--blue-glow),transparent)}
+.bento-card.blue-tint:hover{border-color:rgba(26,58,255,.45)}
+
+.bento-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--gold-soft);border:1px solid rgba(212,148,10,.3);
+  display:grid;place-items:center;margin-bottom:20px;
+}
+.bento-icon.blue{background:var(--blue-soft);border-color:rgba(26,58,255,.3)}
+.bento-icon svg{width:22px;height:22px;stroke:var(--gold-hi);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.bento-icon.blue svg{stroke:var(--blue-hi)}
+.bento-card h3{font-size:18px;font-weight:700;margin-bottom:10px;line-height:1.2}
+.bento-card p{font-size:14px;color:var(--txt-2);line-height:1.65;font-weight:300}
+.bento-big-num{
+  font-family:'Bebas Neue',sans-serif;font-size:80px;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:.9;margin-bottom:8px;
+}
+.bento-big-num.blue{
+  background:linear-gradient(135deg,var(--blue-hi),var(--blue-2));
+  -webkit-background-clip:text;background-clip:text;
+}
+
+/* ══════════════════════════════
+   CTA FINAL
+══════════════════════════════ */
+.cta-wrap{
+  padding:110px 40px;
+  border-top:1px solid var(--brd);
+  position:relative;overflow:hidden;
+}
+.cta-glow-l{position:absolute;width:600px;height:600px;top:50%;left:-150px;transform:translateY(-50%);background:radial-gradient(circle,rgba(26,58,255,.12),transparent 65%);filter:blur(80px)}
+.cta-glow-r{position:absolute;width:600px;height:600px;top:50%;right:-150px;transform:translateY(-50%);background:radial-gradient(circle,rgba(212,148,10,.10),transparent 65%);filter:blur(80px)}
+.cta-inner{max-width:780px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.cta-card{
+  padding:64px 52px;border-radius:28px;
+  border:1px solid rgba(212,148,10,.35);
+  background:linear-gradient(145deg,rgba(14,11,9,.98),rgba(19,16,8,.95));
+  box-shadow:0 0 0 1px rgba(212,148,10,.08) inset,0 60px 120px rgba(0,0,0,.6);
+  position:relative;overflow:hidden;
+}
+.cta-card::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-hi),transparent)}
+.cta-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(212,148,10,.07),transparent);pointer-events:none}
+.cta-title{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,72px);
+  letter-spacing:3px;color:var(--txt);line-height:1;margin-bottom:16px;
+}
+.cta-title em{
+  font-family:'Playfair Display',serif;font-style:italic;font-size:.75em;letter-spacing:0;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cta-sub{font-size:15px;color:var(--txt-2);font-weight:300;margin-bottom:36px;line-height:1.6}
+.cta-perks{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:36px;text-align:left;
+}
+.perk{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:var(--txt-2);
+}
+.perk-icon{
+  flex:0 0 20px;height:20px;border-radius:50%;margin-top:1px;
+  background:var(--gold-soft);border:1px solid rgba(212,148,10,.3);
+  display:grid;place-items:center;
+}
+.perk-icon svg{width:10px;height:10px;stroke:var(--gold-hi);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--brd);padding:40px;
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.ft-name{
+  font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.ft-copy{font-size:12px;color:var(--mu)}
+.ft-links{display:flex;gap:24px}
+.ft-links a{font-size:12px;color:var(--mu);transition:.2s}
+.ft-links a:hover{color:var(--txt-2)}
+
+/* ── QUIÉNES SOMOS ── */
+.qs-section{
+  padding:110px 40px;
+  border-top:1px solid var(--brd);
+  position:relative;overflow:hidden;
+}
+.qs-inner{max-width:1280px;margin:0 auto}
+.qs-hero{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;margin-top:64px;
+}
+.qs-photo-col{position:relative}
+.qs-photo-main{
+  width:100%;border-radius:22px;overflow:hidden;
+  border:1px solid rgba(212,148,10,.25);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(212,148,10,.12);
+  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(212,148,10,.08),var(--card-2));
+  display:flex;align-items:center;justify-content:center;
+  padding:40px;min-height:320px;
+}
+.qs-photo-main img{
+  /* Mostrar a tamaño real sin estirar — foto pequeña bien encuadrada */
+  width:auto;height:auto;
+  max-width:min(100%, 225px);
+  max-height:225px;
+  display:block;
+  border-radius:50%;
+  border:3px solid rgba(212,148,10,.5);
+  box-shadow:0 0 40px rgba(212,148,10,.4),0 0 80px rgba(212,148,10,.2);
+  image-rendering:auto;
+}
+.qs-photo-placeholder{
+  display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--mu);
+  font-size:13px;
+}
+.qs-photo-placeholder svg{width:40px;height:40px;stroke:var(--mu);fill:none;stroke-width:1.5;stroke-linecap:round}
+.qs-glow{
+  position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
+  width:80%;height:200px;
+  background:radial-gradient(ellipse,rgba(212,148,10,.28),transparent 65%);
+  filter:blur(60px);pointer-events:none;
+}
+.qs-text-col{}
+.qs-lead{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(32px,3.5vw,52px);letter-spacing:1px;
+  color:var(--txt);line-height:1.05;margin-bottom:24px;
+}
+.qs-lead em{
+  font-family:'Playfair Display',serif;font-style:italic;font-size:.8em;letter-spacing:0;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.qs-bio{display:flex;flex-direction:column;gap:16px}
+.qs-bio p{font-size:15px;color:var(--txt-2);line-height:1.8;font-weight:300}
+.qs-bio p strong{color:var(--txt);font-weight:600}
+
+/* Timeline rápida */
+.qs-timeline{
+  margin-top:36px;display:flex;flex-direction:column;gap:0;
+  border-left:2px solid rgba(212,148,10,.3);padding-left:24px;
+}
+.qs-tl-item{padding:12px 0;position:relative}
+.qs-tl-item::before{
+  content:'';position:absolute;left:-31px;top:18px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 10px var(--gold-glow);
+}
+.qs-tl-year{
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;
+  color:var(--gold-hi);margin-bottom:2px;
+}
+.qs-tl-text{font-size:13px;color:var(--txt-2);font-weight:300;line-height:1.5}
+
+/* Quote grande */
+.qs-quote-wrap{
+  margin-top:64px;padding:52px 56px;border-radius:22px;
+  border:1px solid rgba(212,148,10,.3);
+  background:linear-gradient(145deg,rgba(212,148,10,.07),rgba(14,11,9,.95));
+  position:relative;overflow:hidden;text-align:center;
+}
+.qs-quote-wrap::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-hi),transparent)}
+.qs-quote-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(212,148,10,.09),transparent);pointer-events:none}
+.qs-quote-mark{
+  font-family:'Playfair Display',serif;font-size:100px;line-height:.6;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:12px;display:block;opacity:.6;
+}
+.qs-quote{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(18px,2.2vw,26px);line-height:1.55;
+  color:var(--txt);position:relative;z-index:1;
+}
+.qs-quote-author{
+  margin-top:20px;font-size:13px;color:var(--gold-hi);
+  font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+
+/* Libro section */
+.qs-book{
+  display:grid;grid-template-columns:260px 1fr;gap:56px;
+  align-items:center;margin-top:64px;padding:40px 48px;
+  border-radius:20px;border:1px solid var(--brd-2);background:var(--card);
+  position:relative;overflow:hidden;
+}
+.qs-book::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-glow),transparent)}
+.qs-book-cover{
+  width:100%;border-radius:14px;overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 40px rgba(212,148,10,.15);
+  background:var(--card-2);
+  display:flex;align-items:center;justify-content:center;
+}
+.qs-book-cover img{
+  width:100%;height:auto;display:block;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:crisp-edges;
+}
+.qs-book-cover-placeholder{
+  display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--mu);font-size:12px;
+}
+.qs-book-cover-placeholder svg{width:32px;height:32px;stroke:var(--mu);fill:none;stroke-width:1.5;stroke-linecap:round}
+.qs-book-title{
+  font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--g1),var(--g2),var(--g3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;margin-bottom:12px;
+}
+.qs-book-sub{font-size:13px;color:var(--txt-2);font-weight:300;line-height:1.65;margin-bottom:16px}
+
+@media(max-width:900px){
+  .qs-hero{grid-template-columns:1fr;gap:48px}
+  .qs-photo-main{aspect-ratio:4/3}
+  .qs-book{grid-template-columns:1fr;gap:28px}
+  .qs-quote-wrap{padding:36px 28px}
+  .qs-section{padding:72px 22px}
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:1;transform:translateY(0)}
+.reveal-d1{}.reveal-d2{}.reveal-d3{}.reveal-d4{}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;text-align:center;gap:60px;padding-top:110px}
+  .hero-left{display:flex;flex-direction:column;align-items:center}
+  .hero-sub{max-width:100%}
+  .earn-layout{grid-template-columns:1fr}
+  .partners-grid{grid-template-columns:1fr 1fr}
+  .bento{grid-template-columns:1fr 1fr}
+  .bento-card.span-2{grid-column:span 2}
+}
+@media(max-width:768px){
+  .steps-grid{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .bento-card.span-2{grid-column:span 1}
+  .cta-perks{grid-template-columns:1fr}
+  .earn-extras{grid-template-columns:1fr}
+  .partners-grid{grid-template-columns:1fr}
+  .section,.cta-wrap,.earn-section,.network-section{padding:72px 22px}
+  .hero-right{display:none}
+  footer{flex-direction:column;text-align:center}.ft-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- AMBIENT LIGHTS -->
+<div class="light light-gold-tl"></div>
+<div class="light light-gold-br"></div>
+<div class="light light-blue-tr"></div>
+<div class="light-gold-mid"></div>
+<div class="light-gold-top"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">El Socio Genial</div>
+    <div class="nav-links">
+      <a href="#como">Cómo funciona</a>
+      <a href="#comisiones">Ganancias</a>
+      <a href="#quienes">Quiénes somos</a>
+      <a href="./tu-cuenta.html" class="nav-cta">Únete ahora →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section style="overflow:hidden;position:relative">
+  <!-- background glow -->
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 80% 40%,rgba(26,58,255,.08),transparent 55%),radial-gradient(ellipse 60% 50% at 20% 60%,rgba(212,148,10,.06),transparent 55%)"></div>
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        Franquicia activa · Bolivia
+      </div>
+      <h1 class="hero-title">
+        <span class="italic-word">la red donde</span>
+        <span class="gold-word">comprar</span>
+        <span class="blue-word">es ganar.</span>
+      </h1>
+      <p class="hero-sub">
+        Unite al sistema de consumo inteligente. <strong>20% de descuento</strong> en cada compra, comisiones automáticas por tu red — hasta 4 niveles de profundidad.
+      </p>
+      <div class="hero-actions">
+        <a href="./tu-cuenta.html" class="btn-gold">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Únete ahora
+        </a>
+        <a href="#como" class="btn-blue">Ver cómo funciona</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="logo-wrap">
+        <div class="logo-glow"></div>
+        <div class="logo-glow-ring"></div>
+
+        <!-- Logo SG — hexágono de cristal holográfico (Stitch) -->
+        <div class="logo-hex-wrap">
+          <img src="./img/sg-logo.png" alt="El Socio Genial"
+            style="width:100%;height:100%;object-fit:contain;">
+        </div>
+
+        <!-- Tarjetas flotantes de beneficios -->
+        <div class="float-card fc-1">
+          <div class="fc-num">20%</div>
+          <div class="fc-lbl">Tu descuento</div>
+        </div>
+        <div class="float-card fc-2">
+          <div class="fc-num">+%</div>
+          <div class="fc-lbl">Porcentaje de tu red</div>
+        </div>
+        <div class="float-card fc-3">
+          <div class="fc-num" style="background:linear-gradient(135deg,#6EFFD8,#34D399);-webkit-background-clip:text;background-clip:text;color:transparent">1%</div>
+          <div class="fc-lbl">Fondo navideño</div>
+        </div>
+        <div class="float-card fc-4">
+          <div class="fc-num" style="background:linear-gradient(135deg,var(--blue-hi),var(--blue-2));-webkit-background-clip:text;background-clip:text;color:transparent">∞</div>
+          <div class="fc-lbl">Red sin límite</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-glow"></div>
+
+<!-- ══ TICKER ══ -->
+<div class="divider-band">
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ticker-item">Café boliviano <span>—</span></div>
+      <div class="ticker-item">Cuñapé <span>—</span></div>
+      <div class="ticker-item">20% <span>DESCUENTO</span></div>
+      <div class="ticker-item">Tamales <span>—</span></div>
+      <div class="ticker-item">Ropa Édmar <span>—</span></div>
+      <div class="ticker-item">Comisiones <span>AUTOMÁTICAS</span></div>
+      <div class="ticker-item">Pan de arroz <span>—</span></div>
+      <div class="ticker-item">Red <span>INTERNACIONAL</span></div>
+      <div class="ticker-item">Mocochinchi <span>—</span></div>
+      <div class="ticker-item">Liderazgo <span>INTEGRAL</span></div>
+      <!-- dup -->
+      <div class="ticker-item">Café boliviano <span>—</span></div>
+      <div class="ticker-item">Cuñapé <span>—</span></div>
+      <div class="ticker-item">20% <span>DESCUENTO</span></div>
+      <div class="ticker-item">Tamales <span>—</span></div>
+      <div class="ticker-item">Ropa Édmar <span>—</span></div>
+      <div class="ticker-item">Comisiones <span>AUTOMÁTICAS</span></div>
+      <div class="ticker-item">Pan de arroz <span>—</span></div>
+      <div class="ticker-item">Red <span>INTERNACIONAL</span></div>
+      <div class="ticker-item">Mocochinchi <span>—</span></div>
+      <div class="ticker-item">Liderazgo <span>INTEGRAL</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="como" class="section">
+  <div class="reveal">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2 class="h2">Simple.<br><em>Rentable.</em></h2>
+    <p class="section-sub">Tres pasos para empezar a ganar desde el primer día que te asociás.</p>
+  </div>
+  <div class="steps-grid" style="margin-top:48px">
+    <div class="step reveal reveal-d1">
+      <div class="step-num">01</div>
+      <h3>Pagás la membresía anual</h3>
+      <p>Una inversión única que te da acceso total a la red, precios preferenciales y participación en el sistema de comisiones de 4 niveles.</p>
+      <div class="step-arrow">Paso 1 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="step reveal reveal-d2">
+      <div class="step-num">02</div>
+      <h3>Comprás con 20% de descuento</h3>
+      <p>Cada compra en la red Típicos y productos afiliados tiene precio preferencial. Ahorrás en todo lo que ya consumís día a día.</p>
+      <div class="step-arrow">Paso 2 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="step reveal reveal-d3">
+      <div class="step-num">03</div>
+      <h3>Invitás y generás ingresos</h3>
+      <p>Comisiones automáticas por cada persona en tu red y por sus recompras recurrentes — hasta 4 niveles de profundidad, sin esfuerzo extra.</p>
+      <div class="step-arrow">Paso 3 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-glow"></div>
+<!-- ══ EARNINGS / FRANQUICIA ══ -->
+<div class="earn-section" id="comisiones">
+  <div class="earn-bg"></div>
+  <div class="earn-inner">
+    <div class="reveal">
+      <span class="eyebrow eyebrow-gold">Tus ganancias como franquiciatario</span>
+      <h2 class="h2">Comprás barato.<br><em>Ganás en cada compra</em><br>de tu red.</h2>
+      <p class="section-sub">Dos formas de generar ingresos: tu propio descuento y el porcentaje de lo que compran las personas que recomendás.</p>
+    </div>
+
+    <div class="earn-layout">
+      <!-- TU DESCUENTO -->
+      <div class="earn-card gold-card reveal reveal-d1">
+        <div class="earn-num gold">20%</div>
+        <h3>Tu descuento permanente</h3>
+        <p>Desde el primer día como franquiciatario, comprás con <strong style="color:var(--txt)">20% de descuento</strong> en todos los negocios de la red. Típicos ya está activo — supermercados y farmacias se suman pronto.</p>
+        <div class="earn-tag gold">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Activo desde el día 1
+        </div>
+      </div>
+
+      <!-- TUS GANANCIAS POR RECOMENDACIÓN -->
+      <div class="earn-card blue-card reveal reveal-d2">
+        <div class="earn-num blue">+%</div>
+        <h3>Ganás en las compras de tu red</h3>
+        <p>Cada vez que alguien que vos recomendás compra en cualquier negocio de la red, <strong style="color:var(--txt)">vos recibís un porcentaje automático</strong> — sin hacer nada extra. Y lo mismo aplica para quienes ellos recomiendan.</p>
+        <div class="earn-tag blue">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Ganancias automáticas sin esfuerzo
+        </div>
+      </div>
+    </div>
+
+    <!-- Breakdown rápido -->
+    <div class="earn-extras reveal" style="margin-top:16px">
+      <div class="earn-extra">
+        <div class="earn-extra-num">20%</div>
+        <div class="earn-extra-lbl">Tu descuento en compras propias</div>
+      </div>
+      <div class="earn-extra">
+        <div class="earn-extra-num">20%</div>
+        <div class="earn-extra-lbl">Por vender la franquicia a alguien directo</div>
+      </div>
+      <div class="earn-extra green">
+        <div class="earn-extra-num">1%</div>
+        <div class="earn-extra-lbl">Fondo navideño personal por persona en tu red</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-glow"></div>
+<!-- ══ PARTNER NETWORK ══ -->
+<div class="network-section" id="red">
+  <div class="network-inner">
+    <div class="reveal">
+      <span class="eyebrow">Red de negocios</span>
+      <h2 class="h2">Usá tu descuento<br><em>donde ya comprás.</em></h2>
+      <p class="section-sub">La red crece mes a mes. Ya podés usar tu membresía en Típicos — y pronto en muchos más negocios que usás todos los días.</p>
+    </div>
+
+    <div class="partners-grid reveal" style="margin-top:64px">
+
+      <!-- TÍPICOS — ACTIVO -->
+      <div class="partner-card active">
+        <div class="partner-status live">Activo ahora</div>
+        <div class="partner-logo-wrap">
+          <img src="./img/logo.jpeg" alt="Típicos">
+        </div>
+        <div class="partner-name">Típicos</div>
+        <div class="partner-desc">Café y sabores bolivianos en Santa Cruz de la Sierra. Primer negocio activo de la red.</div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:4px">Tu beneficio</div>
+          <div class="partner-pct">20% de descuento</div>
+        </div>
+      </div>
+
+      <!-- SUPERMERCADO — PRÓXIMO -->
+      <div class="partner-card">
+        <div class="partner-status soon">Próximamente</div>
+        <div class="partner-logo-wrap" style="background:#1A1A1A;border-color:var(--brd-2);padding:4px">
+          <img src="./img/supermercado.jfif" alt="Supermercados" style="width:100%;height:100%;object-fit:contain;border-radius:10px">
+        </div>
+        <div class="partner-name">Supermercados</div>
+        <div class="partner-desc">Compras de primera necesidad del hogar con descuento directo en tu carrito.</div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--txt-2);font-weight:700;margin-bottom:4px">Tu beneficio</div>
+          <div class="partner-pct-soon">20% de descuento</div>
+        </div>
+      </div>
+
+      <!-- FARMACIA — PRÓXIMO -->
+      <div class="partner-card">
+        <div class="partner-status soon">Próximamente</div>
+        <div class="partner-logo-wrap" style="background:#1A1A1A;border-color:var(--brd-2);padding:4px">
+          <img src="./img/farmacia.jfif" alt="Farmacias" style="width:100%;height:100%;object-fit:contain;border-radius:10px">
+        </div>
+        <div class="partner-name">Farmacias</div>
+        <div class="partner-desc">Medicamentos y productos de salud con precio preferencial para socios.</div>
+        <div>
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--txt-2);font-weight:700;margin-bottom:4px">Tu beneficio</div>
+          <div class="partner-pct-soon">20% de descuento</div>
+        </div>
+      </div>
+
+      <!-- MÁS -->
+      <div class="partner-more reveal reveal-d3">
+        <div style="font-size:32px">+</div>
+        <div style="font-size:14px;font-weight:600">Más negocios</div>
+        <div style="font-size:13px;font-weight:300">La red crece cada mes con nuevos aliados comerciales.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ BENEFITS BENTO ══ -->
+<section id="beneficios" class="section">
+  <div class="reveal">
+    <span class="eyebrow">Beneficios del socio</span>
+    <h2 class="h2">Todo desde<br><em>el día 1.</em></h2>
+  </div>
+  <div class="bento">
+    <div class="bento-card reveal reveal-d1">
+      <div class="bento-big-num">20%</div>
+      <h3>Descuento permanente</h3>
+      <p>En todos los productos de la red, todo el año, desde tu primera compra como socio.</p>
+    </div>
+    <div class="bento-card blue-tint reveal reveal-d2">
+      <div class="bento-icon blue"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Red sin límite</h3>
+      <p>Tu red puede crecer indefinidamente. Más socios = más ingresos pasivos automáticos mes a mes.</p>
+    </div>
+    <div class="bento-card reveal reveal-d3">
+      <div class="bento-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3>Ganancias recurrentes reales</h3>
+      <p>Porcentaje automático por cada compra que hace tu red. Sin hacer nada extra una vez que está armada.</p>
+    </div>
+    <div class="bento-card span-2 reveal reveal-d1">
+      <div class="bento-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <h3>Expansión internacional</h3>
+      <p>El modelo se adapta a distintos países. Tu red puede crecer más allá de Bolivia manteniendo la misma estructura de beneficios y comisiones.</p>
+    </div>
+    <div class="bento-card blue-tint reveal reveal-d2">
+      <div class="bento-big-num blue">4x</div>
+      <h3>Niveles de comisión</h3>
+      <p>20% directo → 8% → 7% → 5%. Cuatro niveles de ingresos que trabajan para vos.</p>
+    </div>
+    <div class="bento-card reveal reveal-d3">
+      <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Liderazgo integral</h3>
+      <p>Capacitaciones en ventas, comunicación, desarrollo personal y liderazgo. Una comunidad que crece junta.</p>
+    </div>
+    <div class="bento-card reveal reveal-d4">
+      <div class="bento-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 9h6v6H9z"/></svg></div>
+      <h3>Franquicias y alianzas</h3>
+      <p>Acceso a operar como punto comercial autorizado usando la marca y herramientas de la red.</p>
+    </div>
+    <div class="bento-card reveal reveal-d1" style="border-color:rgba(52,211,153,.2);background:rgba(52,211,153,.03)">
+      <div class="bento-big-num" style="background:linear-gradient(135deg,#6EFFD8,#34D399);-webkit-background-clip:text;background-clip:text;color:transparent">1%</div>
+      <h3 style="color:#34D399">Fondo Navideño</h3>
+      <p>Por cada persona en tus 3 primeros niveles, 1% se acumula en tu fondo personal de fin de año. Un bono garantizado.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-glow"></div>
+
+<!-- ══ QUIÉNES SOMOS ══ -->
+<div class="qs-section" id="quienes">
+  <div class="qs-inner">
+    <div class="reveal">
+      <span class="eyebrow">Quiénes somos</span>
+      <h2 class="h2">Una historia que empezó<br><em>con dos botellas de leche.</em></h2>
+    </div>
+
+    <div class="qs-hero">
+      <!-- FOTO EDMAR -->
+      <div class="qs-photo-col reveal reveal-d1">
+        <div class="qs-photo-main">
+          <img src="./img/edmar.jpg" alt="Edmar Pedraza Chamón"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="qs-photo-placeholder" style="display:none">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Foto de Edmar<br><span style="font-size:11px;opacity:.6">img/edmar.jpg</span>
+          </div>
+        </div>
+        <div class="qs-glow"></div>
+      </div>
+
+      <!-- TEXTO -->
+      <div class="qs-text-col reveal reveal-d2">
+        <h3 class="qs-lead">Edmar Pedraza Chamón<br><em>Fundador</em></h3>
+        <div class="qs-bio">
+          <p>Nació en Santa Cruz, Bolivia, en 1961. Desde los 6 años sabía lo que quería: <strong>"Quiero hacer plata"</strong>, le dijo a su padre, quien en lugar de frenarlo le extendió dos botellas de leche: <strong>"No le voy a cortar las alas a este joven."</strong> Ese niño salió corriendo a vender, y nunca paró.</p>
+          <p>Estudió en el Colegio Don Bosco, egresó como bachiller en 1979 y comenzó a trabajar mientras aún estudiaba. Pasó por empresas como COMBI Ltda. y la Cervecería Boliviana del Oriente, aprendiendo el oficio desde las trincheras.</p>
+        </div>
+
+        <div class="qs-timeline" style="margin-top:32px">
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">1990</div>
+            <div class="qs-tl-text">Emigra a los Estados Unidos — solo dos maletas y determinación.</div>
+          </div>
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">1990 · 15 días después</div>
+            <div class="qs-tl-text">Ya trabajando en <strong style="color:var(--txt)">World Book</strong>, la editorial más grande del mundo.</div>
+          </div>
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">Primer año</div>
+            <div class="qs-tl-text">Rompe <strong style="color:var(--txt)">5 récords mundiales</strong>: Mejor Vendedor de Washington, Mejor Reclutador, Premio a la Integridad — reconocido ante más de 140 países.</div>
+          </div>
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">Hoy</div>
+            <div class="qs-tl-text">Funda <strong style="color:var(--gold-hi)">El Socio Genial</strong> en Santa Cruz: llevar esa filosofía de crecimiento a cada familia boliviana.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="qs-quote-wrap reveal">
+      <span class="qs-quote-mark">"</span>
+      <blockquote class="qs-quote">
+        Uno tiene que apuntar a las estrellas para darle aunque sea a las nubes, pero con los pies en la tierra.
+      </blockquote>
+      <div class="qs-quote-author">— Edmar Pedraza Chamón</div>
+    </div>
+
+    <!-- LIBRO -->
+    <div class="qs-book reveal">
+      <div class="qs-book-cover">
+        <img src="./img/libro.jpg" alt="Éxitos sin Fronteras"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="qs-book-cover-placeholder" style="display:none">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Portada del libro<br><span style="font-size:11px;opacity:.6">img/libro.jpg</span>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow eyebrow-gold" style="margin-bottom:10px;display:block">Su libro</span>
+        <div class="qs-book-title">Éxitos sin Fronteras</div>
+        <p class="qs-book-sub">
+          En este libro autobiográfico, Edmar narra su historia desde los 6 años hasta los récords mundiales en ventas. El mensaje central: el verdadero secreto detrás de cada logro es compromiso, enfoque, disciplina y entrega.
+        </p>
+        <p class="qs-book-sub">
+          <strong style="color:var(--txt)">Una guía de vida</strong> para quienes quieren convertir el esfuerzo cotidiano en resultados extraordinarios — exactamente la filosofía que inspiró El Socio Genial.
+        </p>
+        <a href="#" id="whop-libro-link" target="_blank"
+          style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:14px 26px;border-radius:11px;background:linear-gradient(160deg,var(--g1),var(--g2),var(--em));color:#0A0600;font-weight:800;font-size:14px;box-shadow:0 8px 28px rgba(212,148,10,.4);transition:.3s;text-decoration:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Adquiere el libro digital
+        </a>
+        <p style="font-size:11px;color:var(--mu);margin-top:8px">
+          Disponible en Whop · Próximamente
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<div class="cta-wrap" id="unirse">
+  <div class="cta-glow-l"></div>
+  <div class="cta-glow-r"></div>
+  <div class="cta-inner">
+    <div class="reveal">
+      <span class="eyebrow" style="display:block;text-align:center;margin-bottom:0">Franquicia anual</span>
+    </div>
+    <div class="cta-card reveal" style="margin-top:32px">
+      <div class="cta-title">Una inversión.<br><em>Un año entero ganando.</em></div>
+      <p class="cta-sub">Pagás una vez y empezás a ahorrar y generar ingresos desde el primer día.</p>
+      <div class="cta-perks">
+        <div class="perk"><div class="perk-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>20% descuento en toda la red</div>
+        <div class="perk"><div class="perk-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Comisiones: 20% — 8% — 7% — 5%</div>
+        <div class="perk"><div class="perk-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Porcentaje por cada compra de tu red</div>
+        <div class="perk"><div class="perk-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Fondo Navideño personal garantizado</div>
+        <div class="perk"><div class="perk-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Capacitaciones en liderazgo y ventas</div>
+        <div class="perk"><div class="perk-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Red que crece sin límite, incluso fuera del país</div>
+      </div>
+      <a href="./tu-cuenta.html" class="btn-gold" style="width:100%;justify-content:center;font-size:16px;padding:18px;border-radius:14px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.9L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.5-8 8.5z"/></svg>
+        Consultar por WhatsApp
+      </a>
+      <p style="margin-top:14px;font-size:12px;color:var(--mu);text-align:center">Edmar Pedraza Chamón · Santa Cruz de la Sierra, Bolivia</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-name">El Socio Genial</div>
+  <div class="ft-copy">© 2026 · Edmar Pedraza Chamón · Santa Cruz de la Sierra</div>
+  <div class="ft-links">
+    <a href="#como">Cómo funciona</a>
+    <a href="#comisiones">Comisiones</a>
+    <a href="#beneficios">Beneficios</a>
+  </div>
+</footer>
+
+<script>
+// Elimina el fondo negro del logo SG usando Canvas — funciona con archivos locales
+(function removeLogo(){
+  function process(img){
+    const c = document.createElement('canvas');
+    c.width = img.naturalWidth || 440;
+    c.height = img.naturalHeight || 440;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    const d = ctx.getImageData(0, 0, c.width, c.height);
+    const px = d.data;
+    for(let i = 0; i < px.length; i += 4){
+      // luminancia ponderada
+      const lum = px[i]*0.299 + px[i+1]*0.587 + px[i+2]*0.114;
+      if(lum < 30){
+        px[i+3] = 0;                                  // negro puro → transparente
+      } else if(lum < 70){
+        px[i+3] = Math.round((lum-30)/40 * 255);      // transición suave
+      }
+    }
+    ctx.putImageData(d, 0, 0);
+    img.src = c.toDataURL('image/png');
+  }
+  window.addEventListener('load', function(){
+    const img = document.querySelector('.logo-hex-wrap img');
+    if(!img) return;
+    if(img.complete && img.naturalWidth > 0){ process(img); }
+    else { img.addEventListener('load', function(){ process(img); }); }
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Reveal on scroll
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Fallback: muestra todo después de 1.5s por si el observer falla
+setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in'));
+}, 1500);
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), { passive: true });
+
+// Parallax sphere on scroll
+gsap.to('.sphere-wrap', {
+  yPercent: 12,
+  ease: 'none',
+  scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
+});
+
+// Step hover shimmer
+document.querySelectorAll('.step').forEach(el => {
+  el.addEventListener('mouseenter', () => gsap.to(el.querySelector('.step-num'), { color: 'rgba(26,58,255,0.25)', duration: 0.3 }));
+  el.addEventListener('mouseleave', () => gsap.to(el.querySelector('.step-num'), { color: 'rgba(255,255,255,0.05)', duration: 0.3 }));
+});
+</script>
+</body>
+</html>

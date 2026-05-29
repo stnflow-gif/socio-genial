@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>Típicos · Café y típicos bolivianos · Porongo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   VARIABLES + RESET
+═══════════════════════════════════════ */
+:root{
+  --bg:#080503;
+  --card:#110C07;
+  --brd:rgba(255,255,255,0.055);
+  --brd-2:rgba(255,255,255,0.10);
+  --gold:#C8965A;
+  --gold-hi:#E0B278;
+  --gold-deep:#8B6030;
+  --gold-glow:rgba(200,150,90,0.35);
+  --cream:#F5EDD8;
+  --cream-2:#B8A48A;
+  --mu:#6B5C48;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --ease-in-out:cubic-bezier(0.65,0,0.35,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--cream);
+  font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;line-height:1.5;
+  cursor:none;
+}
+a{color:inherit;text-decoration:none;cursor:none}
+button{font-family:inherit;cursor:none;border:none;background:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ═══════════════════════════════════════
+   GLOW ORBS (Velocity style)
+═══════════════════════════════════════ */
+.orb{
+  position:absolute;border-radius:50%;
+  pointer-events:none;filter:blur(80px);z-index:0;
+}
+.orb-hero-1{
+  width:600px;height:600px;
+  top:-120px;right:5%;
+  background:radial-gradient(circle,rgba(200,150,90,.22) 0%,transparent 70%);
+  animation:orbFloat 9s ease-in-out infinite;
+}
+.orb-hero-2{
+  width:400px;height:400px;
+  bottom:10%;left:2%;
+  background:radial-gradient(circle,rgba(200,150,90,.12) 0%,transparent 70%);
+  animation:orbFloat 12s ease-in-out infinite 3s;
+}
+.orb-section{
+  width:500px;height:500px;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(200,150,90,.10) 0%,transparent 65%);
+  filter:blur(100px);
+}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(20px,-30px) scale(1.04)}
+  66%{transform:translate(-15px,20px) scale(.97)}
+}
+
+/* ═══════════════════════════════════════
+   GRAIN
+═══════════════════════════════════════ */
+.grain{
+  position:fixed;inset:0;z-index:9;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.026;mix-blend-mode:overlay;
+}
+
+/* ═══════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════ */
+.cursor-dot{
+  position:fixed;top:0;left:0;width:6px;height:6px;
+  background:var(--cream);border-radius:50%;
+  pointer-events:none;z-index:10000;
+  transform:translate(-50%,-50%);
+  transition:background .2s;
+  will-change:transform;
+}
+.cursor-ring{
+  position:fixed;top:0;left:0;width:34px;height:34px;
+  border:1px solid rgba(200,150,90,0.55);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  will-change:transform;
+}
+body:has(a:hover) .cursor-dot,
+body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
+
+/* ═══════════════════════════════════════
+   PRELOADER
+═══════════════════════════════════════ */
+.preloader{
+  position:fixed;inset:0;z-index:8000;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+}
+.preloader-logo-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+}
+.preloader-logo-img{
+  width:160px;height:160px;object-fit:contain;
+  border-radius:20px;
+  will-change:transform,opacity;
+}
+.preloader-svg{
+  width:220px;overflow:visible;
+}
+.preloader-draw-line{
+  stroke:var(--gold);stroke-width:1.2;fill:none;
+}
+.preloader-tagline{
+  font-family:'Lora',serif;font-size:12px;font-weight:400;
+  letter-spacing:5px;text-transform:uppercase;color:var(--gold);
+  margin-top:4px;min-height:20px;
+  opacity:0;
+}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 52px;
+  transition:background .5s,padding .4s;
+}
+.nav.scrolled{
+  background:rgba(8,5,3,.88);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--brd);
+  padding:14px 52px;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:12px;
+}
+.nav-brand-img{
+  width:44px;height:44px;object-fit:contain;border-radius:10px;
+  opacity:0;
+}
+.nav-brand-name{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--cream);
+  opacity:0;
+}
+.nav-links{display:flex;gap:38px;font-size:13px;font-weight:500;color:var(--cream-2)}
+.nav-links a{transition:color .2s;position:relative}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;
+  background:var(--gold);transition:width .3s var(--ease-out);
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  padding:10px 22px;border-radius:9px;
+  border:1px solid rgba(200,150,90,0.38);
+  color:var(--gold-hi);font-size:13px;font-weight:600;
+  transition:.25s;opacity:0;
+}
+.nav-cta:hover{background:rgba(200,150,90,0.10);border-color:var(--gold-hi);transform:translateY(-1px)}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:140px 64px 100px 52px;
+  position:relative;z-index:2;
+}
+.hero-eyebrow{
+  font-size:10px;text-transform:uppercase;letter-spacing:6px;
+  color:var(--gold);font-weight:700;margin-bottom:28px;
+}
+.hero-title{
+  font-family:'Lora',serif;font-weight:900;
+  font-size:clamp(58px,7.8vw,112px);
+  line-height:.92;letter-spacing:-.03em;color:var(--cream);
+  padding-bottom:8px;
+}
+.hero-title .line-wrap{display:block}
+.hero-title em{
+  display:block;font-style:italic;
+  background:linear-gradient(125deg,var(--gold-hi) 0%,var(--gold) 55%,#9C6B38 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{
+  margin-top:32px;font-size:16px;color:var(--cream-2);
+  line-height:1.75;max-width:420px;font-weight:300;
+}
+.hero-actions{
+  margin-top:44px;display:flex;gap:20px;align-items:center;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:16px 32px;border-radius:11px;
+  background:linear-gradient(160deg,var(--gold-hi),var(--gold),var(--gold-deep));
+  color:#1A0E02;font-weight:700;font-size:14px;
+  box-shadow:0 8px 30px rgba(200,150,90,0.42);
+  transition:.3s var(--ease-out);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);
+  transform:translateX(-100%);transition:transform .55s var(--ease-out);
+}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-ghost-link{
+  font-size:14px;color:var(--cream-2);font-weight:500;
+  display:flex;align-items:center;gap:8px;transition:color .2s;
+}
+.btn-ghost-link svg{transition:transform .3s var(--ease-out)}
+.btn-ghost-link:hover{color:var(--cream)}
+.btn-ghost-link:hover svg{transform:translateY(4px)}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:36px;left:52px;z-index:3;
+  display:flex;align-items:center;gap:14px;
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--mu);
+}
+.scroll-hint-line{
+  width:48px;height:1px;
+  background:linear-gradient(90deg,var(--mu),transparent);
+  position:relative;overflow:hidden;
+}
+.scroll-hint-line::after{
+  content:'';position:absolute;top:0;left:-100%;
+  width:100%;height:1px;background:var(--gold);
+  animation:scanLine 2.5s ease-in-out 3.5s infinite;
+}
+
+/* HERO RIGHT */
+.hero-right{position:relative;overflow:hidden}
+.hero-coffee{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.78) contrast(1.06) saturate(1.1);
+  transform-origin:center center;
+  will-change:transform;
+}
+.hero-right::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,var(--bg) 0%,rgba(8,5,3,.2) 38%,transparent 60%);
+}
+.hero-right::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(0deg,var(--bg) 0%,transparent 22%);
+}
+.hero-coffee-fallback{
+  width:100%;height:100%;min-height:100vh;
+  background:
+    radial-gradient(ellipse 85% 90% at 65% 38%,rgba(139,96,48,.48),transparent 62%),
+    radial-gradient(ellipse 55% 65% at 80% 78%,rgba(70,42,16,.6),transparent 58%),
+    #0F0905;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-coffee-fallback img{
+  width:300px;opacity:.42;
+  filter:sepia(.5) saturate(1.4) brightness(.8)
+    drop-shadow(0 0 90px rgba(200,150,90,.65));
+  animation:logoPulse 7s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════
+   STATS
+═══════════════════════════════════════ */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);
+  position:relative;overflow:hidden;
+}
+.stats::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(200,150,90,.35),transparent);
+  opacity:0;
+}
+.stats-item{
+  padding:56px 28px;text-align:center;
+  border-right:1px solid var(--brd);
+  position:relative;overflow:hidden;
+  transition:background .4s;
+}
+.stats-item:last-child{border-right:none}
+.stats-item:hover{background:rgba(200,150,90,.04)}
+.stats-num{
+  font-family:'Lora',serif;font-weight:900;
+  font-size:clamp(36px,4vw,56px);
+  line-height:1;color:var(--gold-hi);
+  transition:color .3s;
+}
+.stats-item:hover .stats-num{color:var(--cream)}
+.stats-unit{
+  font-family:'Lora',serif;font-size:clamp(20px,2.2vw,30px);
+  color:var(--gold-hi);font-style:italic;
+}
+.stats-lbl{
+  font-size:11px;text-transform:uppercase;
+  letter-spacing:3px;color:var(--cream-2);margin-top:10px;font-weight:500;
+}
+
+/* ═══════════════════════════════════════
+   EL LOCAL
+═══════════════════════════════════════ */
+.local-section{
+  padding:110px 52px;max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.local-left .eyebrow{
+  font-size:10px;text-transform:uppercase;letter-spacing:5px;
+  color:var(--gold);font-weight:700;margin-bottom:20px;
+}
+.local-title{
+  font-family:'Lora',serif;font-size:clamp(30px,3.2vw,48px);
+  font-weight:700;line-height:1.12;letter-spacing:-.025em;color:var(--cream);
+}
+.local-title em{font-style:italic;color:var(--gold-hi)}
+.local-body{
+  margin-top:22px;font-size:15px;color:var(--cream-2);line-height:1.8;font-weight:300;
+}
+.local-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:26px;padding:10px 16px;border-radius:8px;
+  border:1px solid rgba(200,150,90,.25);background:rgba(200,150,90,.06);
+  font-size:12px;color:var(--gold-hi);font-weight:600;letter-spacing:1.5px;
+}
+.local-tag svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.local-right{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.local-photo{
+  aspect-ratio:2/3;border-radius:16px;overflow:hidden;
+  position:relative;
+}
+.local-photo:first-child{
+  grid-row:span 2;aspect-ratio:auto;
+  border-radius:18px;
+}
+.local-photo-inner{
+  width:100%;height:100%;
+  background:linear-gradient(145deg,#1A0E06,#2A1A09);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:20px;
+  transition:transform .6s var(--ease-out);
+}
+.local-photo:hover .local-photo-inner{transform:scale(1.02)}
+.local-photo-inner img{
+  width:80px;opacity:.3;
+  filter:sepia(.5) saturate(1.4);
+}
+.local-photo-inner span{
+  font-size:10px;text-transform:uppercase;letter-spacing:3px;
+  color:var(--mu);font-weight:600;
+}
+/* clip-path para reveal animado */
+.local-photo{clip-path:inset(0 100% 0 0);border-radius:16px}
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+.about-section{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:580px;
+  border-top:1px solid var(--brd);
+}
+.about-img-col{
+  position:relative;overflow:hidden;background:#0D0805;
+  display:flex;align-items:center;justify-content:center;
+}
+.about-img-col::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 55%,var(--card) 100%);
+}
+.about-glow-logo{
+  width:220px;opacity:.3;
+  filter:sepia(.5) saturate(1.3) brightness(.8)
+    drop-shadow(0 0 80px rgba(200,150,90,.6));
+  animation:logoPulse 8s ease-in-out infinite;
+}
+.about-content{
+  padding:90px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--card);
+}
+.eyebrow{
+  font-size:10px;text-transform:uppercase;letter-spacing:5px;
+  color:var(--gold);font-weight:700;margin-bottom:20px;
+}
+.about-title{
+  font-family:'Lora',serif;font-size:clamp(28px,2.8vw,40px);
+  font-weight:700;line-height:1.15;letter-spacing:-.025em;color:var(--cream);
+}
+.about-title em{font-style:italic;color:var(--gold-hi)}
+.about-body{
+  margin-top:24px;font-size:15px;color:var(--cream-2);
+  line-height:1.85;font-weight:300;
+}
+.about-quote{
+  margin-top:28px;padding-left:22px;
+  border-left:2px solid rgba(200,150,90,.45);
+  font-family:'Lora',serif;font-style:italic;font-size:17px;
+  color:var(--cream-2);line-height:1.6;
+}
+.about-coming{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:18px;padding:9px 14px;border-radius:7px;
+  border:1px solid rgba(200,150,90,.2);background:rgba(200,150,90,.05);
+  font-size:11px;color:var(--mu);letter-spacing:1px;
+}
+.about-coming svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ═══════════════════════════════════════
+   MAPS
+═══════════════════════════════════════ */
+.maps-section{
+  padding:100px 52px;max-width:1240px;margin:0 auto;
+}
+.maps-head{margin-bottom:52px}
+.maps-head .eyebrow{margin-bottom:14px}
+.maps-title{
+  font-family:'Lora',serif;font-size:clamp(30px,3.5vw,50px);
+  font-weight:700;letter-spacing:-.025em;color:var(--cream);
+  line-height:1.1;
+}
+.maps-title em{font-style:italic;color:var(--gold-hi)}
+.maps-sub{margin-top:14px;font-size:15px;color:var(--cream-2);font-weight:300;max-width:480px;line-height:1.7}
+.maps-grid{
+  display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start;
+}
+.maps-embed-wrap{
+  position:relative;border-radius:18px;overflow:hidden;
+  border:1px solid var(--brd-2);
+  aspect-ratio:16/9;
+}
+.maps-embed-wrap iframe{
+  width:100%;height:100%;border:none;display:block;
+  filter:grayscale(.85) sepia(.35) brightness(.55) contrast(1.1);
+  transition:filter .5s;
+}
+.maps-embed-wrap:hover iframe{filter:grayscale(.5) sepia(.2) brightness(.7) contrast(1.1)}
+.maps-embed-wrap::after{
+  content:'';position:absolute;inset:0;
+  border-radius:18px;
+  box-shadow:inset 0 0 0 1px rgba(200,150,90,.2);
+  pointer-events:none;
+}
+.maps-info{
+  display:flex;flex-direction:column;gap:18px;
+}
+.maps-info-card{
+  padding:22px 22px;border-radius:14px;
+  border:1px solid var(--brd-2);background:var(--card);
+  display:flex;align-items:flex-start;gap:16px;
+  transition:.3s;
+}
+.maps-info-card:hover{border-color:rgba(200,150,90,.35);background:rgba(17,12,7,.9)}
+.maps-info-icon{
+  flex:0 0 38px;height:38px;border-radius:10px;
+  background:rgba(200,150,90,.1);border:1px solid rgba(200,150,90,.22);
+  display:grid;place-items:center;
+}
+.maps-info-icon svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.maps-info-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--mu);margin-bottom:4px;font-weight:700}
+.maps-info-value{font-size:14px;color:var(--cream);font-weight:500}
+.maps-cta{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 20px;border-radius:12px;
+  border:1px solid var(--brd-2);background:var(--card);
+  font-size:13px;color:var(--cream-2);font-weight:600;
+  transition:.25s;margin-top:4px;
+}
+.maps-cta:hover{border-color:rgba(200,150,90,.4);color:var(--gold-hi);transform:translateY(-2px)}
+.maps-cta svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.wpp-cta{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 20px;border-radius:12px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff;font-size:13px;font-weight:700;
+  box-shadow:0 6px 20px rgba(37,211,102,.25);
+  transition:.25s;
+}
+.wpp-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.4)}
+.wpp-cta svg{width:18px;height:18px;fill:currentColor}
+
+/* ═══════════════════════════════════════
+   REGISTRO
+═══════════════════════════════════════ */
+.registro-section{
+  padding:0 52px 100px;max-width:1240px;margin:0 auto;
+}
+.registro-card{
+  border-radius:24px;overflow:hidden;
+  border:1px solid var(--brd-2);
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.reg-left{
+  padding:64px 56px;
+  background:linear-gradient(145deg,#130E08,#1E1208);
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.reg-left::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:350px;height:350px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,150,90,.12),transparent 70%);
+  pointer-events:none;
+}
+.reg-left .eyebrow{margin-bottom:16px}
+.reg-title{
+  font-family:'Lora',serif;font-size:clamp(24px,2.6vw,36px);
+  font-weight:700;color:var(--cream);line-height:1.2;letter-spacing:-.02em;
+}
+.reg-title em{font-style:italic;color:var(--gold-hi)}
+.reg-sub{margin-top:14px;font-size:14px;color:var(--cream-2);line-height:1.7;font-weight:300}
+.reg-info{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+.reg-info-row{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--cream-2)}
+.reg-info-icon{
+  flex:0 0 34px;height:34px;border-radius:9px;
+  background:rgba(200,150,90,.1);border:1px solid rgba(200,150,90,.22);
+  display:grid;place-items:center;
+}
+.reg-info-icon svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Countdown en registro */
+.countdown-wrap{
+  margin-top:32px;padding:20px;border-radius:14px;
+  background:rgba(200,150,90,.06);border:1px solid rgba(200,150,90,.18);
+}
+.cd-label{font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--gold);font-weight:700;margin-bottom:12px}
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cd-cell{text-align:center;padding:12px 6px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--brd)}
+.cd-num{
+  font-family:'Lora',serif;font-weight:900;
+  font-size:clamp(22px,2.5vw,32px);line-height:1;
+  color:var(--gold-hi);font-variant-numeric:tabular-nums;
+}
+.cd-unit{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--cream-2);margin-top:5px;font-weight:700}
+[data-cd="s"]{animation:blink 1s ease-in-out infinite}
+
+.reg-right{
+  padding:64px 56px;
+  background:linear-gradient(145deg,#0F0A05,#1A1008);
+  display:flex;flex-direction:column;justify-content:center;gap:18px;
+}
+.reg-field label{
+  display:block;font-size:10px;font-weight:700;color:var(--cream-2);
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;
+}
+.reg-field input,.reg-field select{
+  width:100%;padding:14px 16px;border-radius:11px;
+  border:1px solid var(--brd-2);background:rgba(255,255,255,.025);
+  color:var(--cream);font-family:inherit;font-size:14px;
+  transition:.25s;appearance:none;-webkit-appearance:none;
+}
+.reg-field input:focus,.reg-field select:focus{
+  outline:none;border-color:rgba(200,150,90,.5);
+  background:rgba(200,150,90,.04);
+  box-shadow:0 0 0 3px rgba(200,150,90,.10);
+}
+.reg-field input::placeholder{color:var(--mu)}
+.reg-field select option{background:#1A1008}
+.reg-submit{
+  width:100%;padding:16px;border-radius:11px;
+  background:linear-gradient(160deg,var(--gold-hi),var(--gold));
+  color:#1A0E02;font-weight:700;font-size:14px;font-family:inherit;
+  border:none;margin-top:4px;
+  box-shadow:0 6px 24px rgba(200,150,90,.35);
+  transition:.3s var(--ease-out);
+  position:relative;overflow:hidden;
+}
+.reg-submit::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:translateX(-100%);transition:transform .55s var(--ease-out);
+}
+.reg-submit:hover::after{transform:translateX(100%)}
+.reg-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,150,90,.50)}
+
+/* ═══════════════════════════════════════
+   FEATURES
+═══════════════════════════════════════ */
+.features-section{
+  padding:80px 52px 100px;max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+  text-align:center;
+  border-top:1px solid var(--brd);
+}
+.feat{display:flex;flex-direction:column;align-items:center;gap:18px}
+.feat-circle{
+  width:58px;height:58px;border-radius:50%;
+  border:1px solid var(--brd-2);
+  display:grid;place-items:center;
+  transition:.35s var(--ease-out);
+}
+.feat:hover .feat-circle{
+  border-color:rgba(200,150,90,.5);
+  background:rgba(200,150,90,.07);
+  transform:translateY(-4px);
+}
+.feat-circle svg{width:22px;height:22px;stroke:var(--gold-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.feat-title{font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--cream)}
+.feat-text{font-size:12.5px;color:var(--cream-2);line-height:1.65;font-weight:300;max-width:160px}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.footer{
+  padding:48px 52px;border-top:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-logo{font-family:'Lora',serif;font-size:20px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cream)}
+.footer-links{display:flex;gap:28px}
+.footer-link{font-size:12px;color:var(--mu);transition:color .2s;font-weight:500}
+.footer-link:hover{color:var(--cream-2)}
+.footer-copy{font-size:11px;color:var(--mu)}
+
+/* ═══════════════════════════════════════
+   HERO REVEAL — CSS puro (no GSAP, no puede ser revertido)
+═══════════════════════════════════════ */
+/* Estado inicial — oculto mientras el preloader cubre todo */
+.hero-left > * { opacity: 0; }
+
+/* Cuando JS agrega .hero-ready, cada hijo anima con delay creciente */
+@keyframes revealUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero-ready .hero-eyebrow {
+  animation: revealUp .6s cubic-bezier(.22,1,.36,1) 0s forwards;
+}
+.hero-ready .hero-title {
+  animation: revealUp .85s cubic-bezier(.22,1,.36,1) .12s forwards;
+}
+.hero-ready .hero-sub {
+  animation: revealUp .65s cubic-bezier(.22,1,.36,1) .32s forwards;
+}
+.hero-ready .hero-actions {
+  animation: revealUp .55s cubic-bezier(.22,1,.36,1) .48s forwards;
+}
+.hero-ready .scroll-hint {
+  animation: revealUp .5s cubic-bezier(.22,1,.36,1) .62s forwards;
+}
+
+/* ═══════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════ */
+@keyframes logoPulse{
+  0%,100%{opacity:.3;filter:sepia(.5) saturate(1.4) brightness(.8) drop-shadow(0 0 60px rgba(200,150,90,.55))}
+  50%{opacity:.48;filter:sepia(.5) saturate(1.6) brightness(.95) drop-shadow(0 0 110px rgba(200,150,90,.75))}
+}
+@keyframes blink{
+  0%,100%{color:var(--gold-hi);text-shadow:0 0 20px rgba(200,150,90,.5)}
+  50%{color:var(--gold-deep);text-shadow:none}
+}
+@keyframes scanLine{
+  0%{left:-100%}60%{left:100%}100%{left:100%}
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:130px 36px 80px}
+  .hero-right{position:absolute;inset:0;z-index:0}
+  .hero-left{position:relative;z-index:2}
+  .hero-right::before{background:linear-gradient(0deg,var(--bg) 0%,rgba(8,5,3,.85) 100%)}
+  .hero-right::after{display:none}
+  .local-section{grid-template-columns:1fr;gap:48px;padding:80px 36px}
+  .about-section{grid-template-columns:1fr}
+  .about-img-col{display:none}
+  .about-content{padding:72px 36px}
+  .maps-grid{grid-template-columns:1fr}
+  .maps-section{padding:80px 36px}
+  .registro-section{padding:0 36px 80px}
+  .registro-card{grid-template-columns:1fr}
+  .reg-left,.reg-right{padding:48px 36px}
+  .features-section{grid-template-columns:repeat(2,1fr);padding:60px 36px 80px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stats-item:nth-child(2){border-right:none}
+  .nav{padding:18px 36px}.nav.scrolled{padding:12px 36px}
+  .footer{flex-direction:column;gap:16px;text-align:center;padding:36px 28px}
+  .footer-links{justify-content:center}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .hero-left{padding:110px 24px 70px}
+  .scroll-hint{display:none}
+  .local-section{padding:72px 24px}
+  .about-content{padding:60px 24px}
+  .maps-section,.registro-section{padding:72px 24px 72px}
+  .features-section{grid-template-columns:1fr 1fr;padding:56px 24px 72px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .footer{padding:32px 24px}
+  .cursor-dot,.cursor-ring{display:none}
+  body{cursor:auto}
+  a,button{cursor:auto}
+}
+
+/* ═══════════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════════ */
+@media(prefers-reduced-motion:reduce){
+  /* Solo acelerar animaciones, nunca ocultar el preloader */
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .hero-left > *{animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- GRAIN -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ════════════════════════════════════
+     PRELOADER
+════════════════════════════════════ -->
+<div class="preloader" id="preloader">
+  <div class="preloader-logo-wrap">
+    <img class="preloader-logo-img" id="preloaderLogoImg" src="./img/logo.jpeg" alt="Típicos">
+    <svg class="preloader-svg" viewBox="0 0 220 2">
+      <line class="preloader-draw-line" x1="0" y1="1" x2="220" y2="1"/>
+    </svg>
+    <div class="preloader-tagline" id="preloaderTagline">CON LA RECETA DE MAMÁ</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     NAV
+════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-brand">
+    <img class="nav-brand-img" id="navBrandImg" src="./img/logo.jpeg" alt="Típicos">
+    <span class="nav-brand-name" id="navBrandName">Típicos</span>
+  </div>
+  <div class="nav-links">
+    <a href="#local">El local</a>
+    <a href="#about">Nosotros</a>
+    <a href="#ubicacion">Ubicación</a>
+    <a href="#registro">Pre-registro</a>
+  </div>
+  <a href="#registro" class="nav-cta magnetic" id="navCta">Reservá tu lugar</a>
+</nav>
+
+<!-- ════════════════════════════════════
+     SMOOTH WRAPPER
+════════════════════════════════════ -->
+<div id="page-content">
+
+<!-- HERO -->
+<section class="hero" id="heroSection" style="position:relative;overflow:hidden;">
+  <div class="orb orb-hero-1"></div>
+  <div class="orb orb-hero-2"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow" id="heroEyebrow">Santa Cruz · Bolivia · Junio 2026</div>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="line-wrap"><span>Café</span></span>
+      <span class="line-wrap"><em>con la receta</em></span>
+      <span class="line-wrap"><em>de mamá.</em></span>
+    </h1>
+    <p class="hero-sub" id="heroSub">
+      Lo boliviano de siempre, presentado como nunca lo habías visto.<br>
+      Pre-lanzamiento el sábado 6 de junio en Porongo.
+    </p>
+    <div class="hero-actions" id="heroActions">
+      <a href="#registro" class="btn-primary magnetic" id="heroCta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Reservá tu lugar
+      </a>
+      <a href="#local" class="btn-ghost-link">
+        Conocé el local
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+    <div class="scroll-hint" id="scrollHint">
+      <div class="scroll-hint-line"></div>
+      Scroll
+    </div>
+  </div>
+  <div class="hero-right">
+    <img
+      class="hero-coffee" id="heroCoffee"
+      src="https://lh3.googleusercontent.com/aida/ADBb0ughGI3-BjWR5rjmBCP4Ax_5VEaUd5cI-hj1z_PsNREGuD7D2hC4DxqjNDxlOZPlawGU9J3MMgrMUdf7NGcpNMTaBOXDvI8V4_OuRKN63_PaMKTelgMUAcIGkHyVfXTikeyiLmntSzajvXli9hmYS9_IIzPBEHjoxoUec8caP246E9-pdWNv5AZeKS3fpb3gXjwQqKPSRF-y6qMa8WdqKjD8MrMvhpX52S-VQLlsSrDFZWUMMBo2WC_DGvg"
+      alt="Café Típicos"
+      onerror="this.outerHTML='<div class=\'hero-coffee-fallback\'><img src=\'./img/logo.jpeg\' alt=\'Típicos\'></div>'"
+    >
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats" id="statsSection" style="position:relative;overflow:hidden;">
+  <div class="orb orb-section" style="opacity:.7"></div>
+  <div class="stats-item">
+    <div class="stats-num"><span class="count-num" data-target="6">0</span></div>
+    <div class="stats-lbl">Junio · Apertura</div>
+  </div>
+  <div class="stats-item">
+    <div class="stats-num"><span class="count-num" data-target="12">0</span><span class="stats-unit">+</span></div>
+    <div class="stats-lbl">Típicos bolivianos</div>
+  </div>
+  <div class="stats-item">
+    <div class="stats-num"><span class="count-num" data-target="20">0</span><span class="stats-unit">%</span></div>
+    <div class="stats-lbl">Off para socios</div>
+  </div>
+  <div class="stats-item">
+    <div class="stats-num"><span class="count-num" data-target="100">0</span><span class="stats-unit">%</span></div>
+    <div class="stats-lbl">Receta de mamá</div>
+  </div>
+</div>
+
+<!-- EL LOCAL -->
+<section class="local-section" id="local">
+  <div class="local-left">
+    <div class="eyebrow">Nuestro espacio</div>
+    <h2 class="local-title">Un lugar que huele a café<br><em>y sabe a Bolivia.</em></h2>
+    <p class="local-body">
+      Un rincón diseñado para ralentizar el tiempo. Donde el café se prepara como siempre, con calma y con cariño. En Porongo, a minutos de la ciudad, pero a mundos de distancia del ruido.
+    </p>
+    <div class="local-tag">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Porongo · Santa Cruz de la Sierra
+    </div>
+  </div>
+  <div class="local-right">
+    <div class="local-photo" style="grid-row:span 2">
+      <div class="local-photo-inner" style="min-height:420px">
+        <img src="./img/logo.jpeg" alt="Típicos">
+        <span>Fotos del local · Pronto</span>
+      </div>
+    </div>
+    <div class="local-photo">
+      <div class="local-photo-inner" style="min-height:190px">
+        <img src="./img/logo.jpeg" alt="Típicos">
+        <span>Interior</span>
+      </div>
+    </div>
+    <div class="local-photo">
+      <div class="local-photo-inner" style="min-height:190px">
+        <img src="./img/logo.jpeg" alt="Típicos">
+        <span>Ambiente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-img-col">
+    <img class="about-glow-logo" src="./img/logo.jpeg" alt="Típicos">
+  </div>
+  <div class="about-content">
+    <div class="eyebrow">Sobre nosotros</div>
+    <h2 class="about-title">El mejor momento para<br>una <em>taza de café.</em></h2>
+    <div class="about-body">
+      <p>Típicos nació de una idea simple: que lo nuestro merece ser presentado con orgullo. Que el cuñapé, el tamal y el café boliviano tienen el mismo derecho a brillar que cualquier tendencia importada.</p>
+    </div>
+    <blockquote class="about-quote">
+      "La historia completa de cómo nació Típicos está siendo escrita por quien la hizo realidad."
+    </blockquote>
+    <div class="about-coming">
+      <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Edmar Pedraza Chamón está redactando · Coming soon
+    </div>
+  </div>
+</section>
+
+<!-- MAPS -->
+<section id="ubicacion">
+  <div class="maps-section">
+    <div class="maps-head">
+      <div class="eyebrow">¿Dónde estamos?</div>
+      <h2 class="maps-title">En el corazón<br>de <em>Porongo.</em></h2>
+      <p class="maps-sub">A minutos de Santa Cruz, en un rincón tranquilo con sabor de casa. Pronto compartiremos la dirección exacta.</p>
+    </div>
+    <div class="maps-grid">
+      <div class="maps-embed-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=Porongo,+Santa+Cruz,+Bolivia&output=embed&z=13"
+          loading="lazy"
+          allowfullscreen
+          title="Ubicación Típicos – Porongo"
+        ></iframe>
+      </div>
+      <div class="maps-info">
+        <div class="maps-info-card">
+          <div class="maps-info-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="maps-info-label">Ubicación</div>
+            <div class="maps-info-value">Porongo, Santa Cruz de la Sierra</div>
+          </div>
+        </div>
+        <div class="maps-info-card">
+          <div class="maps-info-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+          </div>
+          <div>
+            <div class="maps-info-label">Apertura</div>
+            <div class="maps-info-value">Sábado 6 de junio · 17:00 hs</div>
+          </div>
+        </div>
+        <div class="maps-info-card">
+          <div class="maps-info-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="maps-info-label">Horario</div>
+            <div class="maps-info-value">Dirección exacta · Próximamente</div>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/search/Porongo+Santa+Cruz+Bolivia" target="_blank" class="maps-cta">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+          Abrir en Google Maps
+        </a>
+        <a href="https://wa.me/59178180866?text=Hola!%20Me%20interesa%20el%20pre-lanzamiento%20de%20T%C3%ADpicos%20en%20Porongo%20%F0%9F%8D%B5" target="_blank" class="wpp-cta">
+          <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.9L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.5-8 8.5z"/></svg>
+          Consultá por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRO -->
+<section id="registro">
+  <div class="registro-section">
+    <div class="registro-card" id="registroCard">
+      <div class="reg-left" style="position:relative;overflow:hidden;">
+        <div class="orb" style="width:300px;height:300px;top:-80px;right:-80px;background:radial-gradient(circle,rgba(200,150,90,.18) 0%,transparent 70%);filter:blur(60px);position:absolute;pointer-events:none;z-index:0"></div>
+        <div class="eyebrow">Pre-lanzamiento</div>
+        <h2 class="reg-title">Reservá tu lugar<br>el <em>6 de junio.</em></h2>
+        <p class="reg-sub">Cupos limitados. Acceso prioritario y descuentos de apertura exclusivos para los registrados.</p>
+        <div class="reg-info">
+          <div class="reg-info-row">
+            <div class="reg-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+            </div>
+            <span>Sábado 6 de junio · 17:00 hs</span>
+          </div>
+          <div class="reg-info-row">
+            <div class="reg-info-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <span>Porongo · Santa Cruz de la Sierra</span>
+          </div>
+        </div>
+        <div class="countdown-wrap">
+          <div class="cd-label">Faltan</div>
+          <div class="cd-grid">
+            <div class="cd-cell"><div class="cd-num" data-cd="d">00</div><div class="cd-unit">Días</div></div>
+            <div class="cd-cell"><div class="cd-num" data-cd="h">00</div><div class="cd-unit">Horas</div></div>
+            <div class="cd-cell"><div class="cd-num" data-cd="m">00</div><div class="cd-unit">Min</div></div>
+            <div class="cd-cell"><div class="cd-num" data-cd="s">00</div><div class="cd-unit">Seg</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reg-right">
+        <div class="reg-field">
+          <label>Tu nombre</label>
+          <input type="text" id="regNombre" placeholder="¿Cómo te llamás?">
+        </div>
+        <div class="reg-field">
+          <label>WhatsApp</label>
+          <input type="tel" id="regWpp" placeholder="+591 ·········">
+        </div>
+        <div class="reg-field">
+          <label>¿Cuántas personas van?</label>
+          <select id="regPersonas">
+            <option value="">Seleccioná</option>
+            <option value="1">Solo yo</option>
+            <option value="2">2 personas</option>
+            <option value="3">3 personas</option>
+            <option value="4">4 o más</option>
+          </select>
+        </div>
+        <button class="reg-submit magnetic" id="regSubmit">Confirmar registro →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features-section">
+  <div class="feat" data-reveal>
+    <div class="feat-circle">
+      <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+    </div>
+    <div class="feat-title">Café & Típicos</div>
+    <p class="feat-text">Los mejores sabores bolivianos en un solo lugar.</p>
+  </div>
+  <div class="feat" data-reveal>
+    <div class="feat-circle">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="feat-title">Calidad real</div>
+    <p class="feat-text">Ingredientes locales, receta original, sin atajos.</p>
+  </div>
+  <div class="feat" data-reveal>
+    <div class="feat-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    </div>
+    <div class="feat-title">20% socios</div>
+    <p class="feat-text">Descuento en todo el menú todo el año.</p>
+  </div>
+  <div class="feat" data-reveal>
+    <div class="feat-circle">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="feat-title">Hecho en Bolivia</div>
+    <p class="feat-text">Porongo, Santa Cruz, con orgullo camba.</p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">Típicos</div>
+  <div class="footer-links">
+    <a href="#local" class="footer-link">El local</a>
+    <a href="#about" class="footer-link">Nosotros</a>
+    <a href="#ubicacion" class="footer-link">Ubicación</a>
+  </div>
+  <div class="footer-copy">© 2026 Edmar Pedraza Chamón · Porongo, Santa Cruz</div>
+</footer>
+
+</div><!-- /page-content -->
+
+<!-- ════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════ -->
+<script src="../tipicos/gsap/gsap.min.js"></script>
+<script src="../tipicos/gsap/CustomEase.min.js"></script>
+<script src="../tipicos/gsap/DrawSVGPlugin.min.js"></script>
+<script src="../tipicos/gsap/ScrambleTextPlugin.min.js"></script>
+<script src="../tipicos/gsap/SplitText.min.js"></script>
+<script src="../tipicos/gsap/Flip.min.js"></script>
+<script src="../tipicos/gsap/ScrollTrigger.min.js"></script>
+
+<script>
+/* ──────────────────────────────────────
+   REGISTER + CUSTOM EASES
+────────────────────────────────────── */
+gsap.registerPlugin(
+  CustomEase, DrawSVGPlugin, ScrambleTextPlugin,
+  SplitText, Flip, ScrollTrigger
+);
+
+CustomEase.create("spring", "M0,0 C0.14,0 0.242,1.008 0.35,1 0.45,0.992 0.502,1 1,1");
+CustomEase.create("reveal", "M0,0 C0.05,0 0.133,0.408 0.2,0.6 0.3,0.867 0.4,1 1,1");
+
+/* ──────────────────────────────────────
+   SMOOTH SCROLL — CSS nativo (ScrollSmoother removido, causaba conflictos con GSAP inline styles)
+────────────────────────────────────── */
+
+/* ──────────────────────────────────────
+   CUSTOM CURSOR
+────────────────────────────────────── */
+const cursorDot = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+let mx = window.innerWidth/2, my = window.innerHeight/2;
+let rx = mx, ry = my;
+
+window.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  gsap.to(cursorDot, { x: mx, y: my, duration: 0.08, overwrite: true });
+});
+
+gsap.ticker.add(() => {
+  rx += (mx - rx) * 0.11;
+  ry += (my - ry) * 0.11;
+  gsap.set(cursorRing, { x: rx, y: ry });
+});
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => gsap.to(cursorRing, { scale: 1.8, borderColor: 'rgba(200,150,90,0.9)', duration: 0.3 }));
+  el.addEventListener('mouseleave', () => gsap.to(cursorRing, { scale: 1, borderColor: 'rgba(200,150,90,0.55)', duration: 0.4 }));
+});
+
+/* ──────────────────────────────────────
+   MAGNETIC BUTTONS
+────────────────────────────────────── */
+document.querySelectorAll('.magnetic').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width/2) * 0.32;
+    const y = (e.clientY - r.top - r.height/2) * 0.32;
+    gsap.to(el, { x, y, duration: 0.35, ease: "power2.out", overwrite: true });
+  });
+  el.addEventListener('mouseleave', () => {
+    gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: CustomEase.get("spring"), overwrite: true });
+  });
+});
+
+/* ──────────────────────────────────────
+   PRELOADER — solo GSAP core, sin plugins Club
+────────────────────────────────────── */
+const preloader = document.getElementById('preloader');
+const preloaderLogo = document.getElementById('preloaderLogoImg');
+const preloaderTagline = document.getElementById('preloaderTagline');
+const navBrandImg = document.getElementById('navBrandImg');
+const navBrandName = document.getElementById('navBrandName');
+const navCta = document.getElementById('navCta');
+
+function endPreloader() {
+  if(preloader._ended) return;
+  preloader._ended = true;
+  const navRect = document.querySelector('.nav-brand').getBoundingClientRect();
+  const logoRect = preloaderLogo.getBoundingClientRect();
+  const dx = (navRect.left + 22) - (logoRect.left + logoRect.width / 2);
+  const dy = (navRect.top + navRect.height / 2) - (logoRect.top + logoRect.height / 2);
+  const sc = 44 / logoRect.width;
+  gsap.to(preloaderTagline, { opacity: 0, duration: 0.25 });
+  gsap.to('.preloader-svg', { opacity: 0, duration: 0.25 });
+  gsap.to(preloaderLogo, {
+    x: dx, y: dy, scale: sc, duration: 0.7, ease: "power3.inOut",
+    onComplete: () => {
+      gsap.set([navBrandImg, navBrandName, navCta], { opacity: 1 });
+      gsap.to(preloader, {
+        opacity: 0, duration: 0.4,
+        onComplete: () => {
+          preloader.style.display = 'none';
+          startPageAnimations();
+        }
+      });
+    }
+  });
+}
+
+// Fallback por si algo falla
+setTimeout(() => {
+  if(!preloader._ended) {
+    preloader.style.display = 'none';
+    gsap.set([navBrandImg, navBrandName, navCta], { opacity: 1 });
+    startPageAnimations();
+  }
+}, 6000);
+
+// Timeline sin DrawSVG ni ScrambleText (core GSAP solamente)
+gsap.timeline({ delay: 0.1 })
+  // 1. Logo aparece
+  .fromTo(preloaderLogo,
+    { scale: 0.7, opacity: 0 },
+    { scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" })
+  // 2. Línea se expande (CSS transform, no DrawSVG)
+  .fromTo('.preloader-draw-line',
+    { attr: { x2: 0 } },
+    { attr: { x2: 220 }, duration: 0.8, ease: "power2.inOut" }, "-=0.2")
+  // 3. Tagline fade in letra por letra (CSS animation)
+  .to(preloaderTagline, { opacity: 1, duration: 0.5, ease: "power2.out" }, "-=0.2")
+  // 4. Pausa para leer
+  .to({}, { duration: 0.8 })
+  // 5. Logo vuela al nav y página aparece
+  .add(endPreloader);
+
+/* ──────────────────────────────────────
+   PAGE ANIMATIONS (after preloader)
+────────────────────────────────────── */
+function startPageAnimations() {
+
+  // Hero reveal — CSS animation pura (animation-fill-mode:forwards no puede ser revertida por GSAP)
+  document.querySelector('.hero-left').classList.add('hero-ready');
+
+  // Hero coffee parallax
+  const heroCoffee = document.getElementById('heroCoffee');
+  if(heroCoffee) {
+    gsap.to(heroCoffee, {
+      yPercent: 18,
+      ease: "none",
+      scrollTrigger: {
+        trigger: '#heroSection',
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.2,
+      }
+    });
+    // Ken Burns
+    gsap.to(heroCoffee, {
+      scale: 1.06,
+      duration: 12,
+      ease: "none",
+      yoyo: true,
+      repeat: -1,
+    });
+  }
+
+  // Stats countup
+  document.querySelectorAll('.count-num').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 85%",
+      once: true,
+      onEnter: () => gsap.to({ val: 0 }, {
+        val: target, duration: 1.6,
+        ease: "power2.out",
+        onUpdate: function() { el.textContent = Math.round(this.targets()[0].val); },
+        onComplete: () => { el.textContent = target; }
+      })
+    });
+  });
+
+  // Local photos clip-path reveal
+  gsap.utils.toArray('.local-photo').forEach((el, i) => {
+    gsap.to(el, {
+      clipPath: "inset(0 0% 0 0)",
+      duration: 1.2,
+      ease: "power3.inOut",
+      delay: i * 0.15,
+      scrollTrigger: {
+        trigger: '.local-section',
+        start: "top 65%",
+        once: true,
+      }
+    });
+  });
+
+  // Local text
+  gsap.from('.local-left .eyebrow, .local-title, .local-body, .local-tag', {
+    opacity: 0, y: 28, stagger: 0.12, duration: 0.8, ease: "power3.out",
+    scrollTrigger: { trigger: '.local-section', start: "top 68%", once: true }
+  });
+
+  // About text lines
+  ScrollTrigger.create({
+    trigger: '.about-section',
+    start: "top 65%",
+    once: true,
+    onEnter: () => {
+      gsap.from('.about-content .eyebrow, .about-title, .about-body p, .about-quote, .about-coming', {
+        opacity: 0, y: 24, stagger: 0.13, duration: 0.75, ease: "power3.out"
+      });
+    }
+  });
+
+  // Maps section
+  gsap.from('.maps-head .eyebrow, .maps-title, .maps-sub', {
+    opacity: 0, y: 24, stagger: 0.12, duration: 0.8, ease: "power3.out",
+    scrollTrigger: { trigger: '.maps-section', start: "top 68%", once: true }
+  });
+  gsap.from('.maps-embed-wrap', {
+    opacity: 0, scale: 0.97, duration: 1, ease: "power3.out",
+    scrollTrigger: { trigger: '.maps-embed-wrap', start: "top 75%", once: true }
+  });
+  gsap.from('.maps-info-card, .maps-cta, .wpp-cta', {
+    opacity: 0, x: 24, stagger: 0.1, duration: 0.7, ease: "power2.out",
+    scrollTrigger: { trigger: '.maps-info', start: "top 75%", once: true }
+  });
+
+  // Registro card
+  gsap.from('#registroCard', {
+    opacity: 0, scale: 0.97, y: 30, duration: 1, ease: "power3.out",
+    scrollTrigger: { trigger: '#registroCard', start: "top 72%", once: true }
+  });
+
+  // Features stagger
+  gsap.from('[data-reveal]', {
+    opacity: 0, y: 30, stagger: 0.12, duration: 0.8, ease: "power3.out",
+    scrollTrigger: { trigger: '.features-section', start: "top 75%", once: true }
+  });
+
+  // Footer
+  gsap.from('.footer', {
+    opacity: 0, y: 20, duration: 0.8, ease: "power2.out",
+    scrollTrigger: { trigger: '.footer', start: "top 90%", once: true }
+  });
+}
+
+/* ──────────────────────────────────────
+   NAV SHRINK — compatible con ScrollSmoother
+────────────────────────────────────── */
+const navEl = document.getElementById('nav');
+ScrollTrigger.create({
+  start: 80,
+  onUpdate: self => navEl.classList.toggle('scrolled', self.scroll() > 80),
+});
+
+/* ──────────────────────────────────────
+   COUNTDOWN
+────────────────────────────────────── */
+const EVENT_TS = new Date('2026-06-06T17:00:00-04:00').getTime();
+function pad(n){ return String(n).padStart(2,'0'); }
+function tickCd(){
+  const diff = Math.max(0, EVENT_TS - Date.now());
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.querySelectorAll('[data-cd="d"]').forEach(e=>e.textContent=pad(d));
+  document.querySelectorAll('[data-cd="h"]').forEach(e=>e.textContent=pad(h));
+  document.querySelectorAll('[data-cd="m"]').forEach(e=>e.textContent=pad(m));
+  document.querySelectorAll('[data-cd="s"]').forEach(e=>e.textContent=pad(s));
+}
+tickCd(); setInterval(tickCd, 1000);
+
+/* ──────────────────────────────────────
+   REGISTRO SUBMIT
+────────────────────────────────────── */
+document.getElementById('regSubmit').addEventListener('click', function(){
+  const nombre = document.getElementById('regNombre').value.trim() || 'amigo';
+  this.textContent = `✓ ¡Listo, ${nombre}! Te contactamos pronto.`;
+  this.style.background = 'linear-gradient(160deg,#6ABF59,#3D9A2E)';
+  this.style.color = '#fff';
+  this.disabled = true;
+  gsap.from(this, { scale: 0.97, duration: 0.4, ease: CustomEase.get("spring") });
+});
+
+/* ──────────────────────────────────────
+   REDUCE MOTION FALLBACK
+────────────────────────────────────── */
+// prefers-reduced-motion: el preloader siempre muestra, las CSS animations corren a .01ms (instant)
+</script>
+</body>
+</html>

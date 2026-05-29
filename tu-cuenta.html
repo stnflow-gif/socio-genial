@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://sociogenial.stnflow.online/app -->
+<html lang="es" one-sec-browser-extension-id="ZmVtbmFob2hnaW5kZG9mZ2Vra25mbWFrbGNicGlua24="><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script><div id="in-page-channel-node-id" data-channel-name="in_page_channel_1LT2Ah"></div><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#060504">
+<title>El Socio Genial · Tu cuenta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{
+  /* Nuevo sistema de diseño — igual que socio-genial.html */
+  --bg:#060504; --bg-2:#0E0B09; --bg-deep:#030201;
+  --card:#110D08; --card-2:#171108; --surface:#1C1509;
+  --brd:rgba(255,255,255,0.05); --brd-2:rgba(255,255,255,0.08); --brd-3:rgba(255,255,255,0.12);
+  --brd-gold:rgba(212,148,10,0.22); --brd-gold-hi:rgba(212,148,10,0.42);
+  --g-hi:#FFF4A0; --em:#D4940A; --em-2:#FFD84A; --em-3:#8B5E05;
+  --em-glow:rgba(212,148,10,0.45); --em-soft:rgba(212,148,10,0.08);
+  --navy:#1A3AFF; --navy-2:#1A3AFF; --navy-3:#0D1F8A;
+  --txt:#F0EAE0; --txt-2:#A89880; --mu:#6B5848; --mu-2:#4A3828;
+  --green:#34D399; --red:#F87171; --yellow:#FBBF24;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+body{
+  background:
+    radial-gradient(900px 700px at 10% -10%,rgba(212,120,5,.18),transparent 60%),
+    radial-gradient(700px 600px at 100% 10%,rgba(26,58,255,.10),transparent 55%),
+    radial-gradient(800px 600px at 50% 110%,rgba(212,120,5,.10),transparent 60%),
+    var(--bg);
+  line-height:1.5;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit;font-size:15px;color:var(--txt);background:transparent;border:none;outline:none;width:100%}
+img,svg{display:block;max-width:100%}
+
+/* ───────── Reusable ───────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:12px;font-weight:700;font-size:14px;transition:.22s var(--ease-out);border:1px solid transparent;letter-spacing:.2px;white-space:nowrap}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary{background:linear-gradient(180deg,var(--em-2),var(--em) 50%,var(--em-3));color:#1a1102;box-shadow:0 6px 20px rgba(232,168,48,0.30), inset 0 1px 0 rgba(255,255,255,0.4)}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 28px rgba(232,168,48,0.42)}
+.btn-ghost{background:rgba(255,255,255,0.04);border:1px solid var(--brd-3);color:var(--txt)}
+.btn-ghost:hover:not(:disabled){background:rgba(255,255,255,0.07)}
+.btn-block{width:100%}
+
+.input-group{margin-bottom:14px}
+.input-label{display:block;font-size:12px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.input-wrap{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--card);border:1px solid var(--brd-2);border-radius:11px;transition:.18s}
+.input-wrap:focus-within{border-color:var(--brd-gold-hi);background:var(--card-2)}
+.input-wrap input{font-size:15px}
+.input-wrap textarea{font-size:14px;resize:vertical;min-height:60px}
+
+.card{background:var(--card);border:1px solid var(--brd-2);border-radius:16px;padding:20px}
+.card-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--txt)}
+.card-sub{font-size:13px;color:var(--mu);margin-bottom:16px}
+
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle}
+.spinner-lg{width:36px;height:36px;border-width:3px;border-top-color:var(--em-2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(40px);background:var(--card-2);color:var(--txt);padding:12px 18px;border-radius:12px;border:1px solid var(--brd-3);font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:.3s var(--ease-out);max-width:90vw;box-shadow:0 14px 34px rgba(0,0,0,0.55)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.err{border-color:rgba(248,113,113,0.45);background:#2A1620}
+.toast.ok{border-color:rgba(52,211,153,0.45);background:#0F2421}
+
+.icon{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon-sm{width:16px;height:16px}
+.icon-lg{width:28px;height:28px}
+
+/* ───────── Screens ───────── */
+.screen{display:none;min-height:100vh;animation:fadeIn .35s var(--ease-out)}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Loading ── */
+#screen-loading{display:none;place-items:center}
+#screen-loading.active{display:grid}
+.boot{text-align:center}
+.boot-mark{width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;margin:0 auto 18px;box-shadow:0 0 0 2px #C9A961,0 0 24px rgba(232,168,48,0.35)}
+.boot-mark span{font-family:'Playfair Display',serif;color:var(--em-3);font-size:30px;font-weight:800}
+.boot-txt{color:var(--mu);font-size:13px}
+
+/* ── Auth ── */
+#screen-auth{display:none;align-items:center;justify-content:center;padding:32px 18px;min-height:100vh}
+#screen-auth.active{display:flex}
+.auth-shell{width:100%;max-width:460px}
+.auth-head{text-align:center;margin-bottom:32px}
+.auth-mark{
+  width:80px;height:80px;border-radius:50%;background:#fff;
+  display:grid;place-items:center;margin:0 auto 20px;overflow:hidden;
+  box-shadow:0 0 0 2px var(--em),0 0 0 4px var(--bg),0 0 0 5px rgba(212,148,10,.4),0 8px 32px rgba(212,148,10,.35);
+}
+.auth-mark img{width:80%;height:80%;object-fit:contain}
+.auth-mark span{font-family:'Bebas Neue',sans-serif;color:var(--em-3);font-size:36px;letter-spacing:2px}
+.auth-title{
+  font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--txt);
+}
+.auth-title em{
+  font-family:'Playfair Display',serif;font-style:italic;letter-spacing:0;
+  background:linear-gradient(135deg,var(--g-hi),var(--em-2),var(--em));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.auth-sub{color:var(--mu);font-size:14px;margin-top:8px;font-weight:300}
+
+/* Auth card container */
+.auth-card{
+  background:linear-gradient(145deg,rgba(17,13,8,.98),rgba(23,17,8,.95));
+  border:1px solid var(--brd-gold);border-radius:22px;padding:32px 28px;
+  box-shadow:0 0 0 1px rgba(212,148,10,.06) inset,0 40px 80px rgba(0,0,0,.55);
+  position:relative;overflow:hidden;
+}
+.auth-card::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,148,10,.7),transparent)}
+
+.invitador-banner{background:linear-gradient(180deg,rgba(232,168,48,0.10),rgba(232,168,48,0.03));border:1px solid var(--brd-gold-hi);border-radius:12px;padding:12px 14px;margin-bottom:18px;font-size:13px;color:var(--txt-2);display:flex;align-items:center;gap:10px}
+.invitador-banner b{color:var(--em-2)}
+
+.tabs{display:flex;background:var(--card);border:1px solid var(--brd-2);border-radius:12px;padding:4px;margin-bottom:18px}
+.tab{flex:1;padding:11px;border-radius:9px;font-weight:600;font-size:14px;color:var(--mu);transition:.18s}
+.tab.active{background:var(--card-2);color:var(--em-2);box-shadow:inset 0 0 0 1px var(--brd-gold)}
+
+.auth-form .btn{margin-top:8px}
+.auth-foot{text-align:center;margin-top:18px;font-size:12px;color:var(--mu-2)}
+
+/* ── Pago ── */
+#screen-pago{padding:28px 18px 60px}
+.pago-shell{max-width:520px;margin:0 auto}
+.pago-head{text-align:center;margin-bottom:24px}
+.pago-head h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700}
+.pago-head h2 em{font-style:italic;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pago-head p{color:var(--mu);font-size:14px;margin-top:8px}
+.estado-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid;margin-top:10px}
+.estado-pill .dot{width:7px;height:7px;border-radius:50%}
+.estado-pill.warn{border-color:rgba(251,191,36,0.4);background:rgba(251,191,36,0.08);color:var(--yellow)}
+.estado-pill.warn .dot{background:var(--yellow);box-shadow:0 0 10px var(--yellow)}
+.estado-pill.err{border-color:rgba(248,113,113,0.4);background:rgba(248,113,113,0.08);color:var(--red)}
+.estado-pill.err .dot{background:var(--red)}
+
+.qr-box{background:#fff;padding:18px;border-radius:14px;max-width:280px;margin:0 auto 18px;display:grid;place-items:center;aspect-ratio:1}
+.qr-box img{width:100%;height:100%;object-fit:contain}
+.qr-fallback{font-family:'Playfair Display',serif;text-align:center;color:#0B1120;padding:16px}
+.qr-fallback b{font-size:32px;display:block;color:var(--em-3)}
+
+.monto-box{text-align:center;margin-bottom:24px}
+.monto-label{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.1em}
+.monto{font-family:'Playfair Display',serif;font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.monto small{font-size:18px;color:var(--mu);font-weight:600;-webkit-text-fill-color:var(--mu);margin-left:6px}
+
+.file-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px 16px;background:var(--card);border:2px dashed var(--brd-3);border-radius:12px;cursor:pointer;transition:.18s;text-align:center}
+.file-drop:hover{border-color:var(--brd-gold-hi);background:var(--card-2)}
+.file-drop.has-file{border-style:solid;border-color:var(--brd-gold-hi);background:var(--card-2)}
+.file-drop input{display:none}
+.file-drop .file-icon{color:var(--em-2)}
+.file-drop .file-label{font-size:13px;color:var(--mu);font-weight:500}
+.file-drop .file-name{font-size:13px;color:var(--em-2);font-weight:600;word-break:break-all}
+
+.pago-pendiente,.pago-rechazado{padding:24px 20px;text-align:center}
+.pago-pendiente .icon-big,.pago-rechazado .icon-big{width:56px;height:56px;margin:0 auto 14px;color:var(--yellow)}
+.pago-rechazado .icon-big{color:var(--red)}
+.pago-pendiente h3,.pago-rechazado h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px}
+.pago-pendiente p,.pago-rechazado p{color:var(--mu);font-size:14px;line-height:1.6}
+.motivo-box{margin-top:14px;padding:12px 14px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.3);border-radius:10px;font-size:13px;color:var(--red);text-align:left}
+
+.pago-foot{margin-top:18px;text-align:center}
+.pago-foot a{color:var(--mu);font-size:12px;text-decoration:underline}
+
+/* ── Dashboard ── */
+#screen-dashboard{display:none}
+#screen-dashboard.active{display:grid}
+@media(min-width:1024px){
+  #screen-dashboard.active{grid-template-columns:260px 1fr;min-height:100vh}
+}
+
+.sidebar{display:none;background:rgba(6,5,4,0.88);backdrop-filter:blur(20px);border-right:1px solid var(--brd-2);padding:24px 16px;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+@media(min-width:1024px){.sidebar{display:flex}}
+.sb-brand{display:flex;align-items:center;gap:12px;padding:6px 8px 22px;border-bottom:1px solid var(--brd);margin-bottom:14px}
+.sb-brand .bm{width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 1.5px #C9A961}
+.sb-brand .bm span{font-family:'Playfair Display',serif;color:var(--em-3);font-size:18px;font-weight:800}
+.sb-brand .bn{font-weight:800;font-size:15px;letter-spacing:.2px}
+.sb-brand .bn b{background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--mu);font-size:14px;font-weight:500;cursor:pointer;transition:.18s;text-align:left;width:100%}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--txt-2)}
+.nav-item.active{background:linear-gradient(180deg,rgba(232,168,48,0.10),rgba(232,168,48,0.03));color:var(--em-2);box-shadow:inset 0 0 0 1px var(--brd-gold)}
+.nav-item .icon{flex-shrink:0}
+
+.sb-foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--brd);font-size:11px;color:var(--mu-2);text-align:center}
+
+/* Top bar mobile */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(11,17,32,0.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--brd-2);position:sticky;top:0;z-index:50}
+@media(min-width:1024px){.topbar{display:none}}
+.tb-left{display:flex;align-items:center;gap:10px}
+.tb-mark{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 1.5px #C9A961}
+.tb-mark span{font-family:'Playfair Display',serif;color:var(--em-3);font-size:17px;font-weight:800}
+.tb-name{font-weight:800;font-size:14px}
+.tb-name b{background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tb-codigo{font-family:'Playfair Display',serif;font-size:13px;color:var(--em-2);font-weight:700;letter-spacing:.04em}
+
+/* Main content */
+.main{padding:20px 18px 110px;max-width:920px;margin:0 auto;width:100%}
+@media(min-width:1024px){.main{padding:34px 38px 60px}}
+.view{display:none}
+.view.active{display:block;animation:fadeIn .25s var(--ease-out)}
+
+.view-head{margin-bottom:22px}
+.view-head h1{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;letter-spacing:-.01em}
+.view-head h1 em{font-style:italic;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.view-head p{color:var(--mu);font-size:14px;margin-top:4px}
+
+/* Bottom nav mobile */
+.botnav{position:fixed;left:0;right:0;bottom:0;background:rgba(11,17,32,0.92);backdrop-filter:blur(18px);border-top:1px solid var(--brd-2);display:flex;justify-content:space-around;padding:8px 4px;z-index:60}
+@media(min-width:1024px){.botnav{display:none}}
+.botnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px;color:var(--mu-2);font-size:10px;font-weight:600;letter-spacing:.04em;flex:1;transition:.18s;border-radius:8px;text-align:center;min-width:0}
+.botnav-item.active{color:var(--em-2)}
+.botnav-item .icon{width:22px;height:22px}
+.botnav-item span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+
+/* Inicio view */
+.hero-card{background:linear-gradient(135deg,var(--card-2) 0%,var(--card) 100%);border:1px solid var(--brd-gold);border-radius:18px;padding:22px;position:relative;overflow:hidden;margin-bottom:18px}
+.hero-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(232,168,48,0.18),transparent 60%);pointer-events:none}
+.hc-lbl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.hc-codigo{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0 14px;word-break:break-all}
+.hc-row{display:flex;gap:10px;flex-wrap:wrap}
+.hc-row .btn{flex:1;min-width:140px}
+
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+@media(min-width:640px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--card);border:1px solid var(--brd-2);border-radius:14px;padding:16px;position:relative;overflow:hidden}
+.stat-lbl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:6px}
+.stat-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--txt);line-height:1.1}
+.stat-val small{font-size:14px;color:var(--mu);font-weight:500;-webkit-text-fill-color:var(--mu)}
+.stat-sub{font-size:11px;color:var(--mu-2);margin-top:4px}
+.stat .icon{position:absolute;top:14px;right:14px;color:var(--em-3);opacity:.5}
+
+.pozo-card{background:linear-gradient(135deg,rgba(43,75,158,0.20),rgba(232,168,48,0.10));border:1px solid var(--brd-gold-hi);border-radius:18px;padding:22px;text-align:center}
+.pozo-card .pc-lbl{font-size:12px;color:var(--em-2);text-transform:uppercase;letter-spacing:.16em;font-weight:700;margin-bottom:8px}
+.pozo-card .pc-val{font-family:'Playfair Display',serif;font-size:42px;font-weight:800;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pozo-card .pc-foot{margin-top:8px;font-size:13px;color:var(--mu)}
+.pozo-card .pc-foot b{color:var(--txt-2)}
+
+/* Red view */
+.red-resumen{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
+@media(min-width:640px){.red-resumen{grid-template-columns:repeat(4,1fr)}}
+.nivel-pill{background:var(--card);border:1px solid var(--brd-2);border-radius:12px;padding:14px;text-align:center}
+.nivel-pill .nl-lbl{font-size:11px;color:var(--mu);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.nivel-pill .nl-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--em-2);margin-top:4px}
+.nivel-pill .nl-pct{font-size:11px;color:var(--mu-2);margin-top:2px}
+
+.tree-wrap{background:var(--card);border:1px solid var(--brd-2);border-radius:14px;padding:18px;overflow-x:auto}
+.tree-empty{text-align:center;padding:30px 18px;color:var(--mu)}
+.tree-empty .icon{width:36px;height:36px;margin:0 auto 10px;color:var(--mu-2)}
+.tree-list{list-style:none}
+.tree-node{padding:10px 12px;border:1px solid var(--brd);border-radius:10px;margin-bottom:8px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.02);transition:.18s}
+.tree-node:hover{border-color:var(--brd-gold);background:rgba(232,168,48,0.04)}
+.tree-node.lvl-1{margin-left:20px}
+.tree-node.lvl-2{margin-left:40px;border-color:var(--brd);opacity:.92}
+.tree-node.lvl-3{margin-left:60px;opacity:.85}
+.tn-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--em-3),var(--em-deep));display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:14px;flex-shrink:0}
+.tn-info{flex:1;min-width:0}
+.tn-name{font-size:14px;font-weight:600;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tn-meta{font-size:11px;color:var(--mu);margin-top:1px}
+.tn-lvl{font-size:11px;color:var(--em-2);font-weight:700;padding:3px 8px;border:1px solid var(--brd-gold);border-radius:99px;background:var(--em-soft)}
+
+/* Comisiones */
+.com-niveles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
+@media(min-width:640px){.com-niveles{grid-template-columns:repeat(4,1fr)}}
+.com-card{background:var(--card);border:1px solid var(--brd-2);border-radius:12px;padding:14px}
+.com-card .cc-pct{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--em-2)}
+.com-card .cc-lvl{font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.com-card .cc-monto{font-size:13px;color:var(--txt-2);margin-top:6px}
+
+.com-table{background:var(--card);border:1px solid var(--brd-2);border-radius:14px;overflow:hidden}
+.com-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 16px;border-bottom:1px solid var(--brd);align-items:center}
+.com-row:last-child{border-bottom:none}
+.com-row .cr-from{font-size:13px;font-weight:600;color:var(--txt)}
+.com-row .cr-meta{font-size:11px;color:var(--mu);margin-top:2px}
+.com-row .cr-amount{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--em-2);text-align:right;white-space:nowrap}
+.com-row .cr-pct{font-size:10px;color:var(--mu);margin-top:1px;text-align:right}
+
+.empty{text-align:center;padding:40px 20px;color:var(--mu)}
+.empty .icon{width:42px;height:42px;margin:0 auto 12px;color:var(--mu-2)}
+.empty h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--txt-2);margin-bottom:6px}
+.empty p{font-size:13px}
+
+/* Pozo view */
+.pozo-hero{background:linear-gradient(135deg,rgba(43,75,158,0.30),rgba(232,168,48,0.14));border:1px solid var(--brd-gold-hi);border-radius:20px;padding:32px 22px;text-align:center;position:relative;overflow:hidden;margin-bottom:22px}
+.pozo-hero::before{content:'';position:absolute;inset:-2px;background:radial-gradient(800px 400px at 50% 0%,rgba(232,168,48,0.18),transparent 60%);pointer-events:none}
+.pozo-hero .ph-lbl{font-size:13px;color:var(--em-2);text-transform:uppercase;letter-spacing:.2em;font-weight:700;position:relative}
+.pozo-hero .ph-monto{font-family:'Playfair Display',serif;font-size:clamp(46px,12vw,72px);font-weight:800;background:linear-gradient(135deg,var(--g-hi),var(--em-2),var(--em));-webkit-background-clip:text;background-clip:text;color:transparent;margin:10px 0;line-height:1;position:relative}
+.pozo-hero .ph-foot{color:var(--txt-2);font-size:14px;position:relative}
+.pozo-hero .ph-foot b{color:var(--em-2)}
+
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:480px;margin:18px auto 0;position:relative}
+.cd-box{background:rgba(11,17,32,0.5);border:1px solid var(--brd-gold);border-radius:12px;padding:12px 6px;text-align:center}
+.cd-box .cd-n{font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:var(--g-hi)}
+.cd-box .cd-l{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.12em;font-weight:600;margin-top:2px}
+
+/* Herederos */
+.her-list{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.her-item{background:var(--card);border:1px solid var(--brd-2);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.her-num{width:32px;height:32px;border-radius:50%;background:var(--em-soft);border:1px solid var(--brd-gold);display:grid;place-items:center;font-weight:700;color:var(--em-2);font-size:14px;flex-shrink:0}
+.her-info{flex:1;min-width:0}
+.her-info .hn{font-size:14px;font-weight:600;color:var(--txt)}
+.her-info .hm{font-size:12px;color:var(--mu);margin-top:1px}
+.her-del{padding:8px;color:var(--mu);border-radius:8px;transition:.18s}
+.her-del:hover{color:var(--red);background:rgba(248,113,113,0.08)}
+
+/* Share */
+.share-codigo-box{background:linear-gradient(135deg,var(--card-2),var(--card));border:1px solid var(--brd-gold-hi);border-radius:18px;padding:28px;text-align:center;margin-bottom:18px}
+.share-codigo-box .sc-lbl{font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.share-codigo-box .sc-cod{font-family:'Playfair Display',serif;font-size:38px;font-weight:800;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent;margin:8px 0 14px;letter-spacing:.06em}
+.share-link{display:flex;gap:8px;align-items:center;background:rgba(11,17,32,0.7);border:1px solid var(--brd-2);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--mu);margin-bottom:14px;text-align:left}
+.share-link .sl-url{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt-2);font-family:monospace;font-size:11px}
+.share-link button{color:var(--em-2);font-weight:600;font-size:12px;padding:6px 10px;border:1px solid var(--brd-gold);border-radius:7px;white-space:nowrap}
+
+/* Perfil */
+.perfil-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--brd);font-size:14px}
+.perfil-row:last-child{border-bottom:none}
+.perfil-row .pl{color:var(--mu);font-weight:500}
+.perfil-row .pv{color:var(--txt);font-weight:600;text-align:right;word-break:break-all;max-width:60%}
+.logout-btn{margin-top:22px;width:100%;color:var(--red);border:1px solid rgba(248,113,113,0.3);background:rgba(248,113,113,0.04);padding:14px;border-radius:12px;font-weight:600;font-size:14px;transition:.18s}
+.logout-btn:hover{background:rgba(248,113,113,0.10);border-color:var(--red)}
+
+.err-msg{color:var(--red);font-size:12px;margin-top:6px;display:none}
+.err-msg.show{display:block}
+
+/* ──── Invitacion mini-sobre dentro del dashboard ──── */
+.mini-env{
+  position:relative;width:min(360px,100%);aspect-ratio:1.55/1;margin:0 auto;
+  perspective:1200px;transform-style:preserve-3d;
+  transition:transform 1s var(--ease-out),opacity .5s .7s var(--ease-out);
+}
+.mini-env.gone{opacity:0;transform:scale(.5) translateY(-100px);pointer-events:none}
+.mini-env-body{position:absolute;inset:0;border-radius:14px;
+  background:linear-gradient(180deg,#3A2911,#1F1408);
+  border:2px solid rgba(232,168,48,0.55);box-shadow:0 24px 50px rgba(0,0,0,0.55)}
+.mini-env-body::before{content:"";position:absolute;inset:8px;border-radius:10px;
+  background:repeating-linear-gradient(45deg,rgba(232,168,48,0.10) 0 6px,transparent 6px 14px),linear-gradient(180deg,#2A1B0C,#0F0A04);
+  border:1px solid rgba(232,168,48,0.20)}
+.mini-env-flap{position:absolute;left:0;right:0;top:0;height:55%;z-index:6;
+  background:linear-gradient(180deg,#9C6F27,#3A2911);
+  border:2px solid rgba(232,168,48,0.40);border-radius:14px 14px 4px 4px;
+  clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;
+  transform:rotateX(0deg);transition:transform 1s .2s var(--ease-out);
+  box-shadow:inset 0 0 26px rgba(0,0,0,0.30)}
+.mini-env.opening .mini-env-flap{transform:rotateX(-180deg)}
+.mini-letter{position:absolute;inset:6%;border-radius:12px;z-index:4;
+  background:linear-gradient(180deg,#FFFCF4,#F4E5CE);
+  border:1px solid rgba(201,146,59,0.55);
+  box-shadow:0 1px 0 rgba(255,255,255,0.7) inset,0 16px 38px rgba(0,0,0,0.40);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:18px 14px;color:#3D2418;text-align:center;
+  transform:translateY(0);transition:transform 1s .85s var(--ease-out);
+}
+.mini-env.opening .mini-letter{transform:translateY(-65%)}
+.mini-letter-eyebrow{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#9C6F27;font-weight:800;margin-bottom:6px}
+.mini-letter-name{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;line-height:1.1;color:#3D2418}
+.mini-letter-divider{width:36px;height:1px;background:#C9923B;margin:10px auto}
+.mini-letter-msg{font-family:'Playfair Display',serif;font-style:italic;font-size:11px;color:#6B3D24;line-height:1.4}
+.mini-wax{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;
+  width:64px;height:64px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#E8B554,#9C6F27 60%,#6B4C18);
+  display:grid;place-items:center;
+  box-shadow:0 0 0 2px rgba(255,224,138,0.40),0 8px 22px rgba(0,0,0,0.50),inset 0 -6px 14px rgba(0,0,0,0.30);
+  transition:transform .45s var(--ease-spring),opacity .35s}
+.mini-wax span{font-family:'Playfair Display',serif;font-weight:800;font-size:24px;color:#3A2911}
+.mini-env.opening .mini-wax{transform:translate(-50%,-50%) scale(0) rotate(120deg);opacity:0;transition-delay:0s}
+
+.inv-result{margin-top:22px;padding:18px;border-radius:14px;border:1px solid var(--brd-gold);
+  background:linear-gradient(135deg,rgba(232,168,48,0.10),rgba(232,168,48,0.03));
+  display:none;animation:fadeIn .4s var(--ease-out) both}
+.inv-result.show{display:block}
+.inv-result-lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--em-2);font-weight:700;margin-bottom:8px}
+.inv-result-link{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,0.04);border:1px solid var(--brd-2);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.inv-result-link input{flex:1;background:transparent;border:0;color:var(--em-2);font-family:'Inter',monospace;font-size:12px;outline:none;min-width:0}
+.inv-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inv-actions .btn{padding:11px;font-size:13px}
+
+.inv-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;border:1px solid var(--brd-2);background:rgba(255,255,255,0.02);margin-bottom:8px}
+.inv-item:hover{background:rgba(255,255,255,0.04)}
+.inv-item-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#9C6F27,#3A2911);display:grid;place-items:center;flex-shrink:0;color:#FFE08A;font-family:'Playfair Display',serif;font-weight:800;font-size:14px}
+.inv-item-body{flex:1;min-width:0}
+.inv-item-name{font-weight:700;font-size:14px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inv-item-meta{font-size:11px;color:var(--mu);margin-top:2px}
+.inv-badge{font-size:10px;padding:3px 8px;border-radius:6px;font-weight:700;letter-spacing:.3px;white-space:nowrap}
+.inv-badge.pendiente{background:rgba(251,191,36,0.18);color:#FBBF24}
+.inv-badge.abierta{background:rgba(43,75,158,0.30);color:#A8C4FF}
+.inv-badge.confirmada{background:rgba(52,211,153,0.20);color:#34D399}
+
+</style>
+<style>@keyframes slide-in-one-tap {
+  from {
+    transform: translateY(80px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.trust-hide-gracefully {
+  opacity: 0;
+}
+
+.trust-wallet-one-tap .hidden {
+    display: none;
+  }
+
+.trust-wallet-one-tap .semibold {
+    font-weight: 500;
+  }
+
+.trust-wallet-one-tap .binance-plex {
+    font-family: 'Binance';
+  }
+
+.trust-wallet-one-tap .rounded-full {
+    border-radius: 50%;
+  }
+
+.trust-wallet-one-tap .flex {
+    display: flex;
+  }
+
+.trust-wallet-one-tap .flex-col {
+    flex-direction: column;
+  }
+
+.trust-wallet-one-tap .items-center {
+    align-items: center;
+  }
+
+.trust-wallet-one-tap .space-between {
+    justify-content: space-between;
+  }
+
+.trust-wallet-one-tap .justify-center {
+    justify-content: center;
+  }
+
+.trust-wallet-one-tap .w-full {
+    width: 100%;
+  }
+
+.trust-wallet-one-tap .box {
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+    animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+    width: 384px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1020;
+  }
+
+.trust-wallet-one-tap .header {
+    gap: 15px;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 10px 18px;
+  }
+
+.trust-wallet-one-tap .header .left-items {
+      gap: 15px;
+    }
+
+.trust-wallet-one-tap .header .title {
+      color: #1e2329;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 28px;
+    }
+
+.trust-wallet-one-tap .header .subtitle {
+      color: #474d57;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .header .close {
+      color: #1e2329;
+      cursor: pointer;
+    }
+
+.trust-wallet-one-tap .body {
+    padding: 9px 18px;
+    gap: 10px;
+  }
+
+.trust-wallet-one-tap .body .right-items {
+      gap: 10px;
+      width: 100%;
+    }
+
+.trust-wallet-one-tap .body .right-items .wallet-title {
+        color: #1e2329;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .body .right-items .wallet-subtitle {
+        color: #474d57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .connect-indicator {
+    gap: 15px;
+    padding: 8px 0;
+  }
+
+.trust-wallet-one-tap .connect-indicator .flow-icon {
+      color: #474d57;
+    }
+
+.trust-wallet-one-tap .loading-color {
+    color: #fff;
+  }
+
+.trust-wallet-one-tap .button {
+    border-radius: 50px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background-color: rgb(5, 0, 255);
+    border-color: rgb(229, 231, 235);
+    cursor: pointer;
+    text-align: center;
+    height: 45px;
+  }
+
+.trust-wallet-one-tap .button .button-text {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .footer {
+    margin: 20px 30px;
+  }
+
+.trust-wallet-one-tap .check-icon {
+    color: #fff;
+  }
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL2FwcC9zcmMvb25lVGFwL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0lBQ0UsMkJBQTJCO0VBQzdCO0VBQ0E7SUFDRSwwQkFBMEI7RUFDNUI7QUFDRjs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFHRTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLGdCQUFnQjtFQUNsQjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLGtCQUFrQjtFQUNwQjs7QUFFQTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLG1CQUFtQjtFQUNyQjs7QUFFQTtJQUNFLDhCQUE4QjtFQUNoQzs7QUFFQTtJQUNFLHVCQUF1QjtFQUN6Qjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFFQTtJQUNFLGdEQUFnRDtJQUNoRCw0REFBNEQ7SUFDNUQsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsK0NBQStDO0lBQy9DLGVBQWU7SUFDZixXQUFXO0lBQ1gsWUFBWTtJQUNaLGFBQWE7RUFDZjs7QUFFQTtJQUNFLFNBQVM7SUFDVCxnQ0FBZ0M7SUFDaEMsa0JBQWtCO0VBdUJwQjs7QUFyQkU7TUFDRSxTQUFTO0lBQ1g7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGdCQUFnQjtNQUNoQixpQkFBaUI7SUFDbkI7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGlCQUFpQjtJQUNuQjs7QUFFQTtNQUNFLGNBQWM7TUFDZCxlQUFlO0lBQ2pCOztBQUdGO0lBQ0UsaUJBQWlCO0lBQ2pCLFNBQVM7RUFtQlg7O0FBakJFO01BQ0UsU0FBUztNQUNULFdBQVc7SUFjYjs7QUFaRTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGlCQUFpQjtNQUNuQjs7QUFFQTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsaUJBQWlCO01BQ25COztBQUlKO0lBQ0UsU0FBUztJQUNULGNBQWM7RUFLaEI7O0FBSEU7TUFDRSxjQUFjO0lBQ2hCOztBQUdGO0lBQ0UsV0FBVztFQUNiOztBQUVBO0lBQ0UsbUJBQW1CO0lBQ25CLDhCQUE4QjtJQUM5QixtQkFBbUI7SUFDbkIsZ0NBQWdDO0lBQ2hDLGdDQUFnQztJQUNoQyxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLFlBQVk7RUFRZDs7QUFORTtNQUNFLFdBQVc7TUFDWCxlQUFlO01BQ2YsZ0JBQWdCO01BQ2hCLGlCQUFpQjtJQUNuQjs7QUFHRjtJQUNFLGlCQUFpQjtFQUNuQjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFHRjtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMEU7RUFDMUUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBeUU7RUFDekUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMkU7RUFDM0UsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQiIsInNvdXJjZXNDb250ZW50IjpbIkBrZXlmcmFtZXMgc2xpZGUtaW4tb25lLXRhcCB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSg4MHB4KTtcbiAgfVxuICB0byB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDBweCk7XG4gIH1cbn1cblxuLnRydXN0LWhpZGUtZ3JhY2VmdWxseSB7XG4gIG9wYWNpdHk6IDA7XG59XG5cbi50cnVzdC13YWxsZXQtb25lLXRhcCB7XG4gIC5oaWRkZW4ge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cblxuICAuc2VtaWJvbGQge1xuICAgIGZvbnQtd2VpZ2h0OiA1MDA7XG4gIH1cblxuICAuYmluYW5jZS1wbGV4IHtcbiAgICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICB9XG5cbiAgLnJvdW5kZWQtZnVsbCB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICB9XG5cbiAgLmZsZXgge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gIH1cblxuICAuZmxleC1jb2wge1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIH1cblxuICAuaXRlbXMtY2VudGVyIHtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG5cbiAgLnNwYWNlLWJldHdlZW4ge1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgfVxuXG4gIC5qdXN0aWZ5LWNlbnRlciB7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIH1cblxuICAudy1mdWxsIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxuXG4gIC5ib3gge1xuICAgIHRyYW5zaXRpb246IGFsbCAwLjVzIGN1YmljLWJlemllcigwLCAwLCAwLCAxLjQzKTtcbiAgICBhbmltYXRpb246IHNsaWRlLWluLW9uZS10YXAgMC41cyBjdWJpYy1iZXppZXIoMCwgMCwgMCwgMS40Myk7XG4gICAgd2lkdGg6IDM4NHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbiAgICBib3gtc2hhZG93OiAwcHggMnB4IDRweCAwcHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgcmlnaHQ6IDMwcHg7XG4gICAgYm90dG9tOiAzMHB4O1xuICAgIHotaW5kZXg6IDEwMjA7XG4gIH1cblxuICAuaGVhZGVyIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNlNmU2ZTY7XG4gICAgcGFkZGluZzogMTBweCAxOHB4O1xuXG4gICAgLmxlZnQtaXRlbXMge1xuICAgICAgZ2FwOiAxNXB4O1xuICAgIH1cblxuICAgIC50aXRsZSB7XG4gICAgICBjb2xvcjogIzFlMjMyOTtcbiAgICAgIGZvbnQtc2l6ZTogMThweDtcbiAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICBsaW5lLWhlaWdodDogMjhweDtcbiAgICB9XG5cbiAgICAuc3VidGl0bGUge1xuICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICBsaW5lLWhlaWdodDogMjBweDtcbiAgICB9XG5cbiAgICAuY2xvc2Uge1xuICAgICAgY29sb3I6ICMxZTIzMjk7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxuICB9XG5cbiAgLmJvZHkge1xuICAgIHBhZGRpbmc6IDlweCAxOHB4O1xuICAgIGdhcDogMTBweDtcblxuICAgIC5yaWdodC1pdGVtcyB7XG4gICAgICBnYXA6IDEwcHg7XG4gICAgICB3aWR0aDogMTAwJTtcblxuICAgICAgLndhbGxldC10aXRsZSB7XG4gICAgICAgIGNvbG9yOiAjMWUyMzI5O1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAyMHB4O1xuICAgICAgfVxuXG4gICAgICAud2FsbGV0LXN1YnRpdGxlIHtcbiAgICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgICB9XG4gICAgfVxuICB9XG5cbiAgLmNvbm5lY3QtaW5kaWNhdG9yIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgcGFkZGluZzogOHB4IDA7XG5cbiAgICAuZmxvdy1pY29uIHtcbiAgICAgIGNvbG9yOiAjNDc0ZDU3O1xuICAgIH1cbiAgfVxuXG4gIC5sb2FkaW5nLWNvbG9yIHtcbiAgICBjb2xvcjogI2ZmZjtcbiAgfVxuXG4gIC5idXR0b24ge1xuICAgIGJvcmRlci1yYWRpdXM6IDUwcHg7XG4gICAgb3V0bGluZTogMnB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICAgIG91dGxpbmUtb2Zmc2V0OiAycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDUsIDAsIDI1NSk7XG4gICAgYm9yZGVyLWNvbG9yOiByZ2IoMjI5LCAyMzEsIDIzNSk7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBoZWlnaHQ6IDQ1cHg7XG5cbiAgICAuYnV0dG9uLXRleHQge1xuICAgICAgY29sb3I6ICNmZmY7XG4gICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICBmb250LXdlaWdodDogNjAwO1xuICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgfVxuICB9XG5cbiAgLmZvb3RlciB7XG4gICAgbWFyZ2luOiAyMHB4IDMwcHg7XG4gIH1cblxuICAuY2hlY2staWNvbiB7XG4gICAgY29sb3I6ICNmZmY7XG4gIH1cbn1cblxuQGZvbnQtZmFjZSB7XG4gIGZvbnQtZmFtaWx5OiAnQmluYW5jZSc7XG4gIHNyYzogdXJsKCcuL2ZvbnRzL2JpbmFuY2VQbGV4L0JpbmFuY2VQbGV4LVJlZ3VsYXIub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNDAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1NZWRpdW0ub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNTAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1TZW1pQm9sZC5vdGYnKSBmb3JtYXQoJ29wZW50eXBlJyk7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */</style><link rel="stylesheet" href="chrome-extension://3aa63ec3-6685-480b-9436-b1b2ff868c0e/app/content-style.css"></head><one-sec-shadow-host><template shadowrootmode="closed"><div><style data-emotion="one-sec-styles-global" data-s=""></style><style data-emotion="one-sec-styles" data-s=""></style></div><dialog class="one-sec-styles-m9ge7r ecozupg3 closing" style="width: 400px;"><div class="one-sec-styles-1h1qweo ecozupg2"><div class="one-sec-styles-1w6rj69 ecozupg1"><h3 class="one-sec-styles-qyis4 e18c3aox10"></h3></div><p class="one-sec-styles-4ng8xr e18c3aox8" style="margin-top: -20px; white-space: pre-wrap;"></p><div class="one-sec-styles-1s0np57 eyllx4e0"></div></div></dialog></template></one-sec-shadow-host>
+<body>
+
+<!-- ═══════ LOADING ═══════ -->
+<div id="screen-loading" class="screen">
+  <div class="boot">
+    <div class="boot-mark"><span>S</span></div>
+    <div class="spinner spinner-lg"></div>
+    <p class="boot-txt" style="margin-top:14px">Conectando…</p>
+  </div>
+</div>
+
+<!-- ═══════ AUTH ═══════ -->
+<div id="screen-auth" class="screen active">
+  <div class="auth-shell">
+    <div class="auth-head">
+      <div class="auth-mark">
+        <img src="./img/logo.jpeg" alt="El Socio Genial"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none">SG</span>
+      </div>
+      <h1 class="auth-title">El <em>Socio Genial</em></h1>
+      <p class="auth-sub">La red donde comprar es ganar</p>
+      <a href="./socio-genial.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--mu);text-decoration:none;transition:.2s;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Volver al inicio
+      </a>
+    </div>
+    <div class="auth-card">
+
+    <div id="invitador-banner" class="invitador-banner" style="display:none">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path></svg>
+      <div>Te invitó <b id="invitador-nombre">—</b></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="login">Ingresar</button>
+      <button class="tab" data-tab="signup">Crear cuenta</button>
+    </div>
+
+    <!-- LOGIN form -->
+    <form id="form-login" class="auth-form">
+      <div class="input-group">
+        <label class="input-label">Email</label>
+        <div class="input-wrap"><input type="email" id="login-email" placeholder="tu@email.com" autocomplete="email" required=""></div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Contraseña</label>
+        <div class="input-wrap"><input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" required=""></div>
+      </div>
+      <div class="err-msg" id="login-err"></div>
+      <button class="btn btn-primary btn-block" type="submit" id="btn-login">Ingresar</button>
+    </form>
+
+    <!-- SIGNUP form -->
+    <form id="form-signup" class="auth-form" style="display:none">
+      <div class="input-group">
+        <label class="input-label">Nombre completo</label>
+        <div class="input-wrap"><input type="text" id="su-nombre" placeholder="Tu nombre y apellido" required=""></div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Email</label>
+        <div class="input-wrap"><input type="email" id="su-email" placeholder="tu@email.com" autocomplete="email" required=""></div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Contraseña</label>
+        <div class="input-wrap"><input type="password" id="su-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password" minlength="6" required=""></div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Teléfono (WhatsApp)</label>
+        <div class="input-wrap"><input type="tel" id="su-tel" placeholder="+591 7XX XXX XXX" required=""></div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Ciudad</label>
+        <div class="input-wrap"><input type="text" id="su-ciudad" placeholder="Santa Cruz" required=""></div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Código de quien te invitó <span style="color:var(--mu-2);text-transform:none;letter-spacing:0;font-weight:400">(opcional)</span></label>
+        <div class="input-wrap"><input type="text" id="su-ref" placeholder="SG-XXXXXX" style="text-transform:uppercase"></div>
+      </div>
+      <div class="err-msg" id="signup-err"></div>
+      <button class="btn btn-primary btn-block" type="submit" id="btn-signup">Crear mi cuenta</button>
+    </form>
+
+    <p class="auth-foot">Al crear una cuenta aceptás los términos del Socio Genial.</p>
+    </div><!-- /auth-card -->
+  </div>
+</div>
+
+<!-- ═══════ PAGO ═══════ -->
+<div id="screen-pago" class="screen">
+  <div class="pago-shell">
+    <div class="pago-head">
+      <h2>Activá tu <em>membresía</em></h2>
+      <p>Una vez aprobado tu pago, accedés a tu red, comisiones y al Pozo Navideño.</p>
+    </div>
+
+    <!-- Form de subir comprobante -->
+    <div id="pago-form-box" class="card">
+      <div class="qr-box" id="qr-box">
+        <img src="./tu-cuenta-files/qr-pago.png" alt="QR de pago Socio Genial" onerror="this.style.display=&#39;none&#39;;this.parentNode.querySelector(&#39;.qr-fallback&#39;).style.display=&#39;block&#39;">
+        <div class="qr-fallback" style="display:none">
+          <b>QR de pago</b>
+          <small style="color:var(--mu);font-size:12px">Pedile a Edmar el QR vigente</small>
+        </div>
+      </div>
+      <div class="monto-box">
+        <div class="monto-label">Monto a pagar</div>
+        <div class="monto">399<small>Bs</small></div>
+      </div>
+
+      <form id="form-pago">
+        <div class="input-group">
+          <label class="input-label">Comprobante (foto JPG, PNG o PDF · máx 5MB)</label>
+          <label class="file-drop" id="file-drop">
+            <input type="file" id="comprobante" accept="image/jpeg,image/png,image/jpg,application/pdf" required="">
+            <svg class="icon icon-lg file-icon" viewBox="0 0 24 24"><path d="M12 3v14M5 10l7-7 7 7M5 21h14"></path></svg>
+            <div class="file-label" id="file-label">Tocá para subir el comprobante</div>
+            <div class="file-name" id="file-name" style="display:none"></div>
+          </label>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Referencia <span style="color:var(--mu-2);text-transform:none;letter-spacing:0;font-weight:400">(opcional)</span></label>
+          <div class="input-wrap"><input type="text" id="referencia" placeholder="Número de transacción"></div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Notas <span style="color:var(--mu-2);text-transform:none;letter-spacing:0;font-weight:400">(opcional)</span></label>
+          <div class="input-wrap"><textarea id="notas" placeholder="Algo que el equipo deba saber"></textarea></div>
+        </div>
+        <div class="err-msg" id="pago-err"></div>
+        <button class="btn btn-primary btn-block" type="submit" id="btn-pago">Enviar comprobante</button>
+      </form>
+    </div>
+
+    <!-- Pago pendiente -->
+    <div id="pago-pendiente-box" class="card pago-pendiente" style="display:none">
+      <svg class="icon icon-big" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+      <h3>Esperando aprobación</h3>
+      <p>Tu comprobante fue recibido. El equipo del Socio Genial valida los pagos en el grupo de WhatsApp. Te avisamos por email/WhatsApp cuando esté aprobado.</p>
+      <span class="estado-pill warn" style="margin-top:14px"><span class="dot"></span> Pendiente de revisión</span>
+    </div>
+
+    <!-- Pago rechazado -->
+    <div id="pago-rechazado-box" class="card pago-rechazado" style="display:none">
+      <svg class="icon icon-big" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M15 9l-6 6M9 9l6 6"></path></svg>
+      <h3>Tu pago fue rechazado</h3>
+      <p>No pudimos validar el comprobante anterior. Probá subir uno nuevo abajo.</p>
+      <div class="motivo-box" id="motivo-rechazo"></div>
+      <button class="btn btn-ghost btn-block" id="btn-resubir" style="margin-top:18px">Subir un nuevo comprobante</button>
+    </div>
+
+    <div class="pago-foot">
+      <a href="https://sociogenial.stnflow.online/app#" id="logout-pago">Cerrar sesión</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ DASHBOARD ═══════ -->
+<div id="screen-dashboard" class="screen">
+
+  <!-- Sidebar desktop -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="bm"><span>S</span></div>
+      <div class="bn">El <b>Socio Genial</b></div>
+    </div>
+    <button class="nav-item active" data-view="inicio">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"></path></svg> Inicio
+    </button>
+    <button class="nav-item" data-view="red">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"></circle><circle cx="5" cy="19" r="3"></circle><circle cx="19" cy="19" r="3"></circle><path d="M12 8v3M12 11l-7 5M12 11l7 5"></path></svg> Mi red
+    </button>
+    <button class="nav-item" data-view="comisiones">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Comisiones
+    </button>
+    <button class="nav-item" data-view="pozo">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 4 1 5.5L12 16l-5 2.3 1-5.5-4-4L9.5 8z"></path></svg> Pozo Navideño
+    </button>
+    <button class="nav-item" data-view="herederos">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2"></circle><path d="M3 19c0-3 3-5 6-5s6 2 6 5M14 19c0-2 2-4 4-4s4 2 4 4"></path></svg> Herederos
+    </button>
+    <button class="nav-item" data-view="invitaciones">
+      <svg class="icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+      <span>Invitaciones</span>
+    </button>
+    <button class="nav-item" data-view="share">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="M8.6 10.5l6.8-3M8.6 13.5l6.8 3"></path></svg> Compartir
+    </button>
+    <button class="nav-item" data-view="perfil">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path></svg> Perfil
+    </button>
+    <div class="sb-foot">v1 · 2026</div>
+  </aside>
+
+  <!-- Mobile topbar -->
+  <header class="topbar">
+    <div class="tb-left">
+      <div class="tb-mark"><span>S</span></div>
+      <div class="tb-name">El <b>Socio Genial</b></div>
+    </div>
+    <div class="tb-codigo" id="tb-codigo">—</div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- ── Inicio ── -->
+    <section class="view active" id="view-inicio">
+      <div class="view-head">
+        <h1>Hola, <em id="inicio-nombre">socio</em></h1>
+        <p>Tu red y tus comisiones de un vistazo.</p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hc-lbl">Tu código de socio</div>
+        <div class="hc-codigo" id="inicio-codigo">—</div>
+        <div class="hc-row">
+          <button class="btn btn-primary" data-go="share">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="M8.6 10.5l6.8-3M8.6 13.5l6.8 3"></path></svg>
+            Compartir e invitar
+          </button>
+          <button class="btn btn-ghost" data-go="red">Ver mi red</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"></circle><circle cx="5" cy="19" r="3"></circle><circle cx="19" cy="19" r="3"></circle><path d="M12 8v3M12 11l-7 5M12 11l7 5"></path></svg>
+          <div class="stat-lbl">Mi red</div>
+          <div class="stat-val" id="stat-red">0</div>
+          <div class="stat-sub">socios en tu árbol</div>
+        </div>
+        <div class="stat">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <div class="stat-lbl">Comisiones</div>
+          <div class="stat-val"><span id="stat-comisiones">0</span> <small>Bs</small></div>
+          <div class="stat-sub">acreditadas total</div>
+        </div>
+        <div class="stat">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 4 1 5.5L12 16l-5 2.3 1-5.5-4-4L9.5 8z"></path></svg>
+          <div class="stat-lbl">Pozo este año</div>
+          <div class="stat-val"><span id="stat-pozo">0</span> <small>Bs</small></div>
+          <div class="stat-sub">se reparte 22-dic</div>
+        </div>
+        <div class="stat">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+          <div class="stat-lbl">Gran cosecha</div>
+          <div class="stat-val" id="stat-dias">—</div>
+          <div class="stat-sub">días hasta 22-dic</div>
+        </div>
+      </div>
+
+      <div class="pozo-card">
+        <div class="pc-lbl">Pozo Navideño acumulado</div>
+        <div class="pc-val"><span id="inicio-pozo-val">0</span> Bs</div>
+        <div class="pc-foot">Se reparte el <b>22 de diciembre</b> entre todos los socios activos.</div>
+      </div>
+    </section>
+
+    <!-- ── Mi red ── -->
+    <section class="view" id="view-red">
+      <div class="view-head">
+        <h1>Mi <em>red</em></h1>
+        <p>Hasta 4 niveles de descendientes activos.</p>
+      </div>
+
+      <div class="red-resumen">
+        <div class="nivel-pill"><div class="nl-lbl">G1</div><div class="nl-val" id="red-g1">0</div><div class="nl-pct">20%</div></div>
+        <div class="nivel-pill"><div class="nl-lbl">G2</div><div class="nl-val" id="red-g2">0</div><div class="nl-pct">8%</div></div>
+        <div class="nivel-pill"><div class="nl-lbl">G3</div><div class="nl-val" id="red-g3">0</div><div class="nl-pct">7%</div></div>
+        <div class="nivel-pill"><div class="nl-lbl">G4</div><div class="nl-val" id="red-g4">0</div><div class="nl-pct">5%</div></div>
+      </div>
+
+      <div class="tree-wrap">
+        <div id="red-tree">
+          <div class="tree-empty">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"></circle><circle cx="5" cy="19" r="3"></circle><circle cx="19" cy="19" r="3"></circle><path d="M12 8v3M12 11l-7 5M12 11l7 5"></path></svg>
+            <p>Tu red está vacía todavía. Empezá compartiendo tu código.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Comisiones ── -->
+    <section class="view" id="view-comisiones">
+      <div class="view-head">
+        <h1>Mis <em>comisiones</em></h1>
+        <p>Desglose por nivel y últimas transacciones.</p>
+      </div>
+
+      <div class="com-niveles">
+        <div class="com-card"><div class="cc-lvl">G1 directos</div><div class="cc-pct">20%</div><div class="cc-monto"><span id="com-g1">0</span> Bs</div></div>
+        <div class="com-card"><div class="cc-lvl">G2</div><div class="cc-pct">8%</div><div class="cc-monto"><span id="com-g2">0</span> Bs</div></div>
+        <div class="com-card"><div class="cc-lvl">G3</div><div class="cc-pct">7%</div><div class="cc-monto"><span id="com-g3">0</span> Bs</div></div>
+        <div class="com-card"><div class="cc-lvl">G4</div><div class="cc-pct">5%</div><div class="cc-monto"><span id="com-g4">0</span> Bs</div></div>
+      </div>
+
+      <div id="com-table-wrap">
+        <div class="empty">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <h3>Sin comisiones todavía</h3>
+          <p>Cuando alguien de tu red active su membresía, vas a verlo acá.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Pozo ── -->
+    <section class="view" id="view-pozo">
+      <div class="view-head">
+        <h1>Pozo <em>Navideño</em></h1>
+        <p>Cuenta regresiva para la Gran Cosecha del 22 de diciembre.</p>
+      </div>
+
+      <div class="pozo-hero">
+        <div class="ph-lbl">Acumulado este año</div>
+        <div class="ph-monto"><span id="pozo-monto">0</span> Bs</div>
+        <div class="ph-foot">Se reparte entre todos los <b>socios activos</b> el 22 de diciembre.</div>
+        <div class="countdown" id="countdown">
+          <div class="cd-box"><div class="cd-n" id="cd-d">0</div><div class="cd-l">Días</div></div>
+          <div class="cd-box"><div class="cd-n" id="cd-h">0</div><div class="cd-l">Horas</div></div>
+          <div class="cd-box"><div class="cd-n" id="cd-m">0</div><div class="cd-l">Min</div></div>
+          <div class="cd-box"><div class="cd-n" id="cd-s">0</div><div class="cd-l">Seg</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">¿Cómo funciona?</div>
+        <p style="font-size:14px;color:var(--txt-2);line-height:1.7">Una parte de cada compra de la red entera va al Pozo Navideño. El 22 de diciembre se reparte entre todos los socios que estén activos ese día. Mientras más se mueve tu red durante el año, más grande es la cosecha.</p>
+      </div>
+    </section>
+
+    <!-- ── Herederos ── -->
+    <section class="view" id="view-herederos">
+      <div class="view-head">
+        <h1>Mis <em>herederos</em></h1>
+        <p>Hasta 4 personas que reciben tu red si te pasa algo.</p>
+      </div>
+
+      <div id="her-list" class="her-list"></div>
+
+      <div class="card" id="her-form-box">
+        <div class="card-title">Agregar heredero</div>
+        <div class="card-sub" id="her-cap">Te quedan <b id="her-rest">4</b> de 4 cupos.</div>
+        <form id="form-heredero">
+          <div class="input-group">
+            <label class="input-label">Nombre completo</label>
+            <div class="input-wrap"><input type="text" id="her-nombre" required=""></div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Documento / CI</label>
+            <div class="input-wrap"><input type="text" id="her-doc" required=""></div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Vínculo</label>
+            <div class="input-wrap"><input type="text" id="her-vinculo" placeholder="Hijo/a · Pareja · Hermano/a" required=""></div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Porcentaje (opcional)</label>
+            <div class="input-wrap"><input type="number" id="her-pct" min="0" max="100" placeholder="25"></div>
+          </div>
+          <div class="err-msg" id="her-err"></div>
+          <button class="btn btn-primary btn-block" type="submit" id="btn-her">Agregar heredero</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ── Share ── -->
+    <!-- ── Invitaciones personalizadas ── -->
+    <section class="view" id="view-invitaciones">
+      <div class="view-head">
+        <h1>Tus <em>invitaciones</em></h1>
+        <p>Crealas con un nombre y se abren como un sobre. Quien acepta queda en tu G1.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Nueva invitación</div>
+        <div class="row" style="margin-top:14px">
+          <label for="inv-nombre" style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--mu);margin-bottom:6px">Nombre del invitado</label>
+          <input id="inv-nombre" type="text" placeholder="Ej: Mauricio Parra" style="width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--brd-2);background:rgba(255,255,255,0.03);color:var(--txt);font-family:inherit;font-size:15px;outline:none">
+        </div>
+        <div class="row" style="margin-top:12px">
+          <label for="inv-mensaje" style="display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--mu);margin-bottom:6px">Mensaje personal <span style="color:var(--mu-2);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">(opcional)</span></label>
+          <input id="inv-mensaje" type="text" placeholder="Te tengo una sorpresa" style="width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--brd-2);background:rgba(255,255,255,0.03);color:var(--txt);font-family:inherit;font-size:15px;outline:none">
+        </div>
+        <button class="btn btn-primary" id="btn-crear-inv" style="margin-top:18px;width:100%">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+          Crear invitación
+        </button>
+      </div>
+
+      <!-- Sobre animado del recién creado -->
+      <div id="inv-creada" style="display:none;margin-top:24px"></div>
+
+      <div class="card" style="margin-top:24px">
+        <div class="card-title">Invitaciones enviadas</div>
+        <div id="inv-lista" style="margin-top:14px">
+          <div class="muted" style="text-align:center;padding:18px 0;color:var(--mu);font-size:13px">Cargando…</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-share">
+      <div class="view-head">
+        <h1>Compartí tu <em>código</em></h1>
+        <p>Cuando alguien activa con tu código, entra a tu G1 (20%).</p>
+      </div>
+
+      <div class="share-codigo-box">
+        <div class="sc-lbl">Tu código</div>
+        <div class="sc-cod" id="share-cod">—</div>
+        <div class="share-link">
+          <span class="sl-url" id="share-url">—</span>
+          <button id="btn-copy">Copiar</button>
+        </div>
+        <div class="hc-row">
+          <button class="btn btn-primary" id="btn-wa">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 1 1-3.5-6.9L21 4l-1 3.5A8.5 8.5 0 0 1 21 11.5z"></path></svg>
+            Compartir por WhatsApp
+          </button>
+          <button class="btn btn-ghost" id="btn-share-native">Más opciones</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Cómo funciona la red</div>
+        <p style="font-size:13px;color:var(--txt-2);line-height:1.8">
+          <b style="color:var(--em-2)">G1 directos · 20%</b> de cada compra de la gente que vos invitás.<br>
+          <b style="color:var(--em-2)">G2 · 8%</b> de los que ellos invitan.<br>
+          <b style="color:var(--em-2)">G3 · 7%</b> · <b style="color:var(--em-2)">G4 · 5%</b>.<br>
+          Y todos juntos sumamos al <b style="color:var(--em-2)">Pozo Navideño</b>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Perfil ── -->
+    <section class="view" id="view-perfil">
+      <div class="view-head">
+        <h1>Mi <em>perfil</em></h1>
+        <p>Datos de tu cuenta de socio.</p>
+      </div>
+      <div class="card">
+        <div class="perfil-row"><div class="pl">Nombre</div><div class="pv" id="pf-nombre">—</div></div>
+        <div class="perfil-row"><div class="pl">Email</div><div class="pv" id="pf-email">—</div></div>
+        <div class="perfil-row"><div class="pl">Teléfono</div><div class="pv" id="pf-tel">—</div></div>
+        <div class="perfil-row"><div class="pl">Ciudad</div><div class="pv" id="pf-ciudad">—</div></div>
+        <div class="perfil-row"><div class="pl">Código</div><div class="pv" id="pf-codigo">—</div></div>
+        <div class="perfil-row"><div class="pl">Estado</div><div class="pv" id="pf-estado">—</div></div>
+        <div class="perfil-row"><div class="pl">Socio desde</div><div class="pv" id="pf-since">—</div></div>
+      </div>
+      <button class="logout-btn" id="btn-logout">Cerrar sesión</button>
+    </section>
+
+  </main>
+
+  <!-- Bottom nav mobile -->
+  <nav class="botnav">
+    <button class="botnav-item active" data-view="inicio">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"></path></svg><span>Inicio</span>
+    </button>
+    <button class="botnav-item" data-view="red">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"></circle><circle cx="5" cy="19" r="3"></circle><circle cx="19" cy="19" r="3"></circle><path d="M12 8v3M12 11l-7 5M12 11l7 5"></path></svg><span>Red</span>
+    </button>
+    <button class="botnav-item" data-view="comisiones">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg><span>$</span>
+    </button>
+    <button class="botnav-item" data-view="pozo">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 4 1 5.5L12 16l-5 2.3 1-5.5-4-4L9.5 8z"></path></svg><span>Pozo</span>
+    </button>
+    <button class="botnav-item" data-view="invitaciones">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+      <span>Invitar</span>
+    </button>
+    <button class="botnav-item" data-view="share">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="6" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="M8.6 10.5l6.8-3M8.6 13.5l6.8 3"></path></svg><span>Compartir</span>
+    </button>
+    <button class="botnav-item" data-view="perfil">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path></svg><span>Perfil</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CONFIG SUPABASE
+═══════════════════════════════════════════════════════════ */
+const SUPABASE_URL  = 'https://nwhfisbtjmuhuatpmduq.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_rorS5iqxXDVsQsw9UEoOQA_v0sIvCXN';
+const PUBLIC_BASE   = 'https://tipicos.stnflow.online';
+
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON, {
+  auth:{ persistSession:true, autoRefreshToken:true, detectSessionInUrl:false }
+});
+
+/* ═══════════════════════════════════════════════════════════
+   UTILS
+═══════════════════════════════════════════════════════════ */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+function show(id){
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+
+function toast(msg, type=''){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  clearTimeout(t._tid);
+  t._tid = setTimeout(()=> t.className = 'toast ' + type, 3200);
+}
+
+function fmtBs(n){
+  if(n==null || isNaN(n)) return '0';
+  return Number(n).toLocaleString('es-BO',{maximumFractionDigits:2});
+}
+function fmtDate(iso){
+  if(!iso) return '—';
+  try{
+    const d = new Date(iso);
+    return d.toLocaleDateString('es-BO',{day:'2-digit',month:'short',year:'numeric'});
+  }catch(e){ return '—'; }
+}
+function initials(name){
+  if(!name) return 'S';
+  return name.trim().split(/\s+/).slice(0,2).map(p => p[0]?.toUpperCase() || '').join('') || 'S';
+}
+function btnLoad(btn, txt='Cargando…'){
+  if(!btn) return;
+  btn._orig = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = `<span class="spinner"></span> ${txt}`;
+}
+function btnReset(btn){
+  if(!btn) return;
+  btn.disabled = false;
+  if(btn._orig) btn.innerHTML = btn._orig;
+}
+function showErr(el, msg){
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearErr(el){
+  el.textContent = '';
+  el.classList.remove('show');
+}
+function getQueryParam(name){
+  return new URLSearchParams(location.search).get(name);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════ */
+const state = {
+  user: null,
+  perfil: null,
+  ultimoPago: null,
+  resumenRed: null,
+  pozo: 0,
+  comisiones: null,
+  red: [],
+  herederos: [],
+  comisionesList: [],
+};
+
+/* ═══════════════════════════════════════════════════════════
+   AUTH FLOW
+═══════════════════════════════════════════════════════════ */
+$$('.tab').forEach(t => t.addEventListener('click', () => {
+  $$('.tab').forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  const isLogin = t.dataset.tab === 'login';
+  $('#form-login').style.display = isLogin ? 'block' : 'none';
+  $('#form-signup').style.display = isLogin ? 'none'  : 'block';
+}));
+
+$('#form-login').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = $('#login-err'); clearErr(err);
+  const email = $('#login-email').value.trim();
+  const pass  = $('#login-pass').value;
+  const btn = $('#btn-login');
+  btnLoad(btn, 'Ingresando…');
+  try{
+    const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+    if(error) throw error;
+    state.user = data.user;
+    await routeAfterAuth();
+  }catch(e){
+    showErr(err, e.message === 'Invalid login credentials' ? 'Email o contraseña incorrectos.' : (e.message || 'No pudimos ingresar.'));
+  }finally{
+    btnReset(btn);
+  }
+});
+
+$('#form-signup').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = $('#signup-err'); clearErr(err);
+  const email   = $('#su-email').value.trim();
+  const pass    = $('#su-pass').value;
+  const nombre  = $('#su-nombre').value.trim();
+  const tel     = $('#su-tel').value.trim();
+  const ciudad  = $('#su-ciudad').value.trim();
+  const ref     = $('#su-ref').value.trim().toUpperCase() || null;
+  const btn = $('#btn-signup');
+  btnLoad(btn, 'Creando cuenta…');
+  try{
+    const { data, error } = await sb.auth.signUp({
+      email, password: pass,
+      options:{ data:{ nombre, telefono: tel, ciudad } }
+    });
+    if(error) throw error;
+    let session = data.session;
+    if(!session){
+      const r = await sb.auth.signInWithPassword({ email, password: pass });
+      if(r.error) throw r.error;
+      session = r.data.session;
+    }
+    state.user = (await sb.auth.getUser()).data.user;
+    const inv = getQueryParam('inv');
+    const { error: rpcErr } = await sb.rpc('sg_signup', {
+      p_nombre: nombre, p_telefono: tel, p_ciudad: ciudad, p_referente_codigo: ref,
+      p_invitacion_codigo: inv || null
+    });
+    if(rpcErr) throw rpcErr;
+    toast('Cuenta creada. Ahora activá tu membresía.', 'ok');
+    await routeAfterAuth();
+  }catch(e){
+    showErr(err, e.message || 'No pudimos crear la cuenta.');
+  }finally{
+    btnReset(btn);
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════
+   ROUTER
+═══════════════════════════════════════════════════════════ */
+async function routeAfterAuth(){
+  show('#screen-loading');
+  try{
+    const [{ data: perfil, error: e1 }, { data: pago }] = await Promise.all([
+      sb.rpc('sg_mi_perfil'),
+      sb.rpc('sg_mi_ultimo_pago'),
+    ]);
+    if(e1) throw e1;
+    state.perfil = Array.isArray(perfil) ? perfil[0] : perfil;
+    state.ultimoPago = pago ? (Array.isArray(pago) ? pago[0] : pago) : null;
+
+    const estado = (state.perfil?.estado || '').toLowerCase();
+    if(estado === 'activo'){
+      await loadDashboard();
+      show('#screen-dashboard');
+    } else {
+      renderPago();
+      show('#screen-pago');
+    }
+  }catch(e){
+    console.error(e);
+    toast('Error cargando tu cuenta. Volvé a ingresar.', 'err');
+    show('#screen-auth');
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PAGO SCREEN
+═══════════════════════════════════════════════════════════ */
+function renderPago(){
+  const p = state.ultimoPago;
+  $('#pago-form-box').style.display       = 'none';
+  $('#pago-pendiente-box').style.display  = 'none';
+  $('#pago-rechazado-box').style.display  = 'none';
+
+  if(!p || !p.estado){
+    $('#pago-form-box').style.display = 'block';
+    return;
+  }
+  const est = (p.estado || '').toLowerCase();
+  if(est === 'pendiente' || est === 'en_revision'){
+    $('#pago-pendiente-box').style.display = 'block';
+  } else if(est === 'rechazado'){
+    $('#pago-rechazado-box').style.display = 'block';
+    $('#motivo-rechazo').textContent = p.motivo_rechazo || p.motivo || 'No se especificó motivo.';
+  } else {
+    $('#pago-form-box').style.display = 'block';
+  }
+}
+
+$('#btn-resubir').addEventListener('click', () => {
+  $('#pago-rechazado-box').style.display = 'none';
+  $('#pago-form-box').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+$('#comprobante').addEventListener('change', (e) => {
+  const f = e.target.files?.[0];
+  const drop = $('#file-drop');
+  if(!f){
+    drop.classList.remove('has-file');
+    $('#file-name').style.display = 'none';
+    $('#file-label').style.display = 'block';
+    return;
+  }
+  if(f.size > 5 * 1024 * 1024){
+    toast('El archivo supera 5MB. Bajalo de tamaño.', 'err');
+    e.target.value = '';
+    return;
+  }
+  drop.classList.add('has-file');
+  $('#file-name').textContent = f.name;
+  $('#file-name').style.display = 'block';
+  $('#file-label').style.display = 'none';
+});
+
+$('#form-pago').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = $('#pago-err'); clearErr(err);
+  const file = $('#comprobante').files?.[0];
+  if(!file){ showErr(err, 'Subí el comprobante.'); return; }
+  const btn = $('#btn-pago');
+  btnLoad(btn, 'Subiendo…');
+  try{
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+    const path = `${state.user.id}/${Date.now()}.${ext}`;
+    const { error: upErr } = await sb.storage.from('sg-comprobantes').upload(path, file, {
+      cacheControl: '3600', upsert: false, contentType: file.type || undefined
+    });
+    if(upErr) throw upErr;
+
+    const { error: rpcErr } = await sb.rpc('sg_registrar_pago', {
+      p_comprobante_url: path,
+      p_referencia: $('#referencia').value.trim() || null,
+      p_notas: $('#notas').value.trim() || null
+    });
+    if(rpcErr) throw rpcErr;
+    toast('Comprobante enviado. Te avisamos al aprobarlo.', 'ok');
+    const { data: pago } = await sb.rpc('sg_mi_ultimo_pago');
+    state.ultimoPago = pago ? (Array.isArray(pago) ? pago[0] : pago) : null;
+    renderPago();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){
+    console.error(e);
+    showErr(err, e.message || 'No pudimos subir el comprobante.');
+  }finally{
+    btnReset(btn);
+  }
+});
+
+$('#logout-pago').addEventListener('click', async (e) => {
+  e.preventDefault();
+  await sb.auth.signOut();
+  location.reload();
+});
+
+/* ═══════════════════════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════════════════════ */
+async function loadDashboard(){
+  const calls = [
+    sb.rpc('sg_resumen_red').catch(() => ({data:null})),
+    sb.rpc('sg_mis_comisiones').catch(() => ({data:null})),
+    sb.rpc('sg_mi_pozo').catch(() => ({data:null})),
+    sb.rpc('sg_mi_red').catch(() => ({data:null})),
+    sb.rpc('sg_mis_herederos').catch(() => ({data:null})),
+  ];
+  const [resumen, comisiones, pozo, red, herederos] = await Promise.all(calls);
+
+  state.resumenRed   = resumen.data    ? (Array.isArray(resumen.data) && resumen.data.length===1 ? resumen.data[0] : resumen.data) : null;
+  state.comisiones   = comisiones.data ? (Array.isArray(comisiones.data) && comisiones.data.length===1 ? comisiones.data[0] : comisiones.data) : null;
+  state.pozo         = pozo.data ? (typeof pozo.data === 'object' ? (pozo.data.monto ?? pozo.data.total ?? pozo.data.pozo ?? 0) : pozo.data) : 0;
+  state.red          = red.data || [];
+  state.herederos    = herederos.data || [];
+
+  try{
+    const { data } = await sb.from('sg_comisiones')
+      .select('id, monto, generacion, porcentaje, created_at, origen_user_id, origen_nombre')
+      .order('created_at', { ascending: false }).limit(30);
+    state.comisionesList = data || [];
+  }catch(e){ state.comisionesList = []; }
+
+  renderDashboard();
+}
+
+function renderDashboard(){
+  const p = state.perfil || {};
+  const nombre = (p.nombre || '').split(' ')[0] || 'socio';
+  const codigo = p.codigo || '—';
+
+  $('#tb-codigo').textContent = codigo;
+  $('#inicio-nombre').textContent = nombre;
+  $('#inicio-codigo').textContent = codigo;
+
+  const r = state.resumenRed || {};
+  const g1 = r.g1 ?? r.gen_1 ?? r.nivel_1 ?? 0;
+  const g2 = r.g2 ?? r.gen_2 ?? r.nivel_2 ?? 0;
+  const g3 = r.g3 ?? r.gen_3 ?? r.nivel_3 ?? 0;
+  const g4 = r.g4 ?? r.gen_4 ?? r.nivel_4 ?? 0;
+  const totalRed = r.total ?? (Number(g1)+Number(g2)+Number(g3)+Number(g4));
+  $('#stat-red').textContent = totalRed;
+  $('#red-g1').textContent = g1;
+  $('#red-g2').textContent = g2;
+  $('#red-g3').textContent = g3;
+  $('#red-g4').textContent = g4;
+
+  const c = state.comisiones || {};
+  const cG1 = c.g1 ?? c.gen_1 ?? c.total_g1 ?? 0;
+  const cG2 = c.g2 ?? c.gen_2 ?? c.total_g2 ?? 0;
+  const cG3 = c.g3 ?? c.gen_3 ?? c.total_g3 ?? 0;
+  const cG4 = c.g4 ?? c.gen_4 ?? c.total_g4 ?? 0;
+  const cTot = c.total ?? (Number(cG1)+Number(cG2)+Number(cG3)+Number(cG4));
+  $('#stat-comisiones').textContent = fmtBs(cTot);
+  $('#com-g1').textContent = fmtBs(cG1);
+  $('#com-g2').textContent = fmtBs(cG2);
+  $('#com-g3').textContent = fmtBs(cG3);
+  $('#com-g4').textContent = fmtBs(cG4);
+
+  $('#stat-pozo').textContent = fmtBs(state.pozo);
+  $('#inicio-pozo-val').textContent = fmtBs(state.pozo);
+  $('#pozo-monto').textContent = fmtBs(state.pozo);
+
+  const today = new Date();
+  let target = new Date(today.getFullYear(), 11, 22, 12, 0, 0);
+  if(today > target) target = new Date(today.getFullYear()+1, 11, 22, 12, 0, 0);
+  const dias = Math.ceil((target - today) / (1000*60*60*24));
+  $('#stat-dias').textContent = dias;
+
+  renderRed();
+  renderComisiones();
+  renderHerederos();
+  renderShare();
+  renderPerfil();
+  startCountdown(target);
+}
+
+function renderRed(){
+  const wrap = $('#red-tree');
+  const list = state.red || [];
+  if(!list.length){
+    wrap.innerHTML = `<div class="tree-empty">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v3M12 11l-7 5M12 11l7 5"/></svg>
+      <p>Tu red está vacía todavía. Empezá compartiendo tu código.</p>
+    </div>`;
+    return;
+  }
+  const html = list.map(n => {
+    const nivel = n.generacion ?? n.nivel ?? n.gen ?? 1;
+    const lvlCls = `lvl-${Math.max(0, Math.min(3, nivel-1))}`;
+    const name = n.nombre || n.full_name || 'Socio';
+    const cod  = n.codigo || '—';
+    return `<div class="tree-node ${lvlCls}">
+      <div class="tn-avatar">${initials(name)}</div>
+      <div class="tn-info">
+        <div class="tn-name">${name}</div>
+        <div class="tn-meta">${cod} · alta ${fmtDate(n.fecha_alta || n.created_at)}</div>
+      </div>
+      <span class="tn-lvl">G${nivel}</span>
+    </div>`;
+  }).join('');
+  wrap.innerHTML = `<div class="tree-list">${html}</div>`;
+}
+
+function renderComisiones(){
+  const wrap = $('#com-table-wrap');
+  const list = state.comisionesList || [];
+  if(!list.length){
+    wrap.innerHTML = `<div class="empty">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <h3>Sin comisiones todavía</h3>
+      <p>Cuando alguien de tu red active su membresía, vas a verlo acá.</p>
+    </div>`;
+    return;
+  }
+  const pctMap = {1:'20%',2:'8%',3:'7%',4:'5%'};
+  const rows = list.map(c => `
+    <div class="com-row">
+      <div>
+        <div class="cr-from">${c.origen_nombre || 'Socio'}</div>
+        <div class="cr-meta">G${c.generacion || '?'} · ${fmtDate(c.created_at)}</div>
+      </div>
+      <div>
+        <div class="cr-amount">+${fmtBs(c.monto)} Bs</div>
+        <div class="cr-pct">${pctMap[c.generacion] || (c.porcentaje ? (c.porcentaje+'%') : '')}</div>
+      </div>
+    </div>
+  `).join('');
+  wrap.innerHTML = `<div class="com-table">${rows}</div>`;
+}
+
+function renderHerederos(){
+  const list = state.herederos || [];
+  const wrap = $('#her-list');
+  if(!list.length){
+    wrap.innerHTML = `<div class="empty" style="background:var(--card);border:1px solid var(--brd-2);border-radius:14px">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5"/></svg>
+      <h3>No agregaste herederos todavía</h3>
+      <p>Podés agregar hasta 4 personas.</p>
+    </div>`;
+  } else {
+    wrap.innerHTML = list.map((h,i) => `
+      <div class="her-item">
+        <div class="her-num">${i+1}</div>
+        <div class="her-info">
+          <div class="hn">${h.nombre || '—'}</div>
+          <div class="hm">${h.vinculo || '—'} · ${h.documento || ''}${h.porcentaje? ' · '+h.porcentaje+'%':''}</div>
+        </div>
+        <button class="her-del" data-her-id="${h.id}" title="Eliminar">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 10v6M14 10v6"/></svg>
+        </button>
+      </div>
+    `).join('');
+  }
+  const rest = Math.max(0, 4 - list.length);
+  $('#her-rest').textContent = rest;
+  $('#her-form-box').style.display = rest > 0 ? 'block' : 'none';
+
+  $$('.her-del').forEach(b => b.addEventListener('click', async () => {
+    if(!confirm('¿Eliminar este heredero?')) return;
+    const id = b.dataset.herId;
+    try{
+      const { error } = await sb.rpc('sg_eliminar_heredero', { p_id: id });
+      if(error) throw error;
+      const { data } = await sb.rpc('sg_mis_herederos');
+      state.herederos = data || [];
+      renderHerederos();
+      toast('Heredero eliminado', 'ok');
+    }catch(e){ toast(e.message || 'No se pudo eliminar', 'err'); }
+  }));
+}
+
+$('#form-heredero').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = $('#her-err'); clearErr(err);
+  const btn = $('#btn-her'); btnLoad(btn);
+  try{
+    const args = {
+      p_nombre:    $('#her-nombre').value.trim(),
+      p_documento: $('#her-doc').value.trim(),
+      p_vinculo:   $('#her-vinculo').value.trim(),
+      p_porcentaje: $('#her-pct').value ? Number($('#her-pct').value) : null,
+    };
+    const { error } = await sb.rpc('sg_agregar_heredero', args);
+    if(error) throw error;
+    $('#her-nombre').value = ''; $('#her-doc').value = ''; $('#her-vinculo').value = ''; $('#her-pct').value = '';
+    const { data } = await sb.rpc('sg_mis_herederos');
+    state.herederos = data || [];
+    renderHerederos();
+    toast('Heredero agregado', 'ok');
+  }catch(e){ showErr(err, e.message || 'No se pudo agregar'); }
+  finally{ btnReset(btn); }
+});
+
+function renderShare(){
+  const cod = state.perfil?.codigo || '—';
+  const url = `${PUBLIC_BASE}/invite/${cod}`;
+  $('#share-cod').textContent = cod;
+  $('#share-url').textContent = url;
+}
+
+$('#btn-copy').addEventListener('click', async () => {
+  const url = $('#share-url').textContent;
+  try{
+    await navigator.clipboard.writeText(url);
+    toast('Link copiado', 'ok');
+  }catch(e){ toast('No se pudo copiar', 'err'); }
+});
+
+$('#btn-wa').addEventListener('click', () => {
+  const url = $('#share-url').textContent;
+  const cod = $('#share-cod').textContent;
+  const msg = encodeURIComponent(`Te invito al Socio Genial. Con mi código ${cod} entrás a la red y empezás a ganar. ${url}`);
+  window.open(`https://wa.me/?text=${msg}`, '_blank');
+});
+
+$('#btn-share-native').addEventListener('click', async () => {
+  const url = $('#share-url').textContent;
+  const cod = $('#share-cod').textContent;
+  const data = { title:'El Socio Genial', text:`Te invito al Socio Genial con mi código ${cod}`, url };
+  if(navigator.share){
+    try{ await navigator.share(data); }catch(e){}
+  } else {
+    await navigator.clipboard.writeText(url);
+    toast('Link copiado', 'ok');
+  }
+});
+
+function renderPerfil(){
+  const p = state.perfil || {};
+  $('#pf-nombre').textContent = p.nombre || '—';
+  $('#pf-email').textContent  = state.user?.email || '—';
+  $('#pf-tel').textContent    = p.telefono || '—';
+  $('#pf-ciudad').textContent = p.ciudad || '—';
+  $('#pf-codigo').textContent = p.codigo || '—';
+  const est = (p.estado || 'inactivo').toLowerCase();
+  $('#pf-estado').innerHTML = est === 'activo'
+    ? `<span style="color:var(--green)">Activo</span>`
+    : `<span style="color:var(--yellow)">${p.estado || '—'}</span>`;
+  $('#pf-since').textContent = fmtDate(p.created_at || p.fecha_alta);
+}
+
+$('#btn-logout').addEventListener('click', async () => {
+  await sb.auth.signOut();
+  location.reload();
+});
+
+/* ═══════════════════════════════════════════════════════════
+   NAV (sidebar + bottom)
+═══════════════════════════════════════════════════════════ */
+function goView(name){
+  $$('.view').forEach(v => v.classList.remove('active'));
+  const tgt = $(`#view-${name}`);
+  if(tgt) tgt.classList.add('active');
+  $$('.nav-item, .botnav-item').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  window.scrollTo({top:0,behavior:'instant'});
+  if (name === 'invitaciones') loadInvitaciones();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INVITACIONES PERSONALIZADAS
+═══════════════════════════════════════════════════════════ */
+async function loadInvitaciones(){
+  const lista = $('#inv-lista');
+  if (!lista) return;
+  lista.innerHTML = '<div style="text-align:center;padding:18px 0;color:var(--mu);font-size:13px">Cargando…</div>';
+  try {
+    const { data, error } = await sb.rpc('sg_mis_invitaciones');
+    if (error) throw error;
+    if (!data || data.length === 0){
+      lista.innerHTML = '<div style="text-align:center;padding:20px 0;color:var(--mu);font-size:13px">Todavía no creaste ninguna invitación.<br>La primera que mandes, queda en tu G1 (20%).</div>';
+      return;
+    }
+    lista.innerHTML = data.map(i => {
+      const inicial = (i.nombre_invitado || '?').trim()[0].toUpperCase();
+      let badge = 'pendiente', txt = 'Pendiente';
+      if (i.confirmada) { badge='confirmada'; txt='Aceptó · en tu G1'; }
+      else if (i.abierta) { badge='abierta'; txt='Abrió el sobre'; }
+      const fecha = new Date(i.created_at).toLocaleDateString('es-AR',{day:'numeric',month:'short'});
+      return `
+        <div class="inv-item">
+          <div class="inv-item-icon">${inicial}</div>
+          <div class="inv-item-body">
+            <div class="inv-item-name">${i.nombre_invitado}</div>
+            <div class="inv-item-meta">${i.codigo} · ${fecha}</div>
+          </div>
+          <span class="inv-badge ${badge}">${txt}</span>
+          <button onclick="copyInvLink('${i.link}')" style="background:rgba(232,168,48,0.10);border:1px solid var(--brd-gold);color:var(--em-2);padding:6px 10px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer">Copiar</button>
+        </div>`;
+    }).join('');
+  } catch(e){
+    lista.innerHTML = '<div style="text-align:center;padding:18px 0;color:var(--red);font-size:13px">No se pudo cargar.</div>';
+  }
+}
+
+window.copyInvLink = function(link){
+  navigator.clipboard.writeText(link).then(()=>toast('Link copiado','ok')).catch(()=>toast('Copialo a mano: '+link));
+};
+
+(function setupInvCreator(){
+  const btn = $('#btn-crear-inv');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    const nombre = ($('#inv-nombre').value || '').trim();
+    const mensaje = ($('#inv-mensaje').value || '').trim();
+    if (nombre.length < 2) { toast('Escribí el nombre del invitado'); return; }
+    btnLoad(btn, 'Creando...');
+    try {
+      const { data, error } = await sb.rpc('sg_crear_invitacion', { p_nombre_invitado: nombre, p_mensaje: mensaje || null });
+      if (error) throw error;
+      const row = Array.isArray(data) ? data[0] : data;
+      const box = $('#inv-creada');
+      const initial = nombre[0].toUpperCase();
+      box.innerHTML = `
+        <div class="mini-env" id="mini-env">
+          <div class="mini-env-body"></div>
+          <div class="mini-letter">
+            <div class="mini-letter-eyebrow">El Socio Genial</div>
+            <div class="mini-letter-name">${nombre}</div>
+            <div class="mini-letter-divider"></div>
+            <div class="mini-letter-msg">${mensaje || 'Te tenemos una sorpresa'}</div>
+          </div>
+          <div class="mini-env-flap"></div>
+          <div class="mini-wax"><span>SG</span></div>
+        </div>
+        <div class="inv-result show">
+          <div class="inv-result-lbl">Link de tu invitación</div>
+          <div class="inv-result-link">
+            <input value="${row.link}" readonly id="inv-link-input">
+            <button onclick="copyInvLink('${row.link}')" style="background:rgba(232,168,48,0.15);border:1px solid var(--brd-gold);color:var(--em-2);padding:6px 12px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer">COPIAR</button>
+          </div>
+          <div class="inv-actions">
+            <a class="btn btn-primary" href="https://wa.me/?text=${encodeURIComponent(`Hola ${nombre}! Te tengo una sorpresa: ${row.link}`)}" target="_blank">WhatsApp</a>
+            <a class="btn btn-ghost" href="${row.link}" target="_blank">Vista previa</a>
+          </div>
+        </div>`;
+      box.style.display = 'block';
+      $('#inv-nombre').value = '';
+      $('#inv-mensaje').value = '';
+      // Animación: arranca cerrado y abre después de 600ms
+      setTimeout(() => $('#mini-env').classList.add('opening'), 600);
+      // Refrescar lista
+      loadInvitaciones();
+      // Scroll al resultado
+      setTimeout(() => box.scrollIntoView({behavior:'smooth',block:'start'}), 200);
+    } catch(e){
+      toast(e.message || 'No se pudo crear');
+    } finally {
+      btnReset(btn);
+    }
+  });
+})();
+$$('.nav-item, .botnav-item').forEach(b => b.addEventListener('click', () => {
+  if(b.dataset.view) goView(b.dataset.view);
+}));
+$$('[data-go]').forEach(b => b.addEventListener('click', () => goView(b.dataset.go)));
+
+/* ═══════════════════════════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════════════════════════ */
+let _cdTimer = null;
+function startCountdown(target){
+  if(_cdTimer) clearInterval(_cdTimer);
+  function tick(){
+    const now = new Date();
+    let diff = Math.max(0, target - now);
+    const d = Math.floor(diff/86400000); diff -= d*86400000;
+    const h = Math.floor(diff/3600000);  diff -= h*3600000;
+    const m = Math.floor(diff/60000);    diff -= m*60000;
+    const s = Math.floor(diff/1000);
+    const dEl = $('#cd-d'), hEl = $('#cd-h'), mEl = $('#cd-m'), sEl = $('#cd-s');
+    if(dEl) dEl.textContent = d;
+    if(hEl) hEl.textContent = String(h).padStart(2,'0');
+    if(mEl) mEl.textContent = String(m).padStart(2,'0');
+    if(sEl) sEl.textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  _cdTimer = setInterval(tick, 1000);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOOT
+═══════════════════════════════════════════════════════════ */
+async function checkInvitador(){
+  const ref = getQueryParam('ref');
+  if(!ref) return;
+  $('#su-ref').value = ref.toUpperCase();
+  $$('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'signup'));
+  $('#form-login').style.display = 'none';
+  $('#form-signup').style.display = 'block';
+  try{
+    const { data, error } = await sb.rpc('sg_lookup_invitador', { p_codigo: ref.toUpperCase() });
+    if(error || !data) return;
+    const inv = Array.isArray(data) ? data[0] : data;
+    const nombre = inv?.nombre || inv?.full_name;
+    if(nombre){
+      $('#invitador-nombre').textContent = nombre;
+      $('#invitador-banner').style.display = 'flex';
+    }
+  }catch(e){}
+}
+
+async function boot(){
+  await checkInvitador();
+  try{
+    const { data: { session } } = await sb.auth.getSession();
+    if(session){
+      state.user = session.user;
+      await routeAfterAuth();
+    } else {
+      show('#screen-auth');
+    }
+  }catch(e){
+    console.error(e);
+    show('#screen-auth');
+  }
+}
+
+sb.auth.onAuthStateChange((event, session) => {
+  if(event === 'SIGNED_OUT' || !session){
+    if($('#screen-dashboard').classList.contains('active') || $('#screen-pago').classList.contains('active')){
+      state.user = null; state.perfil = null;
+      show('#screen-auth');
+    }
+  }
+});
+
+boot();
+</script>
+
+
+</body></html>

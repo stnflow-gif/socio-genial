@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>Típicos · Café y típicos bolivianos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080503;
+  --card:#110C07;
+  --brd:rgba(255,255,255,0.06);
+  --brd-2:rgba(255,255,255,0.10);
+  --accent:#C8965A;
+  --accent-hi:#E0B278;
+  --accent-dark:#8B6030;
+  --txt:#F5EDD8;
+  --txt-2:#B8A48A;
+  --mu:#6B5C48;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{overflow-x:hidden;line-height:1.5}
+a{color:inherit;text-decoration:none}
+img{display:block}
+
+/* ── GRAIN overlay ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.028;
+}
+
+/* ── REVEAL animations ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.12s}
+.reveal-delay-2{transition-delay:.24s}
+.reveal-delay-3{transition-delay:.36s}
+.reveal-delay-4{transition-delay:.48s}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 48px;
+  transition:background .4s,padding .4s;
+}
+.nav.scrolled{
+  background:rgba(8,5,3,.92);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--brd);
+  padding:14px 48px;
+}
+.nav-logo{
+  font-family:'Lora',serif;font-size:20px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--txt);
+}
+.nav-links{display:flex;gap:36px;font-size:13px;font-weight:500;color:var(--txt-2)}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--txt)}
+.nav-cta{
+  padding:9px 22px;border-radius:8px;
+  border:1px solid rgba(200,150,90,0.4);
+  color:var(--accent-hi);font-size:13px;font-weight:600;
+  transition:.25s;
+}
+.nav-cta:hover{background:rgba(200,150,90,0.12);border-color:var(--accent-hi);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:130px 64px 90px;position:relative;z-index:2;
+}
+.hero-eyebrow{
+  font-size:11px;text-transform:uppercase;letter-spacing:5px;
+  color:var(--accent);font-weight:700;margin-bottom:24px;
+  opacity:0;animation:fadeUp .9s cubic-bezier(.22,1,.36,1) .2s forwards;
+}
+.hero-title{
+  font-family:'Lora',serif;font-weight:900;
+  font-size:clamp(56px,7.5vw,108px);
+  line-height:.92;letter-spacing:-.03em;color:var(--txt);
+  opacity:0;animation:fadeUp 1s cubic-bezier(.22,1,.36,1) .4s forwards;
+}
+.hero-title em{
+  display:block;font-style:italic;
+  background:linear-gradient(135deg,var(--accent-hi) 0%,var(--accent) 60%,#9C6B38 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{
+  margin-top:28px;font-size:16px;color:var(--txt-2);
+  line-height:1.7;max-width:400px;font-weight:300;
+  opacity:0;animation:fadeUp 1s cubic-bezier(.22,1,.36,1) .6s forwards;
+}
+.hero-actions{
+  margin-top:40px;display:flex;gap:16px;align-items:center;
+  opacity:0;animation:fadeUp 1s cubic-bezier(.22,1,.36,1) .75s forwards;
+}
+.btn-accent{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:15px 30px;border-radius:10px;
+  background:linear-gradient(180deg,var(--accent-hi),var(--accent));
+  color:#1A0E02;font-weight:700;font-size:14px;
+  box-shadow:0 8px 28px rgba(200,150,90,0.4);
+  transition:.3s cubic-bezier(.22,1,.36,1);
+}
+.btn-accent:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(200,150,90,0.55)}
+.btn-ghost{
+  font-size:14px;color:var(--txt-2);font-weight:500;
+  display:flex;align-items:center;gap:7px;transition:.2s;
+}
+.btn-ghost svg{transition:transform .25s}
+.btn-ghost:hover{color:var(--txt)}
+.btn-ghost:hover svg{transform:translateX(4px)}
+
+/* ── HERO RIGHT — foto cinematográfica ── */
+.hero-right{position:relative;overflow:hidden}
+.hero-coffee{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.8) contrast(1.08) saturate(1.15);
+  transform:scale(1.08);
+  animation:kenBurns 14s ease-in-out infinite alternate;
+  will-change:transform;
+}
+.hero-right::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,var(--bg) 0%,rgba(8,5,3,.25) 40%,transparent 60%);
+}
+.hero-right::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(0deg,var(--bg) 0%,transparent 25%);
+}
+/* fallback si no carga la imagen */
+.hero-visual-fallback{
+  width:100%;height:100%;min-height:100vh;
+  background:
+    radial-gradient(ellipse 80% 90% at 60% 40%,rgba(139,96,48,0.45),transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 75%,rgba(80,50,20,0.55),transparent 55%),
+    #0E0904;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-logo-glow{
+  width:320px;height:320px;object-fit:contain;
+  opacity:.45;
+  filter:sepia(.5) saturate(1.4) brightness(.85)
+    drop-shadow(0 0 80px rgba(200,150,90,0.65))
+    drop-shadow(0 0 160px rgba(200,150,90,0.25));
+  animation:logoPulse 6s ease-in-out infinite;
+}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:36px;left:64px;z-index:3;
+  display:flex;align-items:center;gap:12px;
+  font-size:10px;text-transform:uppercase;letter-spacing:4px;color:var(--mu);
+  opacity:0;animation:fadeUp .9s cubic-bezier(.22,1,.36,1) 1.2s forwards;
+}
+.scroll-line{
+  width:48px;height:1px;background:linear-gradient(90deg,var(--mu),transparent);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:1px;
+  background:var(--accent);animation:scrollSlide 2.5s ease-in-out 1.5s infinite;
+}
+
+/* ── DIVIDER STATS ── */
+.divider{
+  padding:56px 48px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--brd);border-bottom:1px solid var(--brd);
+  gap:0;
+}
+.divider-item{
+  text-align:center;padding:8px;
+  border-right:1px solid var(--brd);
+}
+.divider-item:last-child{border-right:none}
+.divider-num{
+  font-family:'Lora',serif;font-size:clamp(32px,3.5vw,48px);font-weight:900;
+  color:var(--accent-hi);line-height:1;
+  transition:color .3s;
+}
+.divider-item:hover .divider-num{color:var(--txt)}
+.divider-lbl{font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--txt-2);margin-top:8px;font-weight:500}
+
+/* ── ABOUT ── */
+.about{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:580px;
+}
+.about-img-wrap{
+  position:relative;overflow:hidden;
+}
+.about-img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.65) saturate(1.15);
+  transform:scale(1.05);
+  transition:transform 8s ease;
+}
+.about-img-wrap:hover .about-img{transform:scale(1.0)}
+.about-img-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 55%,var(--card) 100%);
+}
+.about-img-fallback{
+  width:100%;height:100%;min-height:580px;
+  background:
+    radial-gradient(ellipse 70% 80% at 40% 50%,rgba(100,65,25,0.6),transparent 65%),
+    #0D0805;
+  display:flex;align-items:center;justify-content:center;
+}
+.about-img-fallback img{width:180px;opacity:.35;filter:sepia(.5) saturate(1.2)}
+.about-content{
+  padding:80px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--card);
+}
+.eyebrow{
+  font-size:10px;text-transform:uppercase;letter-spacing:5px;
+  color:var(--accent);font-weight:700;margin-bottom:18px;
+}
+.about-title{
+  font-family:'Lora',serif;font-size:clamp(28px,3vw,42px);
+  font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--txt);
+}
+.about-title em{font-style:italic;color:var(--accent-hi)}
+.about-text{
+  margin-top:22px;font-size:15px;color:var(--txt-2);line-height:1.8;font-weight:300;
+  border-left:2px solid rgba(200,150,90,0.3);padding-left:20px;
+  font-style:italic;font-family:'Lora',serif;
+}
+.about-placeholder{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:12px;font-size:12px;color:var(--mu);
+  background:rgba(200,150,90,0.07);border:1px solid rgba(200,150,90,0.18);
+  border-radius:6px;padding:8px 12px;
+}
+
+/* ── REGISTRO ── */
+.registro{
+  max-width:1200px;margin:80px auto;padding:0 48px;
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border-radius:22px;overflow:hidden;
+  border:1px solid var(--brd-2);
+}
+.reg-left{
+  padding:64px 56px;
+  background:linear-gradient(145deg,#130E08,#1C120A);
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.reg-left::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,150,90,0.12),transparent 70%);
+  pointer-events:none;
+}
+.reg-left .eyebrow{margin-bottom:16px}
+.reg-title{
+  font-family:'Lora',serif;font-size:clamp(26px,2.8vw,38px);
+  font-weight:700;color:var(--txt);line-height:1.2;letter-spacing:-.02em;
+}
+.reg-title em{font-style:italic;color:var(--accent-hi)}
+.reg-sub{margin-top:14px;font-size:15px;color:var(--txt-2);line-height:1.65;font-weight:300}
+.reg-info{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+.reg-info-row{
+  display:flex;align-items:center;gap:14px;
+  font-size:14px;color:var(--txt-2);
+}
+.reg-info-icon{
+  flex:0 0 34px;height:34px;border-radius:9px;
+  background:rgba(200,150,90,0.10);border:1px solid rgba(200,150,90,0.22);
+  display:grid;place-items:center;
+}
+.reg-info-icon svg{width:15px;height:15px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.reg-right{
+  padding:64px 56px;
+  background:linear-gradient(145deg,#0F0A05,#180F06);
+  display:flex;flex-direction:column;justify-content:center;gap:16px;
+}
+.reg-field label{
+  display:block;font-size:10px;font-weight:700;color:var(--txt-2);
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:7px;
+}
+.reg-field input,.reg-field select{
+  width:100%;padding:13px 16px;border-radius:10px;
+  border:1px solid var(--brd-2);background:rgba(255,255,255,0.025);
+  color:var(--txt);font-family:inherit;font-size:14px;
+  transition:.25s;appearance:none;
+}
+.reg-field input:focus,.reg-field select:focus{
+  outline:none;border-color:rgba(200,150,90,0.5);
+  background:rgba(200,150,90,0.04);
+  box-shadow:0 0 0 3px rgba(200,150,90,0.10);
+}
+.reg-field input::placeholder{color:var(--mu)}
+.reg-field select option{background:#1A1008}
+.reg-submit{
+  width:100%;padding:15px;border-radius:10px;
+  background:linear-gradient(180deg,var(--accent-hi),var(--accent));
+  color:#1A0E02;font-weight:700;font-size:14px;font-family:inherit;
+  border:none;cursor:pointer;margin-top:6px;
+  box-shadow:0 6px 22px rgba(200,150,90,0.32);
+  transition:.3s cubic-bezier(.22,1,.36,1);
+  position:relative;overflow:hidden;
+}
+.reg-submit::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);
+  transform:translateX(-100%);transition:transform .5s;
+}
+.reg-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,150,90,0.50)}
+.reg-submit:hover::after{transform:translateX(100%)}
+
+/* ── FEATURES ── */
+.features{
+  padding:80px 48px 100px;
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+  text-align:center;
+  border-top:1px solid var(--brd);
+}
+.feat-icon{display:flex;flex-direction:column;align-items:center;gap:16px}
+.feat-icon-circle{
+  width:56px;height:56px;border-radius:50%;
+  border:1px solid var(--brd-2);
+  display:grid;place-items:center;
+  transition:.3s;
+}
+.feat-icon:hover .feat-icon-circle{
+  border-color:rgba(200,150,90,0.5);
+  background:rgba(200,150,90,0.07);
+  transform:translateY(-3px);
+}
+.feat-icon-circle svg{width:22px;height:22px;stroke:var(--accent-hi);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.feat-icon-title{font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--txt)}
+.feat-icon-text{font-size:12px;color:var(--txt-2);line-height:1.65;font-weight:300;max-width:160px}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px 48px;border-top:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ft-logo{font-family:'Lora',serif;font-size:18px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt)}
+.ft-copy{font-size:11px;color:var(--mu)}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes kenBurns{
+  from{transform:scale(1.08) translate(0,0)}
+  to{transform:scale(1.0) translate(-1%,1%)}
+}
+@keyframes logoPulse{
+  0%,100%{opacity:.4;filter:sepia(.5) saturate(1.4) brightness(.85) drop-shadow(0 0 60px rgba(200,150,90,0.5))}
+  50%{opacity:.55;filter:sepia(.5) saturate(1.6) brightness(.95) drop-shadow(0 0 100px rgba(200,150,90,0.75))}
+}
+@keyframes scrollSlide{
+  0%{left:-100%}60%{left:100%}100%{left:100%}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .nav{padding:16px 24px}.nav.scrolled{padding:12px 24px}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:120px 28px 70px}
+  .hero-right{display:none}
+  .scroll-hint{left:28px}
+  .divider{grid-template-columns:repeat(2,1fr)}
+  .divider-item:nth-child(2){border-right:none}
+  .about{grid-template-columns:1fr}
+  .about-img-wrap{display:none}
+  .about-content{padding:60px 28px}
+  .registro{grid-template-columns:1fr;margin:60px 24px;padding:0}
+  .reg-left,.reg-right{padding:44px 32px}
+  .features{grid-template-columns:repeat(2,1fr);padding:60px 28px 80px}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">Típicos</div>
+  <div class="nav-links">
+    <a href="#about">Nosotros</a>
+    <a href="#registro">Pre-registro</a>
+  </div>
+  <a href="#registro" class="nav-cta">Reservá tu lugar</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Santa Cruz · Bolivia · Junio 2026</div>
+    <h1 class="hero-title">
+      Café<br>
+      <em>con la receta<br>de mamá.</em>
+    </h1>
+    <p class="hero-sub">Lo boliviano de siempre, presentado como nunca lo habías visto. Pre-lanzamiento el 6 de junio.</p>
+    <div class="hero-actions">
+      <a href="#registro" class="btn-accent">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Reservá tu lugar
+      </a>
+      <a href="#about" class="btn-ghost">
+        Nuestra historia
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </div>
+
+  <div class="hero-right" id="heroRight">
+    <!-- Imagen cinematográfica generada por Stitch/Gemini -->
+    <img
+      class="hero-coffee"
+      src="https://lh3.googleusercontent.com/aida/ADBb0ughGI3-BjWR5rjmBCP4Ax_5VEaUd5cI-hj1z_PsNREGuD7D2hC4DxqjNDxlOZPlawGU9J3MMgrMUdf7NGcpNMTaBOXDvI8V4_OuRKN63_PaMKTelgMUAcIGkHyVfXTikeyiLmntSzajvXli9hmYS9_IIzPBEHjoxoUec8caP246E9-pdWNv5AZeKS3fpb3gXjwQqKPSRF-y6qMa8WdqKjD8MrMvhpX52S-VQLlsSrDFZWUMMBo2WC_DGvg"
+      alt="Café Típicos"
+      id="heroCoffee"
+      onerror="this.parentElement.innerHTML='<div class=\'hero-visual-fallback\'><img src=\'./img/logo.jpeg\' class=\'hero-logo-glow\' alt=\'Típicos\'></div>'"
+    >
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="divider">
+  <div class="divider-item reveal">
+    <div class="divider-num" data-target="6">0</div>
+    <div class="divider-lbl">Junio · Apertura</div>
+  </div>
+  <div class="divider-item reveal reveal-delay-1">
+    <div class="divider-num" data-target="12">0</div>
+    <div class="divider-lbl">Típicos bolivianos</div>
+  </div>
+  <div class="divider-item reveal reveal-delay-2">
+    <div class="divider-num" data-target="20">0</div>
+    <div class="divider-lbl">% Off socios</div>
+  </div>
+  <div class="divider-item reveal reveal-delay-3">
+    <div class="divider-num" data-target="100">0</div>
+    <div class="divider-lbl">% Receta de mamá</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-wrap">
+    <div class="about-img-fallback">
+      <img src="./img/logo.jpeg" alt="Típicos">
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="eyebrow reveal">Sobre nosotros</div>
+    <h2 class="about-title reveal reveal-delay-1">
+      El mejor momento para<br>
+      una <em>taza de café.</em>
+    </h2>
+    <blockquote class="about-text reveal reveal-delay-2">
+      "La historia de Típicos está siendo escrita por Edmar Pedraza Chamón — el hombre que la hizo realidad. Pronto."
+    </blockquote>
+    <div class="about-placeholder reveal reveal-delay-3">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Edmar está redactando la historia · Coming soon
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRO -->
+<section id="registro">
+  <div class="registro reveal">
+    <div class="reg-left">
+      <div class="eyebrow">Pre-lanzamiento</div>
+      <h2 class="reg-title">Reservá tu lugar<br>el <em>6 de junio.</em></h2>
+      <p class="reg-sub">Cupos limitados. Los registrados tienen acceso prioritario y descuentos de apertura exclusivos.</p>
+      <div class="reg-info">
+        <div class="reg-info-row">
+          <div class="reg-info-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+          </div>
+          <span>Sábado 6 de junio · 17:00 hs</span>
+        </div>
+        <div class="reg-info-row">
+          <div class="reg-info-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span>Santa Cruz de la Sierra · Dirección por confirmar</span>
+        </div>
+      </div>
+    </div>
+    <div class="reg-right">
+      <div class="reg-field">
+        <label>Tu nombre</label>
+        <input type="text" placeholder="¿Cómo te llamás?">
+      </div>
+      <div class="reg-field">
+        <label>WhatsApp</label>
+        <input type="tel" placeholder="+591 ·········">
+      </div>
+      <div class="reg-field">
+        <label>¿Cuántas personas van?</label>
+        <select>
+          <option value="">Seleccioná</option>
+          <option>Solo yo</option>
+          <option>2 personas</option>
+          <option>3 personas</option>
+          <option>4 o más</option>
+        </select>
+      </div>
+      <button class="reg-submit" id="regBtn">Confirmar registro →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features">
+  <div class="feat-icon reveal">
+    <div class="feat-icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+    </div>
+    <div class="feat-icon-title">Café & Típicos</div>
+    <p class="feat-icon-text">Los mejores sabores bolivianos en un solo lugar.</p>
+  </div>
+  <div class="feat-icon reveal reveal-delay-1">
+    <div class="feat-icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="feat-icon-title">Calidad real</div>
+    <p class="feat-icon-text">Ingredientes locales, receta original, sin atajos.</p>
+  </div>
+  <div class="feat-icon reveal reveal-delay-2">
+    <div class="feat-icon-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    </div>
+    <div class="feat-icon-title">20% socios</div>
+    <p class="feat-icon-text">Descuento en todo el menú para socios todo el año.</p>
+  </div>
+  <div class="feat-icon reveal reveal-delay-3">
+    <div class="feat-icon-circle">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="feat-icon-title">Hecho en Bolivia</div>
+    <p class="feat-icon-text">Santa Cruz de la Sierra, con orgullo camba.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-logo">Típicos</div>
+  <div class="ft-copy">Santa Cruz de la Sierra · © 2026 Edmar Pedraza Chamón</div>
+</footer>
+
+<script>
+/* ── Nav shrink on scroll ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ── Parallax hero image ── */
+const heroCoffee = document.getElementById('heroCoffee');
+if (heroCoffee) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY * 0.18;
+    heroCoffee.style.transform = `scale(1.08) translateY(${y}px)`;
+  }, { passive: true });
+}
+
+/* ── Intersection Observer — reveal ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── Animated counters ── */
+function animateCounter(el, target, duration = 1400) {
+  const start = performance.now();
+  const update = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(ease * target);
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(update);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const target = parseInt(e.target.dataset.target);
+      animateCounter(e.target, target);
+      counterObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+/* ── Submit button ── */
+document.getElementById('regBtn').addEventListener('click', function() {
+  this.textContent = '✓ Registrado — te contactamos pronto';
+  this.style.background = 'linear-gradient(180deg,#6ABF59,#4A9A3A)';
+  this.style.color = '#fff';
+  this.disabled = true;
+});
+</script>
+</body>
+</html>
