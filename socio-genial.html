@@ -809,6 +809,33 @@ footer{
 
 /* ── MOBILE HERO LOGO ── */
 .mobile-hero-logo{display:none}
+.mhl-glow{
+  position:absolute;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,148,10,.55) 0%,transparent 65%);
+  filter:blur(50px);pointer-events:none;
+  top:50%;left:50%;transform:translate(-50%,-60%);z-index:0;
+}
+.mhl-img{
+  width:200px;height:200px;object-fit:contain;position:relative;z-index:1;
+  filter:drop-shadow(0 0 28px rgba(212,148,10,.9)) drop-shadow(0 0 55px rgba(212,148,10,.55)) drop-shadow(0 0 100px rgba(212,148,10,.35));
+  animation:logoFloat 7s ease-in-out infinite;
+}
+.mhl-cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;
+  width:100%;max-width:300px;position:relative;z-index:1;
+}
+.mhl-card{
+  padding:12px 14px;border-radius:12px;
+  border:1px solid rgba(212,148,10,.22);
+  background:rgba(10,8,4,.88);backdrop-filter:blur(16px);
+}
+.mhl-num{
+  font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;
+  background:linear-gradient(135deg,#FFFEF0,#FFE14A,#D4900A);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;
+}
+.mhl-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.8px;color:var(--txt-2);margin-top:3px}
 
 /* ── REVEAL ── */
 .reveal{opacity:1;transform:translateY(0)}
@@ -833,18 +860,10 @@ footer{
   .partners-grid{grid-template-columns:1fr}
   .section,.cta-wrap,.earn-section,.network-section{padding:72px 22px}
   .hero-right{display:none}
-  /* Logo simple, sin complejidad de posicionamiento */
   .mobile-hero-logo{
-    display:flex;justify-content:center;
-    margin-top:36px;
-  }
-  .mobile-hero-logo img{
-    width:200px;height:200px;
-    object-fit:contain;
-    filter:
-      drop-shadow(0 0 28px rgba(212,148,10,.9))
-      drop-shadow(0 0 55px rgba(212,148,10,.55))
-      drop-shadow(0 0 100px rgba(212,148,10,.35));
+    display:flex;flex-direction:column;align-items:center;
+    gap:20px;margin-top:40px;
+    position:relative;padding-top:20px;
   }
   footer{flex-direction:column;text-align:center}.ft-links{justify-content:center}
 }
@@ -898,9 +917,16 @@ footer{
         </a>
         <a href="#como" class="btn-blue">Ver cómo funciona</a>
       </div>
-      <!-- Logo mobile-only: visible solo en pantallas pequeñas -->
+      <!-- Logo + tarjetas mobile-only -->
       <div class="mobile-hero-logo">
-        <img src="./img/sg-logo.png" alt="El Socio Genial">
+        <div class="mhl-glow"></div>
+        <img src="./img/sg-logo.png" alt="El Socio Genial" class="mhl-img">
+        <div class="mhl-cards">
+          <div class="mhl-card"><div class="mhl-num">20%</div><div class="mhl-lbl">Tu descuento</div></div>
+          <div class="mhl-card"><div class="mhl-num" style="background:linear-gradient(135deg,var(--blue-hi),var(--blue-2));-webkit-background-clip:text;background-clip:text;color:transparent">∞</div><div class="mhl-lbl">Red sin límite</div></div>
+          <div class="mhl-card"><div class="mhl-num" style="background:linear-gradient(135deg,#6EFFD8,#34D399);-webkit-background-clip:text;background-clip:text;color:transparent">1%</div><div class="mhl-lbl">Fondo navideño</div></div>
+          <div class="mhl-card"><div class="mhl-num">+%</div><div class="mhl-lbl">Porcentaje de tu red</div></div>
+        </div>
       </div>
     </div>
 
