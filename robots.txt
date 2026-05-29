@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /invitaciones/
+Disallow: /tu-cuenta-files/
+
+Sitemap: https://misociogenial.stnflow.online/sitemap.xml
