@@ -807,6 +807,9 @@ footer{
   .qs-section{padding:72px 22px}
 }
 
+/* ── MOBILE HERO LOGO ── */
+.mobile-hero-logo{display:none}
+
 /* ── REVEAL ── */
 .reveal{opacity:1;transform:translateY(0)}
 .reveal-d1{}.reveal-d2{}.reveal-d3{}.reveal-d4{}
@@ -829,14 +832,20 @@ footer{
   .earn-extras{grid-template-columns:1fr}
   .partners-grid{grid-template-columns:1fr}
   .section,.cta-wrap,.earn-section,.network-section{padding:72px 22px}
-  /* Logo visible en mobile — compacto y centrado */
-  .hero-right{display:flex;height:260px;justify-content:center;overflow:visible}
-  .logo-wrap{width:220px;height:220px}
-  .logo-hex-wrap{width:220px;height:220px}
-  .logo-glow{inset:-30px;filter:blur(25px)}
-  .logo-glow-ring{inset:-8px;filter:blur(10px)}
-  /* Tarjetas flotantes — ocultar en mobile (overflow las corta) */
-  .float-card{display:none}
+  .hero-right{display:none}
+  /* Logo simple, sin complejidad de posicionamiento */
+  .mobile-hero-logo{
+    display:flex;justify-content:center;
+    margin-top:36px;
+  }
+  .mobile-hero-logo img{
+    width:200px;height:200px;
+    object-fit:contain;
+    filter:
+      drop-shadow(0 0 28px rgba(212,148,10,.9))
+      drop-shadow(0 0 55px rgba(212,148,10,.55))
+      drop-shadow(0 0 100px rgba(212,148,10,.35));
+  }
   footer{flex-direction:column;text-align:center}.ft-links{justify-content:center}
 }
 </style>
@@ -888,6 +897,10 @@ footer{
           Únete ahora
         </a>
         <a href="#como" class="btn-blue">Ver cómo funciona</a>
+      </div>
+      <!-- Logo mobile-only: visible solo en pantallas pequeñas -->
+      <div class="mobile-hero-logo">
+        <img src="./img/sg-logo.png" alt="El Socio Genial">
       </div>
     </div>
 
