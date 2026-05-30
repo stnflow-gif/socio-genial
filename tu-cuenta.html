@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <!-- saved from url=(0038)https://sociogenial.stnflow.online/app -->
-<html lang="es" one-sec-browser-extension-id="ZmVtbmFob2hnaW5kZG9mZ2Vra25mbWFrbGNicGlua24="><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script><div id="in-page-channel-node-id" data-channel-name="in_page_channel_1LT2Ah"></div><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="es" data-expander-initialized="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#060504">
+<meta name="theme-color" content="#0B1120">
 <title>El Socio Genial · Tu cuenta</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./El Socio Genial · Tu cuenta_files/css2" rel="stylesheet">
+<script src="./El Socio Genial · Tu cuenta_files/supabase.min.js.download"></script>
 <style>
 :root{
-  /* Nuevo sistema de diseño — igual que socio-genial.html */
-  --bg:#060504; --bg-2:#0E0B09; --bg-deep:#030201;
-  --card:#110D08; --card-2:#171108; --surface:#1C1509;
-  --brd:rgba(255,255,255,0.05); --brd-2:rgba(255,255,255,0.08); --brd-3:rgba(255,255,255,0.12);
-  --brd-gold:rgba(212,148,10,0.22); --brd-gold-hi:rgba(212,148,10,0.42);
-  --g-hi:#FFF4A0; --em:#D4940A; --em-2:#FFD84A; --em-3:#8B5E05;
-  --em-glow:rgba(212,148,10,0.45); --em-soft:rgba(212,148,10,0.08);
-  --navy:#1A3AFF; --navy-2:#1A3AFF; --navy-3:#0D1F8A;
-  --txt:#F0EAE0; --txt-2:#A89880; --mu:#6B5848; --mu-2:#4A3828;
+  --bg:#0B1120; --bg-2:#0E1628; --bg-deep:#060A14;
+  --card:#101A31; --card-2:#15213C; --surface:#1A2848;
+  --brd:rgba(255,255,255,0.05); --brd-2:rgba(255,255,255,0.09); --brd-3:rgba(255,255,255,0.14);
+  --brd-gold:rgba(232,168,48,0.22); --brd-gold-hi:rgba(232,168,48,0.38);
+  --g-hi:#FFE08A; --em:#E8A830; --em-2:#F2C158; --em-3:#B7801E; --em-deep:#7A5612;
+  --em-glow:rgba(232,168,48,0.45); --em-soft:rgba(232,168,48,0.08);
+  --navy:#2B4B9E; --navy-2:#1B2D5B; --navy-3:#0F1A38;
+  --txt:#F4F7FC; --txt-2:#D5DEEF; --mu:#8E9DBA; --mu-2:#5C6B88;
   --green:#34D399; --red:#F87171; --yellow:#FBBF24;
-  --ease-out:cubic-bezier(0.22,1,0.36,1);
-  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
 body{
   background:
-    radial-gradient(900px 700px at 10% -10%,rgba(212,120,5,.18),transparent 60%),
-    radial-gradient(700px 600px at 100% 10%,rgba(26,58,255,.10),transparent 55%),
-    radial-gradient(800px 600px at 50% 110%,rgba(212,120,5,.10),transparent 60%),
+    radial-gradient(1200px 800px at 20% -10%, rgba(43,75,158,0.18), transparent 60%),
+    radial-gradient(900px 700px at 100% 10%, rgba(232,168,48,0.10), transparent 55%),
+    radial-gradient(1000px 600px at 50% 110%, rgba(43,75,158,0.12), transparent 60%),
     var(--bg);
   line-height:1.5;overflow-x:hidden;
 }
@@ -86,35 +84,15 @@ img,svg{display:block;max-width:100%}
 .boot-txt{color:var(--mu);font-size:13px}
 
 /* ── Auth ── */
-#screen-auth{display:none;align-items:center;justify-content:center;padding:32px 18px;min-height:100vh}
+#screen-auth{display:none;align-items:center;justify-content:center;padding:32px 18px}
 #screen-auth.active{display:flex}
-.auth-shell{width:100%;max-width:460px}
-.auth-head{text-align:center;margin-bottom:32px}
-.auth-mark{
-  width:80px;height:80px;border-radius:50%;background:#fff;
-  display:grid;place-items:center;margin:0 auto 20px;overflow:hidden;
-  box-shadow:0 0 0 2px var(--em),0 0 0 4px var(--bg),0 0 0 5px rgba(212,148,10,.4),0 8px 32px rgba(212,148,10,.35);
-}
-.auth-mark img{width:80%;height:80%;object-fit:contain}
-.auth-mark span{font-family:'Bebas Neue',sans-serif;color:var(--em-3);font-size:36px;letter-spacing:2px}
-.auth-title{
-  font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;color:var(--txt);
-}
-.auth-title em{
-  font-family:'Playfair Display',serif;font-style:italic;letter-spacing:0;
-  background:linear-gradient(135deg,var(--g-hi),var(--em-2),var(--em));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.auth-sub{color:var(--mu);font-size:14px;margin-top:8px;font-weight:300}
-
-/* Auth card container */
-.auth-card{
-  background:linear-gradient(145deg,rgba(17,13,8,.98),rgba(23,17,8,.95));
-  border:1px solid var(--brd-gold);border-radius:22px;padding:32px 28px;
-  box-shadow:0 0 0 1px rgba(212,148,10,.06) inset,0 40px 80px rgba(0,0,0,.55);
-  position:relative;overflow:hidden;
-}
-.auth-card::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,148,10,.7),transparent)}
+.auth-shell{width:100%;max-width:440px}
+.auth-head{text-align:center;margin-bottom:28px}
+.auth-mark{width:72px;height:72px;border-radius:50%;background:#fff;display:grid;place-items:center;margin:0 auto 16px;box-shadow:0 0 0 2.5px #C9A961,0 8px 28px rgba(232,168,48,0.32)}
+.auth-mark span{font-family:'Playfair Display',serif;color:var(--em-3);font-size:34px;font-weight:800}
+.auth-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--txt)}
+.auth-title em{font-style:italic;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.auth-sub{color:var(--mu);font-size:14px;margin-top:6px}
 
 .invitador-banner{background:linear-gradient(180deg,rgba(232,168,48,0.10),rgba(232,168,48,0.03));border:1px solid var(--brd-gold-hi);border-radius:12px;padding:12px 14px;margin-bottom:18px;font-size:13px;color:var(--txt-2);display:flex;align-items:center;gap:10px}
 .invitador-banner b{color:var(--em-2)}
@@ -175,7 +153,7 @@ img,svg{display:block;max-width:100%}
   #screen-dashboard.active{grid-template-columns:260px 1fr;min-height:100vh}
 }
 
-.sidebar{display:none;background:rgba(6,5,4,0.88);backdrop-filter:blur(20px);border-right:1px solid var(--brd-2);padding:24px 16px;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.sidebar{display:none;background:rgba(11,17,32,0.7);border-right:1px solid var(--brd-2);padding:24px 16px;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
 @media(min-width:1024px){.sidebar{display:flex}}
 .sb-brand{display:flex;align-items:center;gap:12px;padding:6px 8px 22px;border-bottom:1px solid var(--brd);margin-bottom:14px}
 .sb-brand .bm{width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 0 0 1.5px #C9A961}
@@ -392,184 +370,7 @@ img,svg{display:block;max-width:100%}
 .inv-badge.confirmada{background:rgba(52,211,153,0.20);color:#34D399}
 
 </style>
-<style>@keyframes slide-in-one-tap {
-  from {
-    transform: translateY(80px);
-  }
-  to {
-    transform: translateY(0px);
-  }
-}
-
-.trust-hide-gracefully {
-  opacity: 0;
-}
-
-.trust-wallet-one-tap .hidden {
-    display: none;
-  }
-
-.trust-wallet-one-tap .semibold {
-    font-weight: 500;
-  }
-
-.trust-wallet-one-tap .binance-plex {
-    font-family: 'Binance';
-  }
-
-.trust-wallet-one-tap .rounded-full {
-    border-radius: 50%;
-  }
-
-.trust-wallet-one-tap .flex {
-    display: flex;
-  }
-
-.trust-wallet-one-tap .flex-col {
-    flex-direction: column;
-  }
-
-.trust-wallet-one-tap .items-center {
-    align-items: center;
-  }
-
-.trust-wallet-one-tap .space-between {
-    justify-content: space-between;
-  }
-
-.trust-wallet-one-tap .justify-center {
-    justify-content: center;
-  }
-
-.trust-wallet-one-tap .w-full {
-    width: 100%;
-  }
-
-.trust-wallet-one-tap .box {
-    transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
-    animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
-    width: 384px;
-    border-radius: 15px;
-    background: #fff;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    z-index: 1020;
-  }
-
-.trust-wallet-one-tap .header {
-    gap: 15px;
-    border-bottom: 1px solid #e6e6e6;
-    padding: 10px 18px;
-  }
-
-.trust-wallet-one-tap .header .left-items {
-      gap: 15px;
-    }
-
-.trust-wallet-one-tap .header .title {
-      color: #1e2329;
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 28px;
-    }
-
-.trust-wallet-one-tap .header .subtitle {
-      color: #474d57;
-      font-size: 14px;
-      line-height: 20px;
-    }
-
-.trust-wallet-one-tap .header .close {
-      color: #1e2329;
-      cursor: pointer;
-    }
-
-.trust-wallet-one-tap .body {
-    padding: 9px 18px;
-    gap: 10px;
-  }
-
-.trust-wallet-one-tap .body .right-items {
-      gap: 10px;
-      width: 100%;
-    }
-
-.trust-wallet-one-tap .body .right-items .wallet-title {
-        color: #1e2329;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 20px;
-      }
-
-.trust-wallet-one-tap .body .right-items .wallet-subtitle {
-        color: #474d57;
-        font-size: 14px;
-        line-height: 20px;
-      }
-
-.trust-wallet-one-tap .connect-indicator {
-    gap: 15px;
-    padding: 8px 0;
-  }
-
-.trust-wallet-one-tap .connect-indicator .flow-icon {
-      color: #474d57;
-    }
-
-.trust-wallet-one-tap .loading-color {
-    color: #fff;
-  }
-
-.trust-wallet-one-tap .button {
-    border-radius: 50px;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    background-color: rgb(5, 0, 255);
-    border-color: rgb(229, 231, 235);
-    cursor: pointer;
-    text-align: center;
-    height: 45px;
-  }
-
-.trust-wallet-one-tap .button .button-text {
-      color: #fff;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 20px;
-    }
-
-.trust-wallet-one-tap .footer {
-    margin: 20px 30px;
-  }
-
-.trust-wallet-one-tap .check-icon {
-    color: #fff;
-  }
-
-@font-face {
-  font-family: 'Binance';
-  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Binance';
-  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Binance';
-  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL2FwcC9zcmMvb25lVGFwL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0lBQ0UsMkJBQTJCO0VBQzdCO0VBQ0E7SUFDRSwwQkFBMEI7RUFDNUI7QUFDRjs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFHRTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLGdCQUFnQjtFQUNsQjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLGtCQUFrQjtFQUNwQjs7QUFFQTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLG1CQUFtQjtFQUNyQjs7QUFFQTtJQUNFLDhCQUE4QjtFQUNoQzs7QUFFQTtJQUNFLHVCQUF1QjtFQUN6Qjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFFQTtJQUNFLGdEQUFnRDtJQUNoRCw0REFBNEQ7SUFDNUQsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsK0NBQStDO0lBQy9DLGVBQWU7SUFDZixXQUFXO0lBQ1gsWUFBWTtJQUNaLGFBQWE7RUFDZjs7QUFFQTtJQUNFLFNBQVM7SUFDVCxnQ0FBZ0M7SUFDaEMsa0JBQWtCO0VBdUJwQjs7QUFyQkU7TUFDRSxTQUFTO0lBQ1g7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGdCQUFnQjtNQUNoQixpQkFBaUI7SUFDbkI7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGlCQUFpQjtJQUNuQjs7QUFFQTtNQUNFLGNBQWM7TUFDZCxlQUFlO0lBQ2pCOztBQUdGO0lBQ0UsaUJBQWlCO0lBQ2pCLFNBQVM7RUFtQlg7O0FBakJFO01BQ0UsU0FBUztNQUNULFdBQVc7SUFjYjs7QUFaRTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGlCQUFpQjtNQUNuQjs7QUFFQTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsaUJBQWlCO01BQ25COztBQUlKO0lBQ0UsU0FBUztJQUNULGNBQWM7RUFLaEI7O0FBSEU7TUFDRSxjQUFjO0lBQ2hCOztBQUdGO0lBQ0UsV0FBVztFQUNiOztBQUVBO0lBQ0UsbUJBQW1CO0lBQ25CLDhCQUE4QjtJQUM5QixtQkFBbUI7SUFDbkIsZ0NBQWdDO0lBQ2hDLGdDQUFnQztJQUNoQyxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLFlBQVk7RUFRZDs7QUFORTtNQUNFLFdBQVc7TUFDWCxlQUFlO01BQ2YsZ0JBQWdCO01BQ2hCLGlCQUFpQjtJQUNuQjs7QUFHRjtJQUNFLGlCQUFpQjtFQUNuQjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFHRjtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMEU7RUFDMUUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBeUU7RUFDekUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMkU7RUFDM0UsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQiIsInNvdXJjZXNDb250ZW50IjpbIkBrZXlmcmFtZXMgc2xpZGUtaW4tb25lLXRhcCB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSg4MHB4KTtcbiAgfVxuICB0byB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDBweCk7XG4gIH1cbn1cblxuLnRydXN0LWhpZGUtZ3JhY2VmdWxseSB7XG4gIG9wYWNpdHk6IDA7XG59XG5cbi50cnVzdC13YWxsZXQtb25lLXRhcCB7XG4gIC5oaWRkZW4ge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cblxuICAuc2VtaWJvbGQge1xuICAgIGZvbnQtd2VpZ2h0OiA1MDA7XG4gIH1cblxuICAuYmluYW5jZS1wbGV4IHtcbiAgICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICB9XG5cbiAgLnJvdW5kZWQtZnVsbCB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICB9XG5cbiAgLmZsZXgge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gIH1cblxuICAuZmxleC1jb2wge1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIH1cblxuICAuaXRlbXMtY2VudGVyIHtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG5cbiAgLnNwYWNlLWJldHdlZW4ge1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgfVxuXG4gIC5qdXN0aWZ5LWNlbnRlciB7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIH1cblxuICAudy1mdWxsIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxuXG4gIC5ib3gge1xuICAgIHRyYW5zaXRpb246IGFsbCAwLjVzIGN1YmljLWJlemllcigwLCAwLCAwLCAxLjQzKTtcbiAgICBhbmltYXRpb246IHNsaWRlLWluLW9uZS10YXAgMC41cyBjdWJpYy1iZXppZXIoMCwgMCwgMCwgMS40Myk7XG4gICAgd2lkdGg6IDM4NHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbiAgICBib3gtc2hhZG93OiAwcHggMnB4IDRweCAwcHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgcmlnaHQ6IDMwcHg7XG4gICAgYm90dG9tOiAzMHB4O1xuICAgIHotaW5kZXg6IDEwMjA7XG4gIH1cblxuICAuaGVhZGVyIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNlNmU2ZTY7XG4gICAgcGFkZGluZzogMTBweCAxOHB4O1xuXG4gICAgLmxlZnQtaXRlbXMge1xuICAgICAgZ2FwOiAxNXB4O1xuICAgIH1cblxuICAgIC50aXRsZSB7XG4gICAgICBjb2xvcjogIzFlMjMyOTtcbiAgICAgIGZvbnQtc2l6ZTogMThweDtcbiAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICBsaW5lLWhlaWdodDogMjhweDtcbiAgICB9XG5cbiAgICAuc3VidGl0bGUge1xuICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICBsaW5lLWhlaWdodDogMjBweDtcbiAgICB9XG5cbiAgICAuY2xvc2Uge1xuICAgICAgY29sb3I6ICMxZTIzMjk7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxuICB9XG5cbiAgLmJvZHkge1xuICAgIHBhZGRpbmc6IDlweCAxOHB4O1xuICAgIGdhcDogMTBweDtcblxuICAgIC5yaWdodC1pdGVtcyB7XG4gICAgICBnYXA6IDEwcHg7XG4gICAgICB3aWR0aDogMTAwJTtcblxuICAgICAgLndhbGxldC10aXRsZSB7XG4gICAgICAgIGNvbG9yOiAjMWUyMzI5O1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAyMHB4O1xuICAgICAgfVxuXG4gICAgICAud2FsbGV0LXN1YnRpdGxlIHtcbiAgICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgICB9XG4gICAgfVxuICB9XG5cbiAgLmNvbm5lY3QtaW5kaWNhdG9yIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgcGFkZGluZzogOHB4IDA7XG5cbiAgICAuZmxvdy1pY29uIHtcbiAgICAgIGNvbG9yOiAjNDc0ZDU3O1xuICAgIH1cbiAgfVxuXG4gIC5sb2FkaW5nLWNvbG9yIHtcbiAgICBjb2xvcjogI2ZmZjtcbiAgfVxuXG4gIC5idXR0b24ge1xuICAgIGJvcmRlci1yYWRpdXM6IDUwcHg7XG4gICAgb3V0bGluZTogMnB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICAgIG91dGxpbmUtb2Zmc2V0OiAycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDUsIDAsIDI1NSk7XG4gICAgYm9yZGVyLWNvbG9yOiByZ2IoMjI5LCAyMzEsIDIzNSk7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBoZWlnaHQ6IDQ1cHg7XG5cbiAgICAuYnV0dG9uLXRleHQge1xuICAgICAgY29sb3I6ICNmZmY7XG4gICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICBmb250LXdlaWdodDogNjAwO1xuICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgfVxuICB9XG5cbiAgLmZvb3RlciB7XG4gICAgbWFyZ2luOiAyMHB4IDMwcHg7XG4gIH1cblxuICAuY2hlY2staWNvbiB7XG4gICAgY29sb3I6ICNmZmY7XG4gIH1cbn1cblxuQGZvbnQtZmFjZSB7XG4gIGZvbnQtZmFtaWx5OiAnQmluYW5jZSc7XG4gIHNyYzogdXJsKCcuL2ZvbnRzL2JpbmFuY2VQbGV4L0JpbmFuY2VQbGV4LVJlZ3VsYXIub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNDAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1NZWRpdW0ub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNTAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1TZW1pQm9sZC5vdGYnKSBmb3JtYXQoJ29wZW50eXBlJyk7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */</style><link rel="stylesheet" href="chrome-extension://3aa63ec3-6685-480b-9436-b1b2ff868c0e/app/content-style.css"></head><one-sec-shadow-host><template shadowrootmode="closed"><div><style data-emotion="one-sec-styles-global" data-s=""></style><style data-emotion="one-sec-styles" data-s=""></style></div><dialog class="one-sec-styles-m9ge7r ecozupg3 closing" style="width: 400px;"><div class="one-sec-styles-1h1qweo ecozupg2"><div class="one-sec-styles-1w6rj69 ecozupg1"><h3 class="one-sec-styles-qyis4 e18c3aox10"></h3></div><p class="one-sec-styles-4ng8xr e18c3aox8" style="margin-top: -20px; white-space: pre-wrap;"></p><div class="one-sec-styles-1s0np57 eyllx4e0"></div></div></dialog></template></one-sec-shadow-host>
+</head>
 <body>
 
 <!-- ═══════ LOADING ═══════ -->
@@ -582,22 +383,13 @@ img,svg{display:block;max-width:100%}
 </div>
 
 <!-- ═══════ AUTH ═══════ -->
-<div id="screen-auth" class="screen active">
+<div id="screen-auth" class="screen">
   <div class="auth-shell">
     <div class="auth-head">
-      <div class="auth-mark">
-        <img src="./img/logo.jpeg" alt="El Socio Genial"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-        <span style="display:none">SG</span>
-      </div>
+      <div class="auth-mark"><span>S</span></div>
       <h1 class="auth-title">El <em>Socio Genial</em></h1>
       <p class="auth-sub">La red donde comprar es ganar</p>
-      <a href="./socio-genial.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--mu);text-decoration:none;transition:.2s;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-        Volver al inicio
-      </a>
     </div>
-    <div class="auth-card">
 
     <div id="invitador-banner" class="invitador-banner" style="display:none">
       <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-7 8-7s8 3 8 7"></path></svg>
@@ -605,12 +397,12 @@ img,svg{display:block;max-width:100%}
     </div>
 
     <div class="tabs">
-      <button class="tab active" data-tab="login">Ingresar</button>
-      <button class="tab" data-tab="signup">Crear cuenta</button>
+      <button class="tab" data-tab="login">Ingresar</button>
+      <button class="tab active" data-tab="signup">Crear cuenta</button>
     </div>
 
     <!-- LOGIN form -->
-    <form id="form-login" class="auth-form">
+    <form id="form-login" class="auth-form" style="display: none;">
       <div class="input-group">
         <label class="input-label">Email</label>
         <div class="input-wrap"><input type="email" id="login-email" placeholder="tu@email.com" autocomplete="email" required=""></div>
@@ -624,7 +416,7 @@ img,svg{display:block;max-width:100%}
     </form>
 
     <!-- SIGNUP form -->
-    <form id="form-signup" class="auth-form" style="display:none">
+    <form id="form-signup" class="auth-form" style="display: block;">
       <div class="input-group">
         <label class="input-label">Nombre completo</label>
         <div class="input-wrap"><input type="text" id="su-nombre" placeholder="Tu nombre y apellido" required=""></div>
@@ -635,7 +427,7 @@ img,svg{display:block;max-width:100%}
       </div>
       <div class="input-group">
         <label class="input-label">Contraseña</label>
-        <div class="input-wrap"><input type="password" id="su-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password" minlength="6" required=""></div>
+        <div class="input-wrap"><input type="password" id="su-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password" minlength="6" required="" aria-autocomplete="list"></div>
       </div>
       <div class="input-group">
         <label class="input-label">Teléfono (WhatsApp)</label>
@@ -654,12 +446,11 @@ img,svg{display:block;max-width:100%}
     </form>
 
     <p class="auth-foot">Al crear una cuenta aceptás los términos del Socio Genial.</p>
-    </div><!-- /auth-card -->
   </div>
 </div>
 
 <!-- ═══════ PAGO ═══════ -->
-<div id="screen-pago" class="screen">
+<div id="screen-pago" class="screen active">
   <div class="pago-shell">
     <div class="pago-head">
       <h2>Activá tu <em>membresía</em></h2>
@@ -667,9 +458,9 @@ img,svg{display:block;max-width:100%}
     </div>
 
     <!-- Form de subir comprobante -->
-    <div id="pago-form-box" class="card">
+    <div id="pago-form-box" class="card" style="display: block;">
       <div class="qr-box" id="qr-box">
-        <img src="./tu-cuenta-files/qr-pago.png" alt="QR de pago Socio Genial" onerror="this.style.display=&#39;none&#39;;this.parentNode.querySelector(&#39;.qr-fallback&#39;).style.display=&#39;block&#39;">
+        <img src="./El Socio Genial · Tu cuenta_files/qr-pago.png" alt="QR de pago Socio Genial" onerror="this.style.display=&#39;none&#39;;this.parentNode.querySelector(&#39;.qr-fallback&#39;).style.display=&#39;block&#39;">
         <div class="qr-fallback" style="display:none">
           <b>QR de pago</b>
           <small style="color:var(--mu);font-size:12px">Pedile a Edmar el QR vigente</small>
@@ -1051,7 +842,7 @@ img,svg{display:block;max-width:100%}
 </div>
 
 <!-- Toast -->
-<div id="toast" class="toast"></div>
+<div id="toast" class="toast ok">Cuenta creada. Ahora activá tu membresía.</div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════
@@ -1759,4 +1550,12 @@ boot();
 </script>
 
 
-</body></html>
+<div class="glasp-ui-wrapper" id="glasp-ui-wrapper" style="height: 0px; width: 0px; padding: 0px;"><iframe name="glasp-tooltip-iframe" id="glasp-tooltip-iframe" style="display: none;" src="./El Socio Genial · Tu cuenta_files/saved_resource.html"></iframe><iframe name="glasp-sidebar-iframe" id="glasp-sidebar-iframe" style="display: none !important;width: 0px !important; min-width: 0px !important; max-width: 320px; height: 100%; background: transparent; margin: auto; position: fixed; top: 0px; right: 0px; left: auto; z-index: 9000000000000000000;border: none !important;" src="./El Socio Genial · Tu cuenta_files/saved_resource(1).html"></iframe></div><div id="yt_article_summary_widget_wrapper" class="yt_article_summary_widget_wrapper" style="display: none; margin: auto; width: fit-content; padding: 0px; border-radius: 100%;">
+        <div id="yt_article_summary_widget" class="yt_article_summary_widget"><svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.40123 27.3686C-0.44103 25.5284 -0.441033 22.5449 1.4012 20.7047L16.5971 5.52573L24.0098 12.9301L5.47818 31.4409L1.40123 27.3686Z" fill="#FF4E74"></path>
+        <path d="M35.1286 24.0367L16.5972 5.5258L20.6741 1.45341C22.5164 -0.386772 25.5033 -0.386775 27.3455 1.45341L42.5415 16.6323L35.1286 24.0367Z" fill="#FFF85E"></path>
+        <path d="M24.0099 35.143L42.5416 16.6323L46.6183 20.7046C48.4606 22.5448 48.4606 25.5284 46.6183 27.3686L31.4224 42.5476L24.0099 35.143Z" fill="#76FF54"></path>
+        <path d="M27.3454 46.6198C25.5032 48.4601 22.5163 48.4601 20.674 46.6198L5.47815 31.4409L12.8908 24.0366L31.4223 42.5476L27.3454 46.6198Z" fill="#5C94FF"></path>
+    </svg></div>
+        <div id="yt_article_summary_close_button" class="yt_article_summary_close_button">×</div>
+    </div><div id="glasp-extension-toast-container" style="position: fixed; top: 32px; right: 16px; z-index: 2147483647; display: none; flex-direction: column; align-items: flex-end; height: 0px; width: auto; margin: 0px; padding: 0px;"></div></body></html>
