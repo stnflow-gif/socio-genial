@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>Invitación · Cristian Vasquez · Típicos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  /* Paleta Típicos — fondo blanco, acentos marrón + dorado */
+  --bg:#FFFFFF;
+  --card:#FFFDF8;
+  --card-2:#FBF4E6;
+  --brd:rgba(61,36,24,0.10); --brd-2:rgba(61,36,24,0.18); --brd-3:rgba(61,36,24,0.28);
+  --brd-gold:rgba(201,146,59,0.30); --brd-gold-hi:rgba(201,146,59,0.55);
+  --g-hi:#FFE08A; --em:#C9923B; --em-2:#E8B554; --em-3:#9C6F27; --em-deep:#6B4C18;
+  --em-soft:rgba(201,146,59,0.10);
+  --brand-dark:#3D2418; --brand-mid:#6B3D24; --brand-warm:#8B5A2B;
+  --txt:#3D2418; --txt-2:#6B3D24; --mu:#9C7E5E; --mu-2:#B79872;
+  --red:#C0392B; --green:#5B8C3E;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1100px 700px at 18% -5%,rgba(232,181,84,0.22),transparent 55%),
+    radial-gradient(900px 600px at 100% 10%,rgba(139,90,43,0.16),transparent 60%),
+    radial-gradient(800px 600px at 50% 100%,rgba(201,146,59,0.18),transparent 60%),
+    var(--bg);
+  color:var(--txt);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  line-height:1.55;
+  position:relative;
+  overflow-x:hidden;
+}
+/* Logo gigante de fondo */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url('../img/logo.jpeg');
+  background-repeat:no-repeat;
+  background-position:center 42%;
+  background-size:105vmin 105vmin;
+  opacity:.28;
+  filter:blur(0.8px) saturate(1.15);
+  pointer-events:none;
+  z-index:0;
+  animation:logoBreathe 9s ease-in-out infinite;
+  transition:background-position .1s linear;
+  will-change:background-position,opacity;
+}
+/* Halo dorado central */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(550px 380px at 50% 42%,rgba(255,224,138,0.18),transparent 65%);
+  pointer-events:none;
+  z-index:0;
+  mix-blend-mode:screen;
+}
+@keyframes logoBreathe{0%,100%{opacity:.22;transform:scale(1)}50%{opacity:.32;transform:scale(1.025)}}
+/* Logo cuadrado decorativo */
+.logo-cuadro{
+  display:flex;justify-content:center;margin:0 auto 20px;
+  width:130px;height:130px;
+  border-radius:16px;
+  background:#fff;
+  border:1.5px solid rgba(201,146,59,0.35);
+  box-shadow:0 4px 14px rgba(61,36,24,0.10);
+  overflow:hidden;
+}
+.logo-cuadro img{
+  width:100%;height:100%;object-fit:contain;padding:6px;
+}
+.logo-cuadro-abajo{
+  display:flex;justify-content:center;margin:24px auto 0;
+  width:130px;height:130px;
+  border-radius:16px;
+  background:#fff;
+  border:1.5px solid rgba(201,146,59,0.35);
+  box-shadow:0 4px 14px rgba(61,36,24,0.10);
+  overflow:hidden;
+}
+.logo-cuadro-abajo img{
+  width:100%;height:100%;object-fit:contain;padding:6px;
+}
+/* Countdown dramático */
+.countdown{
+  background:linear-gradient(145deg,#3D2418 0%,#6B3D24 100%);
+  border:2px solid rgba(201,146,59,0.55);
+  box-shadow:0 20px 60px rgba(61,36,24,0.35),0 0 0 1px rgba(255,224,138,0.08);
+}
+.cd-tag{color:var(--em-2);letter-spacing:4px}
+.cd-headline{color:#FBF4E6}
+.cd-headline em{color:var(--em-2)}
+.cd-cell{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(201,146,59,0.25);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.cd-num{
+  color:#FFE08A;
+  font-size:clamp(42px,6.5vw,60px);
+  text-shadow:0 0 30px rgba(255,224,138,0.4);
+}
+.cd-lbl{color:rgba(251,244,230,0.55)}
+.cd-foot{color:rgba(251,244,230,0.75);font-size:14px}
+[data-cd="s"]{animation:pulso 1s ease-in-out infinite}
+@keyframes pulso{0%,100%{opacity:1;text-shadow:0 0 30px rgba(255,224,138,0.4)}
+/* Tazas decorativas costados */
+.coffee-side{position:absolute;pointer-events:none;z-index:0;}
+.coffee-side svg{fill:none;stroke:var(--brand-warm);}
+.cs-left-top  {left:-90px; top:0px;}
+.cs-left-mid  {left:-80px; top:180px;}
+.cs-right-top {right:-90px;top:60px;}
+.cs-right-mid {right:-80px;top:230px;}
+@keyframes steamFloat{
+  0%,100%{transform:translateY(0);opacity:.8}
+  50%{transform:translateY(-7px);opacity:.25}
+}
+.steam-1{animation:steamFloat 3.2s ease-in-out infinite;}
+.steam-2{animation:steamFloat 3.2s ease-in-out infinite .6s;}
+.steam-3{animation:steamFloat 3.2s ease-in-out infinite 1.2s;}50%{opacity:0.55;text-shadow:none}}
+
+.wrap{max-width:760px;margin:0 auto;padding:48px 36px;position:relative;z-index:1}
+
+.brand{display:flex;align-items:center;justify-content:center;margin-bottom:28px;position:relative}
+.brand::before{
+  content:"";position:absolute;inset:-22px -40px;
+  background:radial-gradient(60% 90% at 50% 50%,rgba(255,224,138,0.45),transparent 70%);
+  filter:blur(20px);z-index:0;pointer-events:none;
+}
+.brand img{
+  position:relative;z-index:1;
+  height:180px;width:auto;display:block;
+  mix-blend-mode:multiply;
+  filter:
+    drop-shadow(0 4px 12px rgba(61,36,24,0.25))
+    drop-shadow(0 1px 0 rgba(255,255,255,0.40));
+}
+
+.hero{text-align:center;margin-bottom:28px}
+.hero h1{font-family:'Lora',serif;font-weight:700;font-size:clamp(26px,4.5vw,34px);line-height:1.2;letter-spacing:-.01em;color:var(--brand-dark)}
+.hero h1 em{font-style:normal;color:var(--em-3);font-family:'Lora',serif;font-weight:700;font-size:1em;display:inline}
+.hero p{margin-top:14px;color:var(--brand-dark);font-size:18px;font-weight:600;font-family:'Lora',serif;font-style:italic}
+
+.card{
+  position:relative;
+  padding:36px 30px 32px;border-radius:22px;
+  border:1px solid rgba(255,255,255,0.55);
+  background:
+    linear-gradient(180deg,rgba(255,250,238,0.92),rgba(248,234,208,0.85));
+  backdrop-filter:blur(14px) saturate(1.1);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.85) inset,
+    0 -1px 0 rgba(61,36,24,0.06) inset,
+    0 30px 60px -20px rgba(61,36,24,0.30),
+    0 18px 36px -12px rgba(139,90,43,0.20),
+    0 6px 14px -4px rgba(61,36,24,0.10);
+}
+/* Linea dorada sutil arriba (highlight de iluminación) */
+.card::before{
+  content:"";position:absolute;left:24px;right:24px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,224,138,0.85),transparent);
+}
+/* Linea sutil abajo (profundidad) */
+.card::after{
+  content:"";position:absolute;left:24px;right:24px;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(61,36,24,0.15),transparent);
+}
+
+.row{margin-bottom:18px}
+.row label{display:block;font-size:12px;font-weight:700;color:var(--brand-mid);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.row label .opt{color:var(--mu);font-weight:400;font-size:11px;margin-left:4px;text-transform:none;letter-spacing:0;font-style:italic}
+.input,.select{
+  width:100%;padding:14px 16px;border-radius:11px;
+  border:1px solid var(--brd-2);
+  background:#fff;color:var(--brand-dark);
+  font-family:inherit;font-size:15px;transition:.2s;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 1px 2px rgba(61,36,24,0.08) inset,
+    0 1px 0 rgba(255,255,255,0.45);
+}
+.input:focus,.select:focus{
+  outline:none;border-color:var(--em);background:#fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 0 0 3px rgba(201,146,59,0.14),
+    0 8px 20px -6px rgba(201,146,59,0.30);
+}
+.input::placeholder{color:var(--mu-2)}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* Fuente — toggle pills */
+.fuente-group{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.fuente-opt{
+  position:relative;cursor:pointer;
+  padding:18px 14px;border-radius:12px;
+  border:1px solid var(--brd-2);
+  background:#fff;
+  transition:.2s;text-align:center;user-select:none;
+}
+.fuente-opt input{position:absolute;opacity:0;pointer-events:none}
+.fuente-opt .ic{
+  width:36px;height:36px;border-radius:10px;margin:0 auto 8px;
+  background:var(--card-2);
+  display:grid;place-items:center;transition:.2s;
+}
+.fuente-opt .ic svg{width:18px;height:18px;stroke:var(--mu);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.fuente-opt .ttl{font-size:13px;font-weight:600;color:var(--brand-dark);transition:color .2s}
+.fuente-opt .sub{font-size:11px;color:var(--mu);margin-top:3px}
+.fuente-opt:hover{border-color:var(--brd-gold-hi)}
+.fuente-opt:has(input:checked),
+.fuente-opt.is-on{
+  border-color:var(--em);
+  background:linear-gradient(135deg,rgba(201,146,59,0.12),rgba(201,146,59,0.05));
+  box-shadow:0 8px 22px rgba(201,146,59,0.18);
+}
+.fuente-opt:has(input:checked) .ic,
+.fuente-opt.is-on .ic{background:rgba(201,146,59,0.20)}
+.fuente-opt:has(input:checked) .ic svg,
+.fuente-opt.is-on .ic svg{stroke:var(--em-3)}
+.fuente-opt:has(input:checked) .ttl,
+.fuente-opt.is-on .ttl{color:var(--em-3)}
+
+.referente-row{display:none;margin-top:14px;animation:slideDown .25s ease}
+.referente-row.show{display:block}
+@keyframes slideDown{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+/* Aviso franquicia (no devoluciones) */
+.franquicia-aviso{
+  display:none;margin-top:18px;
+  padding:18px 18px 16px;border-radius:14px;
+  border:1px solid var(--brd-gold-hi);
+  background:linear-gradient(135deg,rgba(201,146,59,0.12),rgba(201,146,59,0.04));
+  animation:slideDown .3s ease;
+}
+.franquicia-aviso.show{display:flex;gap:14px}
+.franquicia-aviso .fa-icon{
+  flex:0 0 36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--brand-warm),var(--brand-dark));
+  display:grid;place-items:center;
+}
+.franquicia-aviso .fa-icon svg{width:18px;height:18px;stroke:var(--bg);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.franquicia-aviso .fa-body{flex:1;min-width:0}
+.franquicia-aviso .fa-title{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--em-3);font-weight:700;margin-bottom:6px}
+.franquicia-aviso .fa-text{font-size:13.5px;color:var(--brand-mid);line-height:1.5}
+.franquicia-aviso .fa-text b{color:var(--brand-dark)}
+.franquicia-aviso .fa-check{
+  display:flex;align-items:flex-start;gap:10px;
+  margin-top:14px;padding:12px 12px;border-radius:10px;
+  background:#fff;border:1px solid var(--brd-2);
+  cursor:pointer;user-select:none;transition:.2s;
+}
+.franquicia-aviso .fa-check:hover{border-color:var(--brd-gold-hi)}
+.franquicia-aviso .fa-check input{position:absolute;opacity:0;pointer-events:none}
+.franquicia-aviso .fa-check-mark{
+  flex:0 0 20px;height:20px;border-radius:6px;
+  border:1.5px solid var(--brd-3);background:transparent;
+  display:grid;place-items:center;transition:.2s;
+}
+.franquicia-aviso .fa-check input:checked + .fa-check-mark{
+  background:linear-gradient(135deg,var(--brand-warm),var(--brand-dark));border-color:var(--brand-dark);
+}
+.franquicia-aviso .fa-check-mark::after{
+  content:"";width:10px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;
+  transform:rotate(-45deg) translateY(-1px);opacity:0;transition:opacity .2s;
+}
+.franquicia-aviso .fa-check input:checked + .fa-check-mark::after{opacity:1}
+.franquicia-aviso .fa-check-text{font-size:13px;color:var(--brand-mid);line-height:1.4;font-weight:500}
+
+/* Invite banner (cuando llegan desde /invite/<codigo>) */
+.invite-banner{
+  display:none;align-items:center;gap:14px;
+  margin-bottom:24px;padding:14px 16px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(201,146,59,0.16),rgba(139,90,43,0.08));
+  border:1px solid var(--brd-gold-hi);
+  animation:slideDown .35s ease;
+}
+.invite-banner.show{display:flex}
+.invite-banner .ib-icon{
+  flex:0 0 42px;height:42px;border-radius:10px;
+  background:linear-gradient(135deg,var(--brand-warm),var(--brand-dark));
+  display:grid;place-items:center;box-shadow:0 6px 16px rgba(61,36,24,0.25)
+}
+.invite-banner .ib-icon svg{width:20px;height:20px;stroke:var(--bg);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.invite-banner .ib-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--mu);font-weight:700;margin-bottom:3px}
+.invite-banner .ib-name{font-family:'Lora',serif;font-weight:700;font-size:20px;color:var(--brand-dark);line-height:1.15}
+
+/* Bloque "tu código" + compartir en pantalla success */
+.share-block{
+  margin-top:22px;padding:18px;border-radius:14px;
+  border:1px solid var(--brd-gold);
+  background:linear-gradient(135deg,rgba(201,146,59,0.10),rgba(248,234,208,0.50))
+}
+.share-block .sb-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--em-3);font-weight:700;margin-bottom:8px}
+.share-block .sb-codigo{
+  font-family:'Lora',serif;font-size:32px;font-weight:900;letter-spacing:2px;
+  color:var(--brand-dark);
+  text-align:center;margin:8px 0 14px;
+}
+.share-block .sb-link{
+  display:block;padding:12px 14px;border-radius:10px;
+  background:#fff;border:1px solid var(--brd-2);
+  font-family:'Inter',monospace;font-size:12px;color:var(--brand-mid);
+  word-break:break-all;text-align:center;margin-bottom:12px;
+}
+.share-block .sb-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.share-block .sb-btn{
+  padding:12px;border-radius:10px;border:1px solid var(--brd-2);
+  background:#fff;color:var(--brand-mid);
+  font-weight:600;font-size:13px;cursor:pointer;transition:.2s;
+  font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.share-block .sb-btn:hover{border-color:var(--em);color:var(--em-3)}
+.share-block .sb-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.share-block .sb-btn.wpp{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none}
+.share-block .sb-btn.wpp:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,211,102,0.35)}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:16px;border-radius:12px;
+  font-weight:700;font-size:15px;cursor:pointer;border:none;
+  font-family:inherit;transition:.2s;margin-top:8px;
+  background:linear-gradient(180deg,var(--brand-warm),var(--brand-dark));
+  color:var(--bg);
+  box-shadow:0 8px 22px rgba(61,36,24,0.28),inset 0 1px 0 rgba(255,255,255,0.18);
+}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 30px rgba(61,36,24,0.38)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+
+.foot{text-align:center;margin-top:18px;font-size:12px;color:var(--mu)}
+
+/* Success state */
+.success{
+  display:none;
+  padding:42px 28px;text-align:center;
+  border-radius:18px;border:1px solid var(--brd-gold-hi);
+  background:linear-gradient(180deg,var(--card),var(--card-2));
+  box-shadow:0 18px 48px rgba(61,36,24,0.12);
+}
+.success.show{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.98)}to{opacity:1;transform:scale(1)}}
+.success-ic{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 20px;
+  background:linear-gradient(135deg,var(--em-2),var(--em-3));
+  display:grid;place-items:center;
+  box-shadow:0 10px 28px rgba(201,146,59,0.40);
+}
+.success-ic svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.success h2{font-family:'Lora',serif;font-size:24px;font-weight:700;line-height:1.25;color:var(--brand-dark)}
+.success h2 em{font-style:normal;color:var(--em-3);font-weight:700}
+.success p{margin-top:12px;color:var(--brand-mid);font-size:14px;line-height:1.55}
+
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  padding:14px 22px;border-radius:10px;background:var(--red);color:#fff;
+  font-weight:600;font-size:14px;z-index:1000;display:none;
+}
+.toast.show{display:block;animation:slideUp .25s ease}
+@keyframes slideUp{from{transform:translate(-50%,12px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+
+.is-loading{opacity:.6;pointer-events:none}
+
+/* ───────── COUNTDOWN ───────── */
+.countdown{
+  margin:0 auto 28px;padding:24px 24px 20px;max-width:560px;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(201,146,59,0.18),rgba(139,90,43,0.10));
+  border:2px solid var(--brd-gold-hi);
+  box-shadow:0 14px 40px rgba(201,146,59,0.20);
+  text-align:center;
+}
+.cd-headline{
+  font-family:'Lora',serif;
+  font-weight:700;
+  font-size:clamp(24px,4.2vw,34px);
+  line-height:1.15;
+  color:var(--brand-dark);
+  margin-bottom:6px;
+  letter-spacing:-.01em;
+}
+.cd-headline em{font-style:normal;color:var(--em-3);font-weight:700}
+.cd-tag{
+  font-size:11px;text-transform:uppercase;letter-spacing:3px;
+  color:var(--em-3);font-weight:800;margin-bottom:14px;
+}
+.cd-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+.cd-cell{
+  padding:14px 4px 10px;border-radius:12px;
+  background:#fff;border:1px solid var(--brd-2);
+  box-shadow:0 4px 12px rgba(61,36,24,0.06);
+}
+.cd-num{
+  font-family:'Lora',serif;font-weight:900;
+  font-size:clamp(32px,5.5vw,44px);line-height:1;
+  color:var(--brand-dark);
+  font-variant-numeric:tabular-nums;font-feature-settings:'tnum';
+}
+.cd-lbl{
+  font-size:10px;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--brand-mid);font-weight:700;margin-top:6px;
+}
+.cd-foot{
+  margin-top:14px;font-size:16px;font-weight:700;color:var(--brand-dark);
+  font-style:italic;font-family:'Lora',serif;
+}
+.countdown-ok{margin-top:24px;margin-bottom:8px}
+.success h2 #ok-nombre{color:var(--em-3);font-family:'Lora',serif;font-weight:700;font-size:1em}
+.success .ok-line2{margin-top:14px;font-size:15px;color:var(--brand-mid);font-style:italic;font-family:'Lora',serif}
+.success .ok-foot{margin-top:14px;font-size:13px;color:var(--mu)}
+
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="logo-cuadro"><img src="../img/logo.jpeg" alt="Tipicos"></div>
+
+  <div class="countdown" id="countdown-hero">
+    <div class="cd-tag">Pre-lanzamiento</div>
+    <div class="cd-headline">Sábado <em>6 de junio · 17:00 hs</em></div>
+    <div class="cd-grid">
+      <div class="cd-cell"><div class="cd-num" data-cd="d">10</div><div class="cd-lbl">días</div></div>
+      <div class="cd-cell"><div class="cd-num" data-cd="h">23</div><div class="cd-lbl">hs</div></div>
+      <div class="cd-cell"><div class="cd-num" data-cd="m">00</div><div class="cd-lbl">min</div></div>
+      <div class="cd-cell"><div class="cd-num" data-cd="s">00</div><div class="cd-lbl">seg</div></div>
+    </div>
+    <div class="cd-foot">Santa Cruz de la Sierra · Dirección por confirmar</div>
+  </div>
+
+  <div class="coffee-side cs-left-mid"  style="opacity:0.09"><svg viewBox="0 0 90 110" width="70" xmlns="http://www.w3.org/2000/svg">
+  <path class="steam-1" d="M28 32 C24 24 30 16 26 8" stroke-width="2.2" stroke-linecap="round"/>
+  <path class="steam-2" d="M40 32 C36 22 42 14 38 5" stroke-width="2.2" stroke-linecap="round"/>
+  <path class="steam-3" d="M52 32 C48 24 54 16 50 8" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M15 36 Q15 34 18 34 L72 34 Q75 34 75 36 L68 80 Q68 83 65 83 L25 83 Q22 83 22 80 Z" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M75 46 Q92 46 92 58 Q92 70 75 70" stroke-width="2.2" stroke-linecap="round"/>
+  <ellipse cx="45" cy="88" rx="36" ry="7" stroke-width="2"/>
+</svg></div>
+  <div class="coffee-side cs-right-mid" style="opacity:0.08;transform:scaleX(-1)"><svg viewBox="0 0 90 110" width="70" xmlns="http://www.w3.org/2000/svg">
+  <path class="steam-1" d="M28 32 C24 24 30 16 26 8" stroke-width="2.2" stroke-linecap="round"/>
+  <path class="steam-2" d="M40 32 C36 22 42 14 38 5" stroke-width="2.2" stroke-linecap="round"/>
+  <path class="steam-3" d="M52 32 C48 24 54 16 50 8" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M15 36 Q15 34 18 34 L72 34 Q75 34 75 36 L68 80 Q68 83 65 83 L25 83 Q22 83 22 80 Z" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M75 46 Q92 46 92 58 Q92 70 75 70" stroke-width="2.2" stroke-linecap="round"/>
+  <ellipse cx="45" cy="88" rx="36" ry="7" stroke-width="2"/>
+</svg></div>
+
+  <div class="card" style="text-align:center;position:relative;">
+    <div style="position:absolute;left:24px;right:24px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,224,138,0.9),transparent);"></div>
+
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--em-3);font-weight:800;margin-bottom:12px;">Invitación Personal</div>
+
+    <div style="font-family:'Lora',serif;font-size:14px;color:var(--brand-mid);font-style:italic;margin-bottom:6px;">Tenés un lugar reservado,</div>
+
+    <div style="font-family:'Lora',serif;font-size:30px;font-weight:700;color:var(--brand-dark);line-height:1.1;margin-bottom:4px;">Cristian Vasquez</div>
+
+    <div style="width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--em),transparent);margin:16px auto 20px;"></div>
+
+    <div style="font-family:'Lora',serif;font-size:16px;color:var(--brand-mid);font-style:italic;line-height:1.6;margin-bottom:22px;">
+      Estás cordialmente invitado/a al<br>
+      <strong style="color:var(--brand-dark);font-style:normal;">Pre-lanzamiento de Típicos</strong>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="background:#fff;border-radius:12px;padding:14px 10px;border:1px solid rgba(201,146,59,0.25);">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mu);font-weight:700;margin-bottom:4px;">Fecha</div>
+        <div style="font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--brand-dark);">Sáb 6 de Junio</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:14px 10px;border:1px solid rgba(201,146,59,0.25);">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mu);font-weight:700;margin-bottom:4px;">Hora</div>
+        <div style="font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--brand-dark);">17:00 hs</div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(201,146,59,0.10),rgba(201,146,59,0.03));border:1px solid rgba(201,146,59,0.30);border-radius:12px;padding:13px;margin-bottom:22px;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--em-3);font-weight:700;margin-bottom:3px;">Lugar</div>
+      <div style="font-family:'Lora',serif;font-size:14px;color:var(--brand-dark);font-style:italic;">Santa Cruz de la Sierra · Dirección por confirmar</div>
+    </div>
+
+    <a href="https://wa.me/59178180866?text=Hola!%20Confirmo%20mi%20asistencia%20al%20pre-lanzamiento%20de%20T%C3%ADpicos%20%F0%9F%8D%B5"
+       style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:12px;background:linear-gradient(180deg,#25D366,#128C7E);color:#fff;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 8px 22px rgba(37,211,102,0.28);margin-bottom:0;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.9L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.5-8 8.5z"/></svg>
+      Confirmar mi asistencia
+    </a>
+  </div>
+
+  <div class="logo-cuadro-abajo"><img src="../img/logo.jpeg" alt="Tipicos"></div>
+
+</div>
+
+<script>
+const EVENT_TS = new Date('2026-06-06T17:00:00-04:00').getTime();
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const diff = EVENT_TS - Date.now();
+  const d = Math.max(0,Math.floor(diff/86400000));
+  const h = Math.max(0,Math.floor((diff%86400000)/3600000));
+  const m = Math.max(0,Math.floor((diff%3600000)/60000));
+  const s = Math.max(0,Math.floor((diff%60000)/1000));
+  document.querySelectorAll('[data-cd="d"]').forEach(el=>el.textContent=d);
+  document.querySelectorAll('[data-cd="h"]').forEach(el=>el.textContent=pad(h));
+  document.querySelectorAll('[data-cd="m"]').forEach(el=>el.textContent=pad(m));
+  document.querySelectorAll('[data-cd="s"]').forEach(el=>el.textContent=pad(s));
+}
+tick(); setInterval(tick,1000);
+
+// Parallax logo
+(function(){
+  const styleEl=document.createElement('style');
+  document.head.appendChild(styleEl);
+  let raf;
+  function t(){ styleEl.textContent='body::before{background-position:center '+( 42-(window.scrollY*0.012))+'% !important}'; raf=null; }
+  window.addEventListener('scroll',function(){ if(!raf)raf=requestAnimationFrame(t); },{passive:true});
+})();
+</script>
+</body></html>
