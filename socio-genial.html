@@ -809,6 +809,13 @@ footer{
 
 /* ── MOBILE HERO LOGO ── */
 .mobile-hero-logo{display:none}
+.mhl-bg{
+  position:absolute;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 40%,#1a0e02 0%,#0a0600 55%,transparent 75%);
+  top:50%;left:50%;transform:translate(-50%,-55%);
+  z-index:0;
+}
 .mhl-glow{
   position:absolute;width:280px;height:280px;border-radius:50%;
   background:radial-gradient(circle,rgba(212,148,10,.55) 0%,transparent 65%);
@@ -816,8 +823,7 @@ footer{
   top:50%;left:50%;transform:translate(-50%,-60%);z-index:0;
 }
 .mhl-img{
-  width:200px;height:200px;object-fit:contain;position:relative;z-index:1;
-  border-radius:50%;
+  width:220px;height:220px;object-fit:contain;position:relative;z-index:1;
   filter:drop-shadow(0 0 28px rgba(212,148,10,.9)) drop-shadow(0 0 55px rgba(212,148,10,.55)) drop-shadow(0 0 100px rgba(212,148,10,.35));
   animation:logoFloat 7s ease-in-out infinite;
 }
@@ -929,6 +935,7 @@ footer{
       </div>
       <!-- Logo + tarjetas mobile-only -->
       <div class="mobile-hero-logo">
+        <div class="mhl-bg"></div>
         <div class="mhl-glow"></div>
         <img src="./img/sg-logo.png" alt="El Socio Genial" class="mhl-img">
         <div class="mhl-cards">
