@@ -440,7 +440,7 @@ body::after{
       <div class="cd-cell"><div class="cd-num" data-cd="m">00</div><div class="cd-lbl">min</div></div>
       <div class="cd-cell"><div class="cd-num" data-cd="s">00</div><div class="cd-lbl">seg</div></div>
     </div>
-    <div class="cd-foot">Santa Cruz de la Sierra · Dirección por confirmar</div>
+    <div class="cd-foot">Hotel Yotau · Santa Cruz de la Sierra</div>
   </div>
 
   <div class="coffee-side cs-left-mid"  style="opacity:0.09"><svg viewBox="0 0 90 110" width="70" xmlns="http://www.w3.org/2000/svg">
@@ -489,14 +489,10 @@ body::after{
 
     <div style="background:linear-gradient(135deg,rgba(201,146,59,0.10),rgba(201,146,59,0.03));border:1px solid rgba(201,146,59,0.30);border-radius:12px;padding:13px;margin-bottom:22px;">
       <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--em-3);font-weight:700;margin-bottom:3px;">Lugar</div>
-      <div style="font-family:'Lora',serif;font-size:14px;color:var(--brand-dark);font-style:italic;">Santa Cruz de la Sierra · Dirección por confirmar</div>
+      <div style="font-family:'Lora',serif;font-size:14px;color:var(--brand-dark);font-style:italic;">Hotel Yotau · Santa Cruz de la Sierra</div>
     </div>
 
-    <a href="https://wa.me/59178180866?text=Hola!%20Confirmo%20mi%20asistencia%20al%20pre-lanzamiento%20de%20T%C3%ADpicos%20%F0%9F%8D%B5"
-       style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:12px;background:linear-gradient(180deg,#25D366,#128C7E);color:#fff;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 8px 22px rgba(37,211,102,0.28);margin-bottom:0;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.3 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.5-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.4 1.3 4.9L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.5-8 8.5z"/></svg>
-      Confirmar mi asistencia
-    </a>
+    <button onclick="confirmarAsistencia(this)" id="btn-conf" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:12px;background:linear-gradient(180deg,var(--brand-warm),var(--brand-dark));color:#fff;font-weight:700;font-size:15px;border:none;cursor:pointer;box-shadow:0 8px 22px rgba(61,36,24,0.28);font-family:inherit;transition:.2s;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Confirmar mi asistencia</button><div id="conf-ok" style="display:none;padding:20px;text-align:center;border-radius:12px;background:linear-gradient(135deg,rgba(91,140,62,0.12),rgba(91,140,62,0.04));border:1px solid rgba(91,140,62,0.40);"><div style="font-family:'Lora',serif;font-size:20px;font-weight:700;color:#3B6B24;margin-bottom:6px;">✓ Confirmado</div><div style="font-size:14px;color:var(--brand-mid);">Nos vemos el 6 de junio en el Hotel Yotau.</div></div>
   </div>
 
   <div class="logo-cuadro-abajo"><img src="../img/logo.jpeg" alt="Tipicos"></div>
