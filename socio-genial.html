@@ -55,7 +55,10 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Preload del logo principal — crítico para LCP -->
+<link rel="preload" as="image" href="./img/sg-logo.png">
 <style>
 :root{
   --bg:#060504;
@@ -859,12 +862,25 @@ footer{
   .earn-extras{grid-template-columns:1fr}
   .partners-grid{grid-template-columns:1fr}
   .section,.cta-wrap,.earn-section,.network-section{padding:72px 22px}
+  /* ── OVERFLOW FIX — causa raíz: qs-photo-main con aspect-ratio+min-height = 427px ── */
+  html{overflow-x:hidden}
+  .qs-photo-main{aspect-ratio:unset;min-height:180px;width:100%}
+  .qs-inner,.qs-hero,.qs-text-col,.qs-photo-col{max-width:100%;overflow-x:hidden}
+  p,li,.qs-tl-text,.qs-body{word-break:break-word;overflow-wrap:break-word}
+
   .hero-right{display:none}
+  /* LOGO MOBILE — ancho explícito para que mhl-cards no colapse */
   .mobile-hero-logo{
     display:flex;flex-direction:column;align-items:center;
     gap:20px;margin-top:40px;
     position:relative;padding-top:20px;
+    width:100%;
   }
+  .mhl-cards{width:280px;max-width:90vw}
+  /* TEXTO HERO — reducir font-size para que no desborde */
+  .hero-title{font-size:clamp(44px,11vw,68px)}
+  .hero-sub{font-size:14px}
+  .hero{padding-left:22px;padding-right:22px}
   footer{flex-direction:column;text-align:center}.ft-links{justify-content:center}
 }
 </style>
@@ -1092,7 +1108,7 @@ footer{
       <div class="partner-card active">
         <div class="partner-status live">Activo ahora</div>
         <div class="partner-logo-wrap">
-          <img src="./img/logo.jpeg" alt="Típicos">
+          <img src="./img/logo.jpeg" alt="Típicos" loading="lazy">
         </div>
         <div class="partner-name">Típicos</div>
         <div class="partner-desc">Café y sabores bolivianos en Santa Cruz de la Sierra. Primer negocio activo de la red.</div>
