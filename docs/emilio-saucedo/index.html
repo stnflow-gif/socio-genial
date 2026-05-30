@@ -524,4 +524,15 @@ tick(); setInterval(tick,1000);
   window.addEventListener('scroll',function(){ if(!raf)raf=requestAnimationFrame(t); },{passive:true});
 })();
 </script>
+<script>
+function confirmarAsistencia(btn){
+  btn.disabled=true;btn.style.opacity='.6';btn.textContent='Confirmando...';
+  var nombre=document.title.split('·')[1].trim();
+  fetch('https://script.google.com/macros/s/AKfycbz9TmKHgtixd_Z3k4dJhz07GgFBU4Nx4ZG3CqjIIYTuTRDt4EWKwUtojozTkartuAprjQ/exec?nombre='+encodeURIComponent(nombre)+'&ts='+Date.now(),{mode:'no-cors'})
+    .finally(function(){
+      document.getElementById('btn-conf').style.display='none';
+      document.getElementById('conf-ok').style.display='block';
+    });
+}
+</script>
 </body></html>
