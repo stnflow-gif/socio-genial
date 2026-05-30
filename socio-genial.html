@@ -864,7 +864,14 @@ footer{
     display:flex;flex-direction:column;align-items:center;
     gap:20px;margin-top:40px;
     position:relative;padding-top:20px;
+    width:100%;max-width:320px;align-self:center;
   }
+  .mhl-cards{width:100%;max-width:320px}
+  /* Texto hero — no desborda en pantallas pequeñas */
+  .hero-title{font-size:clamp(44px,11vw,68px)}
+  .hero{padding-left:22px;padding-right:22px}
+  /* Overflow horizontal — solo body, nunca html en iOS */
+  .qs-photo-main{aspect-ratio:unset;min-height:180px}
   footer{flex-direction:column;text-align:center}.ft-links{justify-content:center}
 }
 </style>
@@ -1256,7 +1263,7 @@ footer{
     <!-- LIBRO -->
     <div class="qs-book reveal">
       <div class="qs-book-cover">
-        <img src="./img/libro.jpg" alt="Éxitos sin Fronteras"
+        <img src="./img/libro.jpg" alt="Éxitos sin Fronteras" loading="lazy"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="qs-book-cover-placeholder" style="display:none">
           <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
