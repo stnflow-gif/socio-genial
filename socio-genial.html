@@ -862,6 +862,8 @@ footer{
   .partners-grid{grid-template-columns:1fr}
   .section,.cta-wrap,.earn-section,.network-section{padding:72px 22px}
   .hero-right{display:none}
+  /* Neutralizar stacking context para que mix-blend-mode funcione */
+  .hero-left{z-index:auto}
   .mobile-hero-logo{
     display:flex;flex-direction:column;align-items:center;
     gap:20px;margin-top:40px;
