@@ -106,17 +106,18 @@ img,svg{display:block;max-width:100%}
 .auth-foot{text-align:center;margin-top:18px;font-size:12px;color:var(--mu-2)}
 
 /* ── Selector método de pago ── */
-.metodo-label{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;text-align:center}
-.metodo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.metodo-opt{
+.metodo-label{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;text-align:center}
+.metodo-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.metodo-big{
   display:flex;flex-direction:column;align-items:center;gap:6px;
-  padding:12px 8px;border-radius:14px;font-size:11px;font-weight:600;
-  border:1px solid var(--brd-3);background:var(--card);color:var(--mu);
-  cursor:pointer;transition:.2s;text-align:center;line-height:1.2;
+  padding:16px 12px;border-radius:16px;
+  border:1.5px solid var(--brd-3);background:var(--card);color:var(--mu);
+  cursor:pointer;transition:.2s;text-align:center;
 }
-.metodo-opt:hover{border-color:rgba(232,168,48,.4);color:var(--txt)}
-.metodo-opt.active{border-color:var(--em-2);color:var(--em-2);background:rgba(232,168,48,.07)}
-.metodo-opt svg,.metodo-opt img{width:24px;height:24px;flex-shrink:0}
+.metodo-big:hover{border-color:rgba(232,168,48,.4);color:var(--txt)}
+.metodo-big.active{border-color:var(--em-2);color:var(--em-2);background:rgba(232,168,48,.07)}
+.metodo-big-title{font-size:13px;font-weight:700;line-height:1}
+.metodo-big-sub{font-size:11px;color:var(--mu);font-weight:400}
 /* ── T&C checkbox ── */
 .tyc-wrap{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--brd-2);cursor:pointer;margin-bottom:4px;font-size:13px;color:var(--mu);line-height:1.5}
 .tyc-wrap input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--em-2);cursor:pointer}
@@ -482,31 +483,17 @@ img,svg{display:block;max-width:100%}
     </div>
 
     <!-- Selector de método de pago -->
-    <div class="metodo-label">Elegí cómo querés pagar</div>
-    <div class="metodo-grid">
-      <button class="metodo-opt active" onclick="switchMetodo('qr')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h.01M18 14h.01M14 18h.01M18 18h.01"/></svg>
-        QR Boliviano
+    <div class="metodo-label">¿Cómo querés pagar?</div>
+    <div class="metodo-2col">
+      <button class="metodo-big active" id="btn-tab-qr" onclick="switchMetodo('qr',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h.01M18 14h.01M14 18h.01M18 18h.01"/></svg>
+        <span class="metodo-big-title">QR Boliviano</span>
+        <span class="metodo-big-sub">Yape · 399 Bs</span>
       </button>
-      <button class="metodo-opt" onclick="switchMetodo('intl')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-        Tarjeta / USD
-      </button>
-      <button class="metodo-opt" onclick="switchMetodo('intl')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        Crypto
-      </button>
-      <button class="metodo-opt" onclick="switchMetodo('intl')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20.94c1.5 0 2.75-.55 3.7-1.45M12 3c-5 0-9 4-9 9s4 9 9 9"/><path d="M12 3c1.5 0 2.75.55 3.7 1.45"/><path d="M3 12h18"/></svg>
-        Apple Pay
-      </button>
-      <button class="metodo-opt" onclick="switchMetodo('intl')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10"/></svg>
-        Google Pay
-      </button>
-      <button class="metodo-opt" onclick="switchMetodo('intl')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="2"/></svg>
-        Más métodos
+      <button class="metodo-big" id="btn-tab-intl" onclick="switchMetodo('intl',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        <span class="metodo-big-title">Internacional</span>
+        <span class="metodo-big-sub">Tarjeta · Apple Pay · Crypto</span>
       </button>
     </div>
 
@@ -933,12 +920,12 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON, {
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
 
-function switchMetodo(m){
+function switchMetodo(m, btn){
   const isQr = m === 'qr';
   $('#pago-form-box').style.display = isQr ? 'block' : 'none';
   $('#pago-intl-box').style.display = isQr ? 'none'  : 'block';
-  $$('.metodo-opt').forEach(b => b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  $$('.metodo-big').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
 }
 
 function show(id){
