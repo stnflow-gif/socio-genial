@@ -586,19 +586,31 @@ img,svg{display:block;max-width:100%}
 
     </div>
 
-    <!-- Panel Whop embed (tarjeta, Apple Pay, Google Pay, crypto) -->
+    <!-- Panel internacional -->
     <div id="whop-panel" class="card" style="display:none">
-      <p style="text-align:center;font-size:13px;color:var(--mu);margin-bottom:16px">Pago seguro procesado por <strong style="color:var(--txt)">Whop</strong> · 49 USD/año</p>
-      <iframe
-        src="https://whop.com/sistematiza-tu-negocio/mi-socio-genial/"
-        style="width:100%;height:500px;border:none;border-radius:12px"
-        id="whop-iframe"
-        title="Checkout El Socio Genial"
-        allow="payment"
-      ></iframe>
-      <p style="text-align:center;font-size:11px;color:var(--mu);margin-top:12px">
-        Si el pago no carga,
-        <a href="https://whop.com/sistematiza-tu-negocio/mi-socio-genial/" target="_blank" style="color:var(--em-2);text-decoration:underline">abrí en nueva pestaña →</a>
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">Total</div>
+        <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:800;background:linear-gradient(135deg,var(--g-hi),var(--em-2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1">49<span style="font-size:18px;color:var(--mu);-webkit-text-fill-color:var(--mu);font-weight:600;margin-left:4px">USD/año</span></div>
+      </div>
+
+      <!-- Métodos aceptados -->
+      <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+        <span style="padding:5px 12px;border-radius:8px;background:var(--card-2);border:1px solid var(--brd-2);font-size:11px;font-weight:700;color:var(--txt-2)">VISA</span>
+        <span style="padding:5px 12px;border-radius:8px;background:var(--card-2);border:1px solid var(--brd-2);font-size:11px;font-weight:700;color:var(--txt-2)">Mastercard</span>
+        <span style="padding:5px 12px;border-radius:8px;background:#000;border:1px solid #333;font-size:11px;font-weight:700;color:#fff"> Pay</span>
+        <span style="padding:5px 12px;border-radius:8px;background:#fff;border:1px solid #ddd;font-size:11px;font-weight:800;color:#3c4043"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#34A853">g</span>le Pay</span>
+        <span style="padding:5px 12px;border-radius:8px;background:var(--card-2);border:1px solid var(--brd-2);font-size:11px;font-weight:700;color:#26A17B">USDT</span>
+      </div>
+
+      <a href="https://whop.com/sistematiza-tu-negocio/mi-socio-genial/" target="_blank"
+         style="display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:18px;border-radius:14px;background:linear-gradient(160deg,var(--g-hi),var(--em-2),var(--em));color:#0A0600;font-weight:800;font-size:16px;text-decoration:none;transition:.2s;box-shadow:0 8px 28px rgba(212,148,10,.4)">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ir a pagar de forma segura
+      </a>
+
+      <p style="text-align:center;font-size:11px;color:var(--mu);margin-top:12px;line-height:1.6">
+        Procesado por <strong style="color:var(--txt)">Whop</strong> · Pago 100% seguro · Renovación anual automática<br>
+        Vas a volver acá después de pagar ✓
       </p>
     </div>
 
