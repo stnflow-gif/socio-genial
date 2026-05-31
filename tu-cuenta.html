@@ -515,32 +515,91 @@ img,svg{display:block;max-width:100%}
     <!-- Métodos de pago -->
     <div class="pay-methods-label">Elegí tu método de pago</div>
     <div class="pay-methods-grid">
-      <button class="pay-method" onclick="selectPayMethod('qr',this)">
+
+      <!-- QR Yape -->
+      <button class="pay-method" id="pm-qr" onclick="
+        document.querySelectorAll('.pay-method').forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('pago-form-box').style.display='block';
+        document.getElementById('whop-panel').style.display='none';
+      ">
         <div class="pm-logo pm-logo-yape">Yape</div>
         <span class="pm-label">QR Bolivia</span>
       </button>
-      <button class="pay-method" onclick="selectPayMethod('card',this)">
+
+      <!-- Tarjeta -->
+      <button class="pay-method" onclick="
+        document.querySelectorAll('.pay-method').forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('pago-form-box').style.display='none';
+        document.getElementById('whop-panel').style.display='block';
+      ">
         <div class="pm-logo pm-logo-card">
           <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
         </div>
         <span class="pm-label">Tarjeta</span>
       </button>
-      <button class="pay-method" onclick="selectPayMethod('apple',this)">
+
+      <!-- Apple Pay -->
+      <button class="pay-method" onclick="
+        document.querySelectorAll('.pay-method').forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('pago-form-box').style.display='none';
+        document.getElementById('whop-panel').style.display='block';
+      ">
         <div class="pm-logo pm-logo-apple"> Pay</div>
         <span class="pm-label">Apple Pay</span>
       </button>
-      <button class="pay-method" onclick="selectPayMethod('google',this)">
-        <div class="pm-logo pm-logo-google"><span>G</span><em>o</em><b>o</b><i>g</i><span>le</span> Pay</div>
+
+      <!-- Google Pay -->
+      <button class="pay-method" onclick="
+        document.querySelectorAll('.pay-method').forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('pago-form-box').style.display='none';
+        document.getElementById('whop-panel').style.display='block';
+      ">
+        <div class="pm-logo pm-logo-google"><span>G</span><em>o</em><b>o</b><i>g</i><span>le</span>&nbsp;Pay</div>
         <span class="pm-label">Google Pay</span>
       </button>
-      <button class="pay-method" onclick="selectPayMethod('crypto',this)">
+
+      <!-- Crypto -->
+      <button class="pay-method" onclick="
+        document.querySelectorAll('.pay-method').forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('pago-form-box').style.display='none';
+        document.getElementById('whop-panel').style.display='block';
+      ">
         <div class="pm-logo pm-logo-crypto">₮</div>
         <span class="pm-label">Crypto / USDT</span>
       </button>
-      <button class="pay-method" onclick="selectPayMethod('card',this)">
-        <div class="pm-logo pm-logo-card" style="font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--navy-2)">VISA<br>MC</div>
+
+      <!-- Visa/Mastercard -->
+      <button class="pay-method" onclick="
+        document.querySelectorAll('.pay-method').forEach(b=>b.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('pago-form-box').style.display='none';
+        document.getElementById('whop-panel').style.display='block';
+      ">
+        <div class="pm-logo" style="font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--em-2)">VISA · MC</div>
         <span class="pm-label">Visa / Mastercard</span>
       </button>
+
+    </div>
+
+    <!-- Panel Whop embed (tarjeta, Apple Pay, Google Pay, crypto) -->
+    <div id="whop-panel" class="card" style="display:none">
+      <p style="text-align:center;font-size:13px;color:var(--mu);margin-bottom:16px">Pago seguro procesado por <strong style="color:var(--txt)">Whop</strong> · 49 USD/año</p>
+      <iframe
+        src="https://whop.com/sistematiza-tu-negocio/mi-socio-genial/"
+        style="width:100%;height:500px;border:none;border-radius:12px"
+        id="whop-iframe"
+        title="Checkout El Socio Genial"
+        allow="payment"
+      ></iframe>
+      <p style="text-align:center;font-size:11px;color:var(--mu);margin-top:12px">
+        Si el pago no carga,
+        <a href="https://whop.com/sistematiza-tu-negocio/mi-socio-genial/" target="_blank" style="color:var(--em-2);text-decoration:underline">abrí en nueva pestaña →</a>
+      </p>
     </div>
 
     <!-- Panel QR (oculto por defecto) -->
