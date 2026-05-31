@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#FFEFE0">
+<meta name="description" content="Típicos · Con la receta de mamá. Cuñape, tamales, empanadas, postres y más comida típica boliviana.">
+<title>Típicos · Con la receta de mamá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Paleta Típicos: matchea exacto el fondo del logo */
+  --bg:#FFEFE0;            /* fondo blanco puro */
+  --bg-2:#FAF3E5;          /* crema clara para placeholders/inputs */
+  --bg-3:#F3E4CC;          /* crema un poco más fuerte */
+  --card:#FFFFFF;          /* cards blancas con sombra/borde */
+  --brand-dark:#3D2418;     /* marrón oscuro del logo "Típicos" */
+  --brand-mid:#6B3D24;      /* marrón medio del ribbon */
+  --brand-warm:#8B5A2B;     /* marrón cálido */
+  --gold:#C9923B;           /* dorado del ribbon */
+  --gold-hi:#E8B554;        /* dorado claro */
+  --gold-deep:#9C6F27;      /* dorado oscuro */
+  --txt:#3D2418;
+  --txt-2:#6B3D24;
+  --mu:#9C7E5E;
+  --mu-2:#B79872;
+  --brd:rgba(61,36,24,0.10);
+  --brd-2:rgba(61,36,24,0.18);
+  --brd-gold:rgba(201,146,59,0.4);
+  --shadow:0 10px 30px rgba(61,36,24,0.12);
+  --shadow-card:0 6px 20px rgba(61,36,24,0.08);
+
+  /* Socio Genial accent (para botón franquicia) */
+  --sg-dark:#0B1120;
+  --sg-gold:#E8A830;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  min-height:100vh;
+}
+
+/* ───────── Top bar ───────── */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:1200px;margin:0 auto;
+  padding:16px 22px;gap:16px;
+}
+.brand-mini{display:flex;align-items:center;gap:0;text-decoration:none}
+.brand-mini img{
+  height:54px;width:auto;display:block;
+  filter:drop-shadow(0 2px 4px rgba(61,36,24,0.15));
+}
+
+.auth-buttons{display:flex;gap:8px;align-items:center}
+.btn-text{
+  padding:8px 14px;border-radius:8px;
+  border:none;background:transparent;cursor:pointer;
+  font-family:inherit;font-size:13px;font-weight:600;color:var(--brand-mid);
+  transition:.2s;
+}
+.btn-text:hover{background:rgba(61,36,24,0.06);color:var(--brand-dark)}
+.btn-text-primary{
+  padding:9px 18px;border-radius:9px;border:none;cursor:pointer;
+  font-family:inherit;font-size:13px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--brand-warm),var(--brand-dark));
+  box-shadow:0 4px 12px rgba(61,36,24,0.25);
+  transition:.2s;
+}
+.btn-text-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(61,36,24,0.35)}
+
+/* ───────── HERO ───────── */
+.hero{
+  text-align:center;
+  padding:20px 22px 56px;
+  position:relative;
+  max-width:780px;margin:0 auto;
+}
+.hero-logo{
+  width:min(340px,72vw);
+  margin:0 auto;
+  display:block;
+  filter:drop-shadow(0 10px 24px rgba(61,36,24,0.18));
+  animation:fadeInUp .9s ease-out;
+}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero-sub{
+  margin-top:16px;font-family:'Lora',serif;font-style:italic;
+  font-size:17px;color:var(--brand-mid);max-width:500px;margin-left:auto;margin-right:auto;
+  line-height:1.6;
+}
+.hero-divider{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-top:28px;
+  color:var(--gold-deep);
+}
+.hero-divider::before,.hero-divider::after{
+  content:"";height:1px;width:60px;
+  background:linear-gradient(90deg,transparent,var(--gold));
+}
+.hero-divider::after{background:linear-gradient(270deg,transparent,var(--gold))}
+.hero-divider-icon{font-size:13px;opacity:.7}
+
+/* ───────── Catálogo ───────── */
+.catalogo{max-width:1200px;margin:0 auto;padding:0 22px 60px}
+
+.cat-section{margin-bottom:54px}
+.cat-section-head{
+  display:flex;align-items:baseline;gap:14px;
+  margin-bottom:24px;padding-bottom:14px;
+  border-bottom:1px dashed var(--brd-2);
+}
+.cat-section-num{
+  font-family:'Allura',cursive;font-size:48px;color:var(--gold-deep);
+  line-height:0.7;opacity:0.5;
+}
+.cat-section-title{
+  font-family:'Lora',serif;font-weight:700;font-size:clamp(22px,3.4vw,30px);
+  color:var(--brand-dark);
+}
+.cat-section-tag{
+  font-family:'Lora',serif;font-style:italic;font-size:13px;color:var(--mu);
+  margin-left:auto;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card-prod{
+  background:var(--card);
+  border:1px solid var(--brd);
+  border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow-card);
+  transition:.25s;
+  cursor:default;
+  position:relative;
+}
+.card-prod:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 32px rgba(61,36,24,0.18);
+  border-color:var(--brd-gold);
+}
+.card-prod-img{
+  width:100%;aspect-ratio:4/3;
+  background:linear-gradient(135deg, var(--bg-3), var(--bg-2));
+  border-bottom:1px solid var(--brd);
+  position:relative;overflow:hidden;
+}
+.card-prod-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .5s ease;
+}
+.card-prod:hover .card-prod-img img{transform:scale(1.06)}
+.card-prod-img::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg, transparent 60%, rgba(61,36,24,0.10) 100%);
+}
+.card-prod-body{padding:14px 16px 16px}
+.card-prod-name{
+  font-family:'Lora',serif;font-weight:600;font-size:16px;color:var(--brand-dark);
+  line-height:1.3;margin-bottom:4px;
+}
+.card-prod-desc{
+  font-size:12px;color:var(--mu);line-height:1.4;
+}
+.card-prod-tag{
+  display:inline-block;margin-top:8px;
+  padding:3px 8px;border-radius:6px;
+  background:rgba(201,146,59,0.12);color:var(--gold-deep);
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+}
+
+/* ───────── CTA franquicia (Socio Genial brand) ───────── */
+.franquicia-cta{
+  max-width:980px;margin:0 auto 60px;padding:0 22px;
+}
+.franquicia-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--sg-dark) 0%,#15213C 100%);
+  color:#F4F7FC;
+  border-radius:20px;padding:36px 32px;
+  display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;
+  border:1px solid rgba(232,168,48,0.25);
+  box-shadow:0 18px 48px rgba(11,17,32,0.25);
+}
+.franquicia-card::before{
+  content:"";position:absolute;top:0;right:0;width:280px;height:280px;
+  background:radial-gradient(circle,rgba(232,168,48,0.20),transparent 60%);
+  pointer-events:none;
+}
+.franquicia-body{position:relative;z-index:1}
+.franquicia-eyebrow{
+  font-size:11px;text-transform:uppercase;letter-spacing:3px;
+  color:var(--sg-gold);font-weight:700;margin-bottom:10px;
+}
+.franquicia-title{
+  font-family:'Lora',serif;font-weight:700;font-size:clamp(22px,3.2vw,32px);
+  line-height:1.2;margin-bottom:10px;
+}
+.franquicia-title em{
+  font-style:normal;
+  background:linear-gradient(135deg,#FFE08A,var(--sg-gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.franquicia-text{color:#D5DEEF;font-size:14px;line-height:1.55}
+
+.btn-franq{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 26px;border-radius:12px;
+  background:linear-gradient(180deg,var(--sg-gold) 0%,#B7801E 100%);
+  color:#1A1206;font-weight:700;font-size:14px;
+  text-decoration:none;border:none;cursor:pointer;
+  font-family:inherit;
+  box-shadow:0 8px 24px rgba(232,168,48,0.35),inset 0 1px 0 rgba(255,255,255,0.4);
+  transition:.2s;white-space:nowrap;
+}
+.btn-franq:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,168,48,0.50)}
+.btn-franq svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ───────── Footer ───────── */
+.footer{
+  background:linear-gradient(180deg,transparent,rgba(61,36,24,0.04));
+  padding:40px 22px 32px;
+  border-top:1px solid var(--brd);
+  text-align:center;
+}
+.footer-brand{font-family:'Allura',cursive;font-size:32px;color:var(--brand-dark);line-height:1}
+.footer-tag{font-family:'Lora',serif;font-style:italic;font-size:14px;color:var(--brand-mid);margin-top:4px}
+.footer-social{margin-top:18px;display:flex;justify-content:center;gap:12px}
+.footer-social a{
+  display:grid;place-items:center;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--brand-dark);color:var(--bg);
+  text-decoration:none;transition:.2s;
+}
+.footer-social a:hover{background:var(--brand-mid);transform:translateY(-2px)}
+.footer-social a svg{width:18px;height:18px;fill:currentColor}
+.footer-copy{margin-top:18px;font-size:11px;color:var(--mu);letter-spacing:.5px}
+
+/* ───────── Modal Login/Register ───────── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(11,17,32,0.6);backdrop-filter:blur(6px);
+  z-index:100;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.show{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  background:var(--card);border-radius:18px;
+  max-width:420px;width:100%;padding:32px;
+  box-shadow:0 28px 60px rgba(61,36,24,0.35);
+  border:1px solid var(--brd);position:relative;
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  width:34px;height:34px;border-radius:50%;
+  background:transparent;border:none;cursor:pointer;
+  font-size:20px;color:var(--mu);transition:.2s;
+}
+.modal-close:hover{background:rgba(61,36,24,0.06);color:var(--brand-dark)}
+.modal-title{
+  font-family:'Lora',serif;font-weight:700;font-size:24px;
+  color:var(--brand-dark);margin-bottom:6px;
+}
+.modal-sub{font-size:13px;color:var(--mu);margin-bottom:22px}
+.modal-row{margin-bottom:14px}
+.modal-row label{display:block;font-size:12px;font-weight:600;color:var(--brand-mid);margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+.modal-row input{
+  width:100%;padding:12px 14px;border-radius:10px;
+  border:1px solid var(--brd-2);background:var(--bg);
+  font-family:inherit;font-size:14px;color:var(--brand-dark);transition:.2s;
+}
+.modal-row input:focus{outline:none;border-color:var(--gold);background:#fff}
+.modal-btn{
+  width:100%;padding:14px;border-radius:10px;border:none;cursor:pointer;
+  font-family:inherit;font-size:14px;font-weight:700;
+  background:linear-gradient(135deg,var(--brand-warm),var(--brand-dark));
+  color:var(--bg);margin-top:8px;transition:.2s;
+}
+.modal-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(61,36,24,0.25)}
+.modal-switch{text-align:center;margin-top:14px;font-size:13px;color:var(--mu)}
+.modal-switch a{color:var(--gold-deep);font-weight:700;cursor:pointer;text-decoration:none}
+.modal-switch a:hover{text-decoration:underline}
+
+/* ───────── Responsive ───────── */
+@media (max-width:640px){
+  .topbar{padding:12px 16px}
+  .brand-mini-text{font-size:22px}
+  .auth-buttons .btn-text{display:none}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+  .card-prod-body{padding:12px 14px}
+  .card-prod-name{font-size:14px}
+  .franquicia-card{grid-template-columns:1fr;text-align:center;padding:28px 22px}
+  .cat-section-num{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <a href="/" class="brand-mini" aria-label="Típicos">
+    <img src="/img/logo.png" alt="Típicos · Con la receta de mamá">
+  </a>
+  <div class="auth-buttons">
+    <a class="btn-text" href="https://sociogenial.stnflow.online/app">Iniciar sesión</a>
+    <a class="btn-text-primary" href="https://sociogenial.stnflow.online/app">Registrate</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <img class="hero-logo" src="/img/logo.png" alt="Típicos · Con la receta de mamá">
+  <p class="hero-sub">Sabores bolivianos hechos en casa, como siempre. Cuñape, tamales, empanadas, postres y todo lo que extrañabas.</p>
+  <div class="hero-divider"><span class="hero-divider-icon">✦</span></div>
+</section>
+
+<!-- Catálogo -->
+<section class="catalogo" id="catalogo">
+
+  <div class="cat-section">
+    <div class="cat-section-head">
+      <span class="cat-section-num">I</span>
+      <h2 class="cat-section-title">Panadería &amp; Empanadas</h2>
+      <span class="cat-section-tag">recién horneados cada mañana</span>
+    </div>
+    <div class="grid" id="grid-pan"></div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-section-head">
+      <span class="cat-section-num">II</span>
+      <h2 class="cat-section-title">Postres</h2>
+      <span class="cat-section-tag">la dulzura de la abuela</span>
+    </div>
+    <div class="grid" id="grid-postres"></div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-section-head">
+      <span class="cat-section-num">III</span>
+      <h2 class="cat-section-title">Bebidas</h2>
+      <span class="cat-section-tag">tradicionales, naturales</span>
+    </div>
+    <div class="grid" id="grid-bebidas"></div>
+  </div>
+
+
+</section>
+
+<!-- CTA Franquicia (estilo Socio Genial) -->
+<section class="franquicia-cta">
+  <div class="franquicia-card">
+    <div class="franquicia-body">
+      <div class="franquicia-eyebrow">Para emprendedores</div>
+      <h3 class="franquicia-title">¿Querés llevarte la <em>franquicia de Típicos</em> a tu ciudad?</h3>
+      <p class="franquicia-text">Sumate a la red <b>El Socio Genial</b>. Plan de compensación 20·8·7·5, soporte completo y la receta de mamá lista para servir.</p>
+    </div>
+    <a href="https://sociogenial.stnflow.online/" class="btn-franq" target="_blank" rel="noopener">
+      Conocer la franquicia
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-brand">Típicos</div>
+  <div class="footer-tag">Con la receta de mamá</div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/tipicos.bo?locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9V15h-2.5v-3h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.5 3h-2.4v6.9A10 10 0 0 0 22 12z"/></svg>
+    </a>
+  </div>
+  <div class="footer-copy">© 2026 · Típicos · Santa Cruz de la Sierra, Bolivia</div>
+</footer>
+
+<!-- Modal Login/Register -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">×</button>
+    <h3 class="modal-title" id="modal-title">Iniciar sesión</h3>
+    <p class="modal-sub" id="modal-sub">Entrá a tu cuenta de Típicos.</p>
+    <form id="auth-form">
+      <div class="modal-row reg-only" style="display:none">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" autocomplete="name">
+      </div>
+      <div class="modal-row">
+        <label for="email">Email o WhatsApp</label>
+        <input type="text" id="email" autocomplete="email" required>
+      </div>
+      <div class="modal-row">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="modal-btn" id="modal-btn">Entrar</button>
+      <div class="modal-switch">
+        <span id="switch-text">¿No tenés cuenta?</span>
+        <a id="switch-link" onclick="switchMode()">Registrate</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+// ───────── Catálogo de productos ─────────
+const PRODUCTOS = {
+  pan: [
+    { nombre: 'Cuñape', desc: 'Pancito de queso clásico cruceño', img: '/img/cunape.jpg', tag: 'CLÁSICO' },
+    { nombre: 'Tamales a la olla', desc: 'Cocidos lento, sabor de antes', img: '/img/tamales.jpg', tag: '' },
+    { nombre: 'Tamal con queso', desc: 'Hecho en hoja de maíz, dorado por dentro', img: '/img/tamal_queso.jpg', tag: '' },
+    { nombre: 'Pan de arroz', desc: 'Suave y esponjoso', img: '/img/pan_arroz.jpg', tag: '' },
+    { nombre: 'Empanada de arroz', desc: 'Dorada, hecha en hoja de plátano', img: '/img/empanadas_arroz.jpg', tag: '' },
+    { nombre: 'Rosca de maíz', desc: 'La rosca de toda la vida', img: '/img/rosca_maiz.jpg', tag: '' },
+  ],
+  postres: [
+    { nombre: 'Gelatina de pata', desc: 'Tradicional boliviana', img: '/img/gelatina_pata.jpg', tag: '' },
+    { nombre: 'Arroz con leche', desc: 'Cremoso, con canela', img: '/img/arroz_leche.jpg', tag: '' },
+  ],
+  bebidas: [
+    { nombre: 'Refresco de tamarindo', desc: 'Natural, recién hecho', img: '/img/jugo_tamarindo.png', tag: 'NATURAL' },
+    { nombre: 'Açaí', desc: 'Fruta amazónica, antioxidante natural', img: '/img/acai.jpg', tag: 'NATURAL' },
+    { nombre: 'Refresco de mocochinchi', desc: 'Tradicional de durazno deshidratado', img: '/img/mocochinchi.jpg', tag: 'TRADICIONAL' },
+    { nombre: 'Achachairú embotellado', desc: 'Refresco artesanal de fruta amazónica', img: '/img/achachairu.jpg', tag: 'DE LA CASA' },
+  ],
+};
+
+function makeCard(p){
+  return `
+    <article class="card-prod">
+      <div class="card-prod-img">
+        <img src="${p.img}" alt="${p.nombre}" loading="lazy">
+      </div>
+      <div class="card-prod-body">
+        <div class="card-prod-name">${p.nombre}</div>
+        <div class="card-prod-desc">${p.desc}</div>
+        ${p.tag ? `<span class="card-prod-tag">${p.tag}</span>` : ''}
+      </div>
+    </article>
+  `;
+}
+
+function render(){
+  document.getElementById('grid-pan').innerHTML = PRODUCTOS.pan.map(makeCard).join('');
+  document.getElementById('grid-postres').innerHTML = PRODUCTOS.postres.map(makeCard).join('');
+  document.getElementById('grid-bebidas').innerHTML = PRODUCTOS.bebidas.map(makeCard).join('');
+}
+render();
+
+// ───────── Modal login/register ─────────
+let modalMode = 'login';
+function openModal(mode){
+  modalMode = mode;
+  document.getElementById('modal-overlay').classList.add('show');
+  applyMode();
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('show');
+}
+function switchMode(){
+  modalMode = modalMode === 'login' ? 'register' : 'login';
+  applyMode();
+}
+function applyMode(){
+  const isReg = modalMode === 'register';
+  document.getElementById('modal-title').textContent = isReg ? 'Crear cuenta' : 'Iniciar sesión';
+  document.getElementById('modal-sub').textContent = isReg
+    ? 'Sumate a Típicos y empezá a pedir.'
+    : 'Entrá a tu cuenta de Típicos.';
+  document.getElementById('modal-btn').textContent = isReg ? 'Crear cuenta' : 'Entrar';
+  document.getElementById('switch-text').textContent = isReg ? '¿Ya tenés cuenta?' : '¿No tenés cuenta?';
+  document.getElementById('switch-link').textContent = isReg ? 'Iniciar sesión' : 'Registrate';
+  document.querySelectorAll('.reg-only').forEach(el => el.style.display = isReg ? 'block' : 'none');
+}
+document.getElementById('modal-overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'modal-overlay') closeModal();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+document.getElementById('auth-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  // Placeholder: integrar con Supabase Auth después
+  alert(modalMode === 'register'
+    ? 'Pronto vas a poder crear cuenta acá. Por ahora, registrate en /registro para el pre-lanzamiento.'
+    : 'Pronto vas a poder iniciar sesión acá.');
+});
+</script>
+
+</body>
+</html>
