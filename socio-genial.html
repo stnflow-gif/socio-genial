@@ -58,11 +58,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#060504;
-  --card:#110D08;
-  --card-2:#171108;
-  --brd:rgba(255,255,255,0.05);
-  --brd-2:rgba(255,255,255,0.08);
+  --bg:#07091A;
+  --card:#0D1228;
+  --card-2:#111830;
+  --brd:rgba(255,255,255,0.06);
+  --brd-2:rgba(255,255,255,0.10);
   /* Metallic gold */
   --g1:#FFF4A0; --g2:#FFD84A; --g3:#D4940A; --g4:#8B5E05; --g5:#3D2703;
   --gold:#D4940A;
@@ -97,34 +97,34 @@ img{display:block;max-width:100%}
 /* Gran orbe dorado superior izquierdo — MÁS INTENSO */
 .light-gold-tl{
   width:1000px;height:800px;top:-300px;left:-250px;
-  background:radial-gradient(ellipse,rgba(212,120,5,.52) 0%,rgba(180,90,5,.28) 30%,transparent 65%);
+  background:radial-gradient(ellipse,rgba(212,120,5,.38) 0%,rgba(180,90,5,.18) 30%,transparent 65%);
   animation:lightDrift1 20s ease-in-out infinite;
 }
 /* Gran orbe dorado inferior derecho */
 .light-gold-br{
   width:1100px;height:900px;bottom:-300px;right:-250px;
-  background:radial-gradient(ellipse,rgba(212,120,5,.45) 0%,rgba(160,80,5,.22) 35%,transparent 65%);
+  background:radial-gradient(ellipse,rgba(212,120,5,.32) 0%,rgba(160,80,5,.14) 35%,transparent 65%);
   animation:lightDrift2 25s ease-in-out infinite 5s;
 }
-/* Orbe azul lateral */
+/* Orbe azul marino lateral — más protagonismo */
 .light-blue-tr{
-  width:700px;height:600px;top:50vh;right:-150px;
-  background:radial-gradient(ellipse,rgba(26,58,255,.22) 0%,transparent 60%);
+  width:900px;height:700px;top:40vh;right:-200px;
+  background:radial-gradient(ellipse,rgba(30,60,180,.35) 0%,rgba(20,40,120,.15) 45%,transparent 65%);
   animation:lightDrift3 18s ease-in-out infinite 3s;
 }
 /* Orbe dorado central — horizonte */
 .light-gold-mid{
   position:fixed;width:1600px;height:500px;
   top:55vh;left:50%;transform:translateX(-50%);
-  background:radial-gradient(ellipse,rgba(180,100,5,.28) 0%,rgba(140,75,5,.12) 40%,transparent 65%);
+  background:radial-gradient(ellipse,rgba(180,100,5,.20) 0%,rgba(140,75,5,.08) 40%,transparent 65%);
   filter:blur(130px);pointer-events:none;z-index:0;
   animation:lightDrift1 30s ease-in-out infinite 8s;
 }
-/* Orbe extra — parte alta de la página */
+/* Orbe azul marino top — da profundidad al navy */
 .light-gold-top{
-  position:fixed;width:1200px;height:300px;
+  position:fixed;width:1400px;height:400px;
   top:0;left:50%;transform:translateX(-50%);
-  background:radial-gradient(ellipse,rgba(212,120,5,.18) 0%,transparent 65%);
+  background:radial-gradient(ellipse,rgba(20,40,160,.18) 0%,rgba(212,120,5,.08) 60%,transparent 80%);
   filter:blur(100px);pointer-events:none;z-index:0;
 }
 
@@ -156,11 +156,11 @@ body::before{
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   transition:background .4s,border-color .4s;
-  background:rgba(6,5,4,0);
+  background:rgba(7,9,26,0);
   border-bottom:1px solid transparent;
 }
 .nav.scrolled{
-  background:rgba(6,5,4,.92);
+  background:rgba(7,9,26,.94);
   border-bottom-color:var(--brd-2);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
@@ -314,7 +314,7 @@ body::before{
 .float-card{
   position:absolute;padding:12px 16px;border-radius:12px;
   border:1px solid rgba(212,148,10,.22);
-  background:rgba(10,8,4,.88);backdrop-filter:blur(16px);
+  background:rgba(7,9,26,.88);backdrop-filter:blur(16px);
   white-space:nowrap;z-index:3;
   box-shadow:0 8px 24px rgba(0,0,0,.5);
 }
@@ -818,7 +818,7 @@ footer{
 .mstat{
   padding:14px 16px;border-radius:14px;
   border:1px solid rgba(212,148,10,.22);
-  background:rgba(10,8,4,.7);backdrop-filter:blur(16px);
+  background:rgba(7,9,26,.7);backdrop-filter:blur(16px);
 }
 .mstat-num{
   font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;
@@ -830,7 +830,7 @@ footer{
 .mhl-bg{
   position:absolute;
   width:260px;height:260px;border-radius:50%;
-  background:radial-gradient(ellipse at 50% 40%,#1a0e02 0%,#0a0600 55%,transparent 75%);
+  background:radial-gradient(ellipse at 50% 40%,#0d1228 0%,#07091a 55%,transparent 75%);
   top:50%;left:50%;transform:translate(-50%,-55%);
   z-index:0;
 }
@@ -852,7 +852,7 @@ footer{
 .mhl-card{
   padding:12px 14px;border-radius:12px;
   border:1px solid rgba(212,148,10,.22);
-  background:rgba(10,8,4,.88);backdrop-filter:blur(16px);
+  background:rgba(7,9,26,.88);backdrop-filter:blur(16px);
 }
 .mhl-num{
   font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;
