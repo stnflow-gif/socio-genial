@@ -726,6 +726,129 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
 }
 
 /* ═══════════════════════════════════════
+   QUIÉNES SOMOS — EDMAR (portado de socio-genial)
+═══════════════════════════════════════ */
+.qs-section{
+  padding:110px 52px;
+  border-top:1px solid var(--brd);
+  position:relative;overflow:hidden;
+}
+.qs-inner{max-width:1240px;margin:0 auto}
+.qs-hero{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;margin-top:64px;
+}
+.qs-photo-col{position:relative}
+.qs-photo-main{
+  width:100%;border-radius:22px;overflow:hidden;
+  border:1px solid rgba(200,150,90,.25);
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(200,150,90,.12);
+  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(200,150,90,.08),#160B04);
+  display:flex;align-items:center;justify-content:center;
+  padding:40px;min-height:320px;
+}
+.qs-photo-main img{
+  width:auto;height:auto;
+  max-width:min(100%,225px);max-height:225px;
+  display:block;border-radius:50%;
+  border:3px solid rgba(200,150,90,.5);
+  box-shadow:0 0 40px rgba(200,150,90,.4),0 0 80px rgba(200,150,90,.2);
+}
+.qs-photo-placeholder{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--mu);font-size:13px}
+.qs-photo-placeholder svg{width:40px;height:40px;stroke:var(--mu);fill:none;stroke-width:1.5;stroke-linecap:round}
+.qs-glow{
+  position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
+  width:80%;height:200px;
+  background:radial-gradient(ellipse,rgba(200,150,90,.28),transparent 65%);
+  filter:blur(60px);pointer-events:none;
+}
+.qs-lead{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(32px,3.5vw,52px);letter-spacing:1px;
+  color:var(--cream);line-height:1.05;margin-bottom:24px;
+}
+.qs-lead em{
+  font-family:'Playfair Display',serif;font-style:italic;font-size:.8em;letter-spacing:0;
+  background:linear-gradient(135deg,var(--cream),var(--gold-hi),var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.qs-bio{display:flex;flex-direction:column;gap:16px}
+.qs-bio p{font-size:15px;color:var(--cream-2);line-height:1.8;font-weight:300}
+.qs-bio p strong{color:var(--cream);font-weight:600}
+.qs-timeline{
+  margin-top:36px;display:flex;flex-direction:column;gap:0;
+  border-left:2px solid rgba(200,150,90,.3);padding-left:24px;
+}
+.qs-tl-item{padding:12px 0;position:relative}
+.qs-tl-item::before{
+  content:'';position:absolute;left:-31px;top:18px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 10px var(--gold-glow);
+}
+.qs-tl-year{
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;
+  color:var(--gold-hi);margin-bottom:2px;
+}
+.qs-tl-text{font-size:13px;color:var(--cream-2);font-weight:300;line-height:1.5}
+.qs-quote-wrap{
+  margin-top:64px;padding:52px 56px;border-radius:22px;
+  border:1px solid rgba(200,150,90,.3);
+  background:linear-gradient(145deg,rgba(200,150,90,.07),rgba(11,7,3,.95));
+  position:relative;overflow:hidden;text-align:center;
+}
+.qs-quote-wrap::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-hi),transparent)}
+.qs-quote-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(200,150,90,.09),transparent);pointer-events:none}
+.qs-quote-mark{
+  font-family:'Playfair Display',serif;font-size:100px;line-height:.6;
+  background:linear-gradient(135deg,var(--cream),var(--gold-hi),var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:12px;display:block;opacity:.6;
+}
+.qs-quote{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(18px,2.2vw,26px);line-height:1.55;
+  color:var(--cream);position:relative;z-index:1;
+}
+.qs-quote-author{
+  margin-top:20px;font-size:13px;color:var(--gold-hi);
+  font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+.qs-book{
+  display:grid;grid-template-columns:260px 1fr;gap:56px;
+  align-items:center;margin-top:64px;padding:40px 48px;
+  border-radius:20px;border:1px solid var(--brd-2);
+  background:linear-gradient(145deg,#130E08,#1E1208);
+  position:relative;overflow:hidden;
+}
+.qs-book::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-glow),transparent)}
+.qs-book-cover{
+  width:100%;border-radius:14px;overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 40px rgba(200,150,90,.15);
+  background:#160B04;
+  display:flex;align-items:center;justify-content:center;
+}
+.qs-book-cover img{width:100%;height:auto;display:block}
+.qs-book-cover-placeholder{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--mu);font-size:12px}
+.qs-book-cover-placeholder svg{width:32px;height:32px;stroke:var(--mu);fill:none;stroke-width:1.5;stroke-linecap:round}
+.qs-book-title{
+  font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--cream),var(--gold-hi),var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;margin-bottom:12px;
+}
+.qs-book-sub{font-size:13px;color:var(--cream-2);font-weight:300;line-height:1.65;margin-bottom:16px}
+@media(max-width:1024px){
+  .qs-hero{grid-template-columns:1fr;gap:48px}
+  .qs-book{grid-template-columns:1fr;gap:28px}
+  .qs-quote-wrap{padding:36px 28px}
+  .qs-section{padding:72px 36px}
+}
+@media(max-width:600px){
+  .qs-section{padding:60px 24px}
+  .qs-book{padding:28px 20px}
+}
+
+/* ═══════════════════════════════════════
    BEBAS NEUE — TIPOGRAFÍA CAMBA
 ═══════════════════════════════════════ */
 .hero-title{
@@ -950,7 +1073,8 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
       <span class="line-wrap"><em>de mamá.</em></span>
     </h1>
     <p class="hero-sub" id="heroSub">
-      Cuñapé, tamal, majadito y café. La comida camba de siempre,<br>con el orgullo de siempre. El 6 de junio en Porongo.
+      Lo nuestro, presentado como nunca lo habías visto.<br>
+      Pre-lanzamiento el sábado 6 de junio en Porongo.
     </p>
     <div class="hero-actions" id="heroActions">
       <a href="#registro" class="btn-primary magnetic" id="heroCta">
@@ -1026,9 +1150,9 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
   </div>
   <div class="local-left">
     <div class="eyebrow">Nuestro espacio</div>
-    <h2 class="local-title">Un lugar que huele a café<br><em>y sabe a Bolivia.</em></h2>
+    <h2 class="local-title">Un lugar donde<br><em>el tiempo se detiene.</em></h2>
     <p class="local-body">
-      Un rincón diseñado para ralentizar el tiempo. Donde el café se prepara como siempre, con calma y con cariño. En Porongo, a minutos de la ciudad, pero a mundos de distancia del ruido.
+      Un rincón diseñado para ralentizar el tiempo, con calma y con cariño. En Porongo, a minutos de la ciudad, pero a mundos de distancia del ruido.
     </p>
     <div class="local-tag">
       <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1057,37 +1181,103 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about-section" id="about">
-  <!-- Foto Chico con Bandera — solo la foto, sin logo encima -->
-  <div class="about-img-col" style="position:relative;overflow:hidden;">
-    <img src="./img/scz-chico-bandera.jfif" alt="Orgullo camba" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.6) contrast(1.1) saturate(1.05);z-index:0;">
-    <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 45%,var(--card) 100%);z-index:1;"></div>
-    <!-- Edmar foto — esquina inferior -->
-    <div style="position:absolute;bottom:28px;left:28px;z-index:2;display:flex;align-items:center;gap:14px;">
-      <img src="./img/edmar.jpg" alt="Edmar Pedraza Chamón" style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid rgba(200,150,90,0.5);filter:grayscale(.2);">
+<!-- ABOUT / QUIÉNES SOMOS — Edmar Pedraza Chamón -->
+<div class="qs-section" id="about">
+  <!-- Foto SCZ de fondo muy oscuro -->
+  <div style="position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;">
+    <img src="./img/scz-catedral-1.jfif" alt="" style="width:100%;height:100%;object-fit:cover;filter:brightness(.09) contrast(1.1) sepia(.3);">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,transparent 15%,transparent 85%,var(--bg) 100%);"></div>
+  </div>
+
+  <div class="qs-inner">
+    <div>
+      <span class="eyebrow">Quiénes somos</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,72px);letter-spacing:.04em;color:var(--cream);line-height:.92;margin-top:10px;">
+        Una historia que empezó<br>
+        <em style="font-family:'Playfair Display',serif;font-style:italic;font-weight:700;background:linear-gradient(135deg,var(--cream),var(--gold-hi),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;">con dos botellas de leche.</em>
+      </h2>
+    </div>
+
+    <div class="qs-hero">
+      <!-- FOTO EDMAR -->
+      <div class="qs-photo-col">
+        <div class="qs-photo-main">
+          <img src="./img/edmar.jpg" alt="Edmar Pedraza Chamón"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="qs-photo-placeholder" style="display:none">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Foto de Edmar
+          </div>
+        </div>
+        <div class="qs-glow"></div>
+      </div>
+
+      <!-- TEXTO -->
+      <div class="qs-text-col">
+        <h3 class="qs-lead">Edmar Pedraza Chamón<br><em>Fundador</em></h3>
+        <div class="qs-bio">
+          <p>Nació en Santa Cruz, Bolivia, en 1961. Desde los 6 años sabía lo que quería: <strong>"Quiero hacer plata"</strong>, le dijo a su padre, quien en lugar de frenarlo le extendió dos botellas de leche: <strong>"No le voy a cortar las alas a este joven."</strong> Ese niño salió corriendo a vender, y nunca paró.</p>
+          <p>Estudió en el Colegio Don Bosco, egresó como bachiller en 1979 y comenzó a trabajar mientras aún estudiaba. Pasó por empresas como COMBI Ltda. y la Cervecería Boliviana del Oriente, aprendiendo el oficio desde las trincheras.</p>
+        </div>
+
+        <div class="qs-timeline" style="margin-top:32px">
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">1990</div>
+            <div class="qs-tl-text">Emigra a los Estados Unidos — solo dos maletas y determinación.</div>
+          </div>
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">1990 · 15 días después</div>
+            <div class="qs-tl-text">Ya trabajando en <strong style="color:var(--cream)">World Book</strong>, la editorial más grande del mundo.</div>
+          </div>
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">Primer año</div>
+            <div class="qs-tl-text">Rompe <strong style="color:var(--cream)">5 récords mundiales</strong>: Mejor Vendedor de Washington, Mejor Desarrollador de Equipos, Premio a la Integridad — reconocido ante más de 140 países.</div>
+          </div>
+          <div class="qs-tl-item">
+            <div class="qs-tl-year">Hoy</div>
+            <div class="qs-tl-text">Funda <strong style="color:var(--gold-hi)">Típicos</strong> en Porongo, Santa Cruz: devolver el orgullo camba a lo que siempre fue nuestro.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="qs-quote-wrap">
+      <span class="qs-quote-mark">"</span>
+      <blockquote class="qs-quote">
+        Uno tiene que apuntar a las estrellas para darle aunque sea a las nubes, pero con los pies en la tierra.
+      </blockquote>
+      <div class="qs-quote-author">— Edmar Pedraza Chamón</div>
+    </div>
+
+    <!-- LIBRO -->
+    <div class="qs-book">
+      <div class="qs-book-cover">
+        <img src="./img/libro.jpg" alt="Éxitos sin Fronteras" loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="qs-book-cover-placeholder" style="display:none">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Portada del libro
+        </div>
+      </div>
       <div>
-        <div style="font-size:11px;font-weight:700;color:var(--cream);letter-spacing:.5px;">Edmar Pedraza Chamón</div>
-        <div style="font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;">Fundador</div>
+        <span class="eyebrow" style="margin-bottom:10px;display:block;color:var(--gold-hi);">Su libro</span>
+        <div class="qs-book-title">Éxitos sin Fronteras</div>
+        <p class="qs-book-sub">
+          En este libro autobiográfico, Edmar narra su historia desde los 6 años hasta los récords mundiales en ventas. El mensaje central: el verdadero secreto detrás de cada logro es compromiso, enfoque, disciplina y entrega.
+        </p>
+        <p class="qs-book-sub">
+          <strong style="color:var(--cream)">Una guía de vida</strong> para quienes quieren convertir el esfuerzo cotidiano en resultados extraordinarios — la filosofía que inspiró Típicos.
+        </p>
+        <a href="#registro"
+          style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:14px 26px;border-radius:11px;background:linear-gradient(160deg,var(--cream),var(--gold-hi),var(--gold));color:#1A0E02;font-weight:800;font-size:14px;box-shadow:0 8px 28px rgba(200,150,90,.4);transition:.3s;text-decoration:none;cursor:none;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Reservá tu lugar el 6 de junio
+        </a>
       </div>
     </div>
   </div>
-  <div class="about-content">
-    <div class="eyebrow">Quiénes somos</div>
-    <h2 class="about-title">Orgullo camba<br><em>en cada receta.</em></h2>
-    <div class="about-body">
-      <p>5 récords mundiales en ventas internacionales. 30 años de liderazgo empresarial. Y una sola deuda pendiente: volver a Santa Cruz y devolver el orgullo a lo nuestro.</p>
-      <p>Típicos nació de esa convicción: que el cuñapé, el tamal, el majadito y la comida camba de siempre merecen el mismo respeto que cualquier tendencia importada.</p>
-    </div>
-    <blockquote class="about-quote">
-      "Uno tiene que apuntar a las estrellas para darle aunque sea a las nubes, pero con los pies en la tierra."
-    </blockquote>
-    <div class="about-coming">
-      <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-      Edmar Pedraza Chamón · Fundador de Típicos
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- CARTA -->
 <section id="carta" style="border-top:1px solid var(--brd);position:relative;overflow:hidden;min-height:480px;display:flex;align-items:center;">
@@ -1579,14 +1769,40 @@ function startPageAnimations() {
     scrollTrigger: { trigger: '.local-section', start: "top 68%", once: true }
   });
 
-  // About text lines
+  // About / Edmar section
   ScrollTrigger.create({
-    trigger: '.about-section',
-    start: "top 65%",
+    trigger: '#about',
+    start: "top 68%",
     once: true,
     onEnter: () => {
-      gsap.from('.about-content .eyebrow, .about-title, .about-body p, .about-quote, .about-coming', {
-        opacity: 0, y: 24, stagger: 0.13, duration: 0.75, ease: "power3.out"
+      gsap.from('#about .eyebrow, #about h2', {
+        opacity: 0, y: 28, stagger: 0.1, duration: 0.8, ease: "power3.out"
+      });
+      gsap.from('.qs-photo-col', {
+        opacity: 0, x: -40, duration: 1, ease: "power3.out", delay: 0.2
+      });
+      gsap.from('.qs-text-col', {
+        opacity: 0, x: 40, duration: 1, ease: "power3.out", delay: 0.3
+      });
+    }
+  });
+  ScrollTrigger.create({
+    trigger: '.qs-quote-wrap',
+    start: "top 78%",
+    once: true,
+    onEnter: () => {
+      gsap.from('.qs-quote-wrap', {
+        opacity: 0, y: 30, scale: 0.98, duration: 0.9, ease: "power3.out"
+      });
+    }
+  });
+  ScrollTrigger.create({
+    trigger: '.qs-book',
+    start: "top 78%",
+    once: true,
+    onEnter: () => {
+      gsap.from('.qs-book', {
+        opacity: 0, y: 24, duration: 0.8, ease: "power3.out"
       });
     }
   });
