@@ -1174,23 +1174,31 @@ async function routeAfterAuth(){
 ═══════════════════════════════════════════════════════════ */
 function renderPago(){
   const p = state.ultimoPago;
-  // Resetear todos los paneles — el usuario elige el método
-  $('#pago-form-box').style.display      = 'none';
-  if($('#whop-panel')) $('#whop-panel').style.display = 'none';
-  $('#pago-pendiente-box').style.display = 'none';
-  $('#pago-rechazado-box').style.display = 'none';
-  // Deseleccionar todos los botones de método
-  document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('selected'));
 
-  if(!p || !p.estado) return; // Sin pago — esperar que el usuario elija método
+  // Sin pago registrado → NO tocar los paneles, el usuario elige método libremente
+  if(!p || !p.estado) return;
 
   const est = (p.estado || '').toLowerCase();
+
   if(est === 'pendiente' || est === 'en_revision'){
+    // Ocultar paneles de elección y mostrar estado pendiente
+    $('#pago-form-box').style.display     = 'none';
+    const wp = document.getElementById('whop-panel');
+    if(wp) wp.style.display              = 'none';
+    document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('selected'));
     $('#pago-pendiente-box').style.display = 'block';
+    $('#pago-rechazado-box').style.display = 'none';
+
   } else if(est === 'rechazado'){
+    $('#pago-form-box').style.display     = 'none';
+    const wp = document.getElementById('whop-panel');
+    if(wp) wp.style.display              = 'none';
+    document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('selected'));
+    $('#pago-pendiente-box').style.display = 'none';
     $('#pago-rechazado-box').style.display = 'block';
     $('#motivo-rechazo').textContent = p.motivo_rechazo || p.motivo || 'No se especificó motivo.';
   }
+  // Estado aprobado → el caller redirige al dashboard
 }
 
 $('#btn-resubir').addEventListener('click', () => {
