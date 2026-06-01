@@ -885,6 +885,16 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
 /* cursor custom desactivado */
 .cursor-dot,.cursor-ring{display:none!important}
 html,body,a,button,.magnetic,*{cursor:auto!important}
+
+/* VISIBILIDAD: contenido siempre solido (sin transparencias por animaciones) */
+.feat,.socio-header,.socio-card-main,.socio-perk,#carta .eyebrow,#carta h2,#carta p,
+.carta-grid > div,.footer,[data-reveal],.maps-head,.maps-info,.maps-info-card,.maps-cta,
+.reg-left,#registroCard,.registro-card,.about-content,.about-img-col,.local-left,.local-right,
+.stats-item{opacity:1!important;transform:none!important}
+
+/* tarjetas info: fondo definido + borde dorado para que no se pierdan en el fondo */
+.maps-info-card,.maps-cta{background:linear-gradient(145deg,#1c140c,#140d07)!important;border:1px solid rgba(200,150,90,0.22)!important}
+.maps-info-label{color:#caa874!important}
 </style>
 </head>
 <body>
