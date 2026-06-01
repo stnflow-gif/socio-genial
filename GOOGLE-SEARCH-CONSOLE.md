@@ -1,4 +1,4 @@
-# Cómo indexar elsociogenial.stnflow.online en Google
+# Cómo indexar elsociogenial.site en Google
 
 ## Paso 1 — Entrar a Search Console
 1. Andá a: https://search.google.com/search-console
@@ -7,7 +7,7 @@
 ## Paso 2 — Agregar la propiedad
 1. Clic en "Agregar propiedad" (arriba a la izquierda)
 2. Elegí "Prefijo de URL"
-3. Ingresá: https://elsociogenial.stnflow.online/
+3. Ingresá: https://elsociogenial.site/
 4. Clic en "Continuar"
 
 ## Paso 3 — Verificar propiedad
@@ -25,7 +25,7 @@ Una vez verificado:
 
 ## Paso 5 — Solicitar indexación de la página principal
 1. Menú izquierdo → "Inspección de URLs"
-2. Pegá: https://elsociogenial.stnflow.online/
+2. Pegá: https://elsociogenial.site/
 3. Clic en "Solicitar indexación"
 
 ## Tiempo estimado
