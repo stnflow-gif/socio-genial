@@ -1720,6 +1720,36 @@ document.getElementById('regSubmit').addEventListener('click', function(){
    REDUCE MOTION FALLBACK
 ────────────────────────────────────── */
 // prefers-reduced-motion: el preloader siempre muestra, las CSS animations corren a .01ms (instant)
+
+/* ──────────────────────────────────────
+   FAILSAFE VISIBILIDAD — ninguna seccion queda invisible
+────────────────────────────────────── */
+(function(){
+  function stRefresh(){ try{ if(window.ScrollTrigger) ScrollTrigger.refresh(true); }catch(e){} }
+  window.addEventListener('load', function(){ setTimeout(stRefresh, 250); });
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ setTimeout(stRefresh, 120); }); }
+  window.addEventListener('resize', function(){ clearTimeout(window._rzt); window._rzt=setTimeout(stRefresh,200); });
+
+  // Respaldo: si una seccion entra en pantalla y sigue invisible (trigger no disparo), revelarla con fade
+  var SELS = ['.socio-header','.socio-card-main','.socio-perk','#carta .eyebrow','#carta h2','#carta p',
+    '.carta-grid > div','.footer','[data-reveal]','.maps-head','.maps-grid > *','.reg-left','#registroCard',
+    '.about-content','.about-img-col','.local-left','.local-right','.stats-item'];
+  function showEl(el){ el.style.transition='opacity .6s ease, transform .6s ease'; el.style.opacity='1'; el.style.transform='none'; }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          if(parseFloat(getComputedStyle(e.target).opacity) < 0.05){ showEl(e.target); }
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.04, rootMargin: '0px 0px -5% 0px' });
+    SELS.forEach(function(sel){ document.querySelectorAll(sel).forEach(function(el){ io.observe(el); }); });
+  } else {
+    // sin IO: revelar todo a los 3s
+    setTimeout(function(){ SELS.forEach(function(sel){ document.querySelectorAll(sel).forEach(showEl); }); }, 3000);
+  }
+})();
 </script>
 </body>
 </html>
