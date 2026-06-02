@@ -1005,6 +1005,19 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
   .socio-price-amount{font-size:52px}
   .socio-grid{gap:24px}
 }
+/* cursor custom desactivado */
+.cursor-dot,.cursor-ring{display:none!important}
+html,body,a,button,.magnetic,*{cursor:auto!important}
+
+/* VISIBILIDAD: contenido siempre solido (sin transparencias por animaciones) */
+.feat,.socio-header,.socio-card-main,.socio-perk,#carta .eyebrow,#carta h2,#carta p,
+.carta-grid > div,.footer,[data-reveal],.maps-head,.maps-info,.maps-info-card,.maps-cta,
+.reg-left,#registroCard,.registro-card,.about-content,.about-img-col,.local-left,.local-right,
+.stats-item{opacity:1!important;transform:none!important}
+
+/* tarjetas info: fondo definido + borde dorado para que no se pierdan en el fondo */
+.maps-info-card,.maps-cta{background:linear-gradient(145deg,#1c140c,#140d07)!important;border:1px solid rgba(200,150,90,0.22)!important}
+.maps-info-label{color:#caa874!important}
 </style>
 </head>
 <body>
@@ -1107,12 +1120,11 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
       <circle cx="63" cy="34" r="4.5" fill="rgba(200,150,90,0.45)"/>
       <circle cx="59" cy="30" r="3" fill="rgba(200,150,90,0.3)"/>
     </svg>
-    <img
-      class="hero-coffee" id="heroCoffee"
-      src="./img/scz-bandera-cristo.jfif"
-      alt="Santa Cruz de la Sierra"
-      onerror="this.style.display='none'"
-    >
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;padding:6%;">
+      <img src="./img/logo-gold.png" alt="Típicos · Con la receta de mamá"
+           style="width:90%;height:90%;object-fit:contain;filter:drop-shadow(0 10px 46px rgba(212,164,74,0.30)) drop-shadow(0 2px 8px rgba(0,0,0,0.4));"
+           onerror="this.style.display='none'">
+    </div>
   </div>
 </section>
 
@@ -1252,6 +1264,21 @@ body:has(button:hover) .cursor-dot{background:var(--gold-hi)}
 
   </div>
 </div>
+
+<!-- Banda Bandera de Santa Cruz -->
+<section style="position:relative;padding:92px 6%;background:linear-gradient(180deg,var(--bg) 0%,#0e0a06 50%,var(--bg) 100%);">
+  <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:54px;align-items:center;">
+    <div>
+      <div style="font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold-hi);font-weight:700;margin-bottom:16px;">Santa Cruz · Bolivia</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,108px);line-height:.88;letter-spacing:.03em;color:var(--cream);margin-bottom:20px;">ORGULLO<br>CAMBA</h2>
+      <p style="font-size:15px;line-height:1.7;color:#d8c9b0;max-width:430px;font-weight:300;">La receta, el sabor y el orgullo de nuestra tierra. Típicos nace en Santa Cruz para celebrar lo nuestro — el 6 de junio en Porongo.</p>
+    </div>
+    <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 40px 84px -26px rgba(0,0,0,.62),0 0 0 1px rgba(201,146,59,.35);aspect-ratio:4/3;">
+      <img src="./img/scz-bandera-cristo.jfif?v=2" alt="Bandera de Santa Cruz" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(1.12) contrast(1.06);">
+      <div style="position:absolute;inset:0;background:linear-gradient(125deg,transparent 58%,rgba(8,5,3,.28));"></div>
+    </div>
+  </div>
+</section>
 
 <!-- CARTA -->
 <section id="carta" style="border-top:1px solid var(--brd);position:relative;overflow:hidden;min-height:480px;display:flex;align-items:center;">
@@ -1827,6 +1854,46 @@ document.getElementById('regSubmit').addEventListener('click', function(){
    REDUCE MOTION FALLBACK
 ────────────────────────────────────── */
 // prefers-reduced-motion: el preloader siempre muestra, las CSS animations corren a .01ms (instant)
+
+/* ──────────────────────────────────────
+   FAILSAFE VISIBILIDAD — ninguna seccion queda invisible
+────────────────────────────────────── */
+(function(){
+  function stRefresh(){ try{ if(window.ScrollTrigger) ScrollTrigger.refresh(true); }catch(e){} }
+  window.addEventListener('load', function(){ setTimeout(stRefresh, 250); });
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ setTimeout(stRefresh, 120); }); }
+  window.addEventListener('resize', function(){ clearTimeout(window._rzt); window._rzt=setTimeout(stRefresh,200); });
+
+  // Respaldo: si una seccion entra en pantalla y sigue invisible (trigger no disparo), revelarla con fade
+  var SELS = ['.socio-header','.socio-card-main','.socio-perk','#carta .eyebrow','#carta h2','#carta p',
+    '.carta-grid > div','.footer','[data-reveal]','.maps-head','.maps-grid > *','.reg-left','#registroCard',
+    '.about-content','.about-img-col','.local-left','.local-right','.stats-item'];
+  function showEl(el){ el.style.transition='opacity .6s ease, transform .6s ease'; el.style.opacity='1'; el.style.transform='none'; }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          if(parseFloat(getComputedStyle(e.target).opacity) < 0.05){ showEl(e.target); }
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.04, rootMargin: '0px 0px -5% 0px' });
+    SELS.forEach(function(sel){ document.querySelectorAll(sel).forEach(function(el){ io.observe(el); }); });
+  } else {
+    setTimeout(function(){ SELS.forEach(function(sel){ document.querySelectorAll(sel).forEach(showEl); }); }, 3000);
+  }
+  // Barrido a prueba de balas: revela cualquier elemento EN PANTALLA que quede invisible (gana siempre)
+  var SELALL = SELS.join(',');
+  function sweep(){
+    document.querySelectorAll(SELALL).forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top < (window.innerHeight*0.96) && r.bottom > 0 && parseFloat(getComputedStyle(el).opacity) < 0.05){ showEl(el); }
+    });
+  }
+  var _sw=0, _iv=setInterval(function(){ sweep(); if(++_sw>26) clearInterval(_iv); }, 420);
+  window.addEventListener('scroll', sweep, {passive:true});
+  window.addEventListener('load', sweep);
+})();
 </script>
 </body>
 </html>
