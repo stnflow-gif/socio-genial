@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>Confirmados · Lanzamiento Típicos</title>
+<meta name="description" content="Quiénes ya confirmaron su lugar para el lanzamiento de Típicos, sábado 5 de septiembre en Porongo.">
+<meta name="theme-color" content="#FFFDF8">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --card:#FFFDF8; --card-2:#FBF4E6;
+  --brd:rgba(61,36,24,0.10); --brd-2:rgba(61,36,24,0.18);
+  --brd-gold:rgba(201,146,59,0.30); --brd-gold-hi:rgba(201,146,59,0.55);
+  --em:#C9923B; --em-2:#E8B554; --em-3:#9C6F27;
+  --brand-dark:#3D2418; --brand-mid:#6B3D24; --brand-warm:#8B5A2B;
+  --mu:#9C7E5E; --green:#5B8C3E;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1000px 650px at 15% -5%,rgba(232,181,84,0.18),transparent 55%),
+    radial-gradient(800px 550px at 100% 0%,rgba(139,90,43,0.12),transparent 60%),
+    var(--bg);
+  color:var(--brand-dark);font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;line-height:1.5;
+}
+.wrap{max-width:720px;margin:0 auto;padding:44px 20px 60px}
+.head{text-align:center;margin-bottom:8px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--em-3);font-weight:800;margin-bottom:12px}
+.head h1{font-family:'Lora',serif;font-weight:700;font-size:clamp(26px,6vw,38px);line-height:1.15}
+.head h1 em{font-style:normal;color:var(--em-3)}
+.head p{margin-top:12px;color:var(--brand-mid);font-family:'Lora',serif;font-style:italic;font-size:15px}
+
+.stats{display:flex;justify-content:center;gap:14px;margin:28px 0 32px;flex-wrap:wrap}
+.stat{
+  background:linear-gradient(180deg,rgba(255,250,238,0.94),rgba(248,234,208,0.88));
+  border:1px solid var(--brd-gold-hi);border-radius:16px;
+  padding:18px 26px;text-align:center;min-width:130px;
+  box-shadow:0 10px 26px rgba(61,36,24,0.10);
+}
+.stat .sv{font-family:'Lora',serif;font-weight:900;font-size:34px;color:var(--brand-dark);font-variant-numeric:tabular-nums}
+.stat .sl{font-size:10.5px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mu);font-weight:700;margin-top:4px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.persona{
+  background:var(--card);border:1px solid var(--brd-2);border-radius:12px;
+  padding:14px 12px;text-align:center;
+  transition:.25s var(--ease);opacity:0;transform:translateY(10px);
+}
+.persona.show{opacity:1;transform:translateY(0)}
+.persona .pn{font-family:'Lora',serif;font-weight:700;font-size:14.5px;color:var(--brand-dark)}
+.persona .pg{
+  display:inline-block;margin-top:6px;font-size:10px;font-weight:800;
+  color:var(--green);background:rgba(91,140,62,0.12);padding:2px 8px;border-radius:6px;
+}
+
+.vacio{text-align:center;padding:60px 20px;color:var(--mu);font-family:'Lora',serif;font-style:italic;font-size:16px}
+.cta{
+  display:block;text-align:center;margin:36px auto 0;max-width:320px;
+  padding:15px;border-radius:12px;text-decoration:none;
+  background:linear-gradient(180deg,var(--brand-warm),var(--brand-dark));
+  color:#fff;font-weight:700;font-size:14.5px;
+  box-shadow:0 10px 26px rgba(61,36,24,0.28);
+}
+.foot{text-align:center;margin-top:26px;font-size:11.5px;color:var(--mu)}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="eyebrow">Lanzamiento Típicos · Sábado 5 de septiembre</div>
+    <h1>Ya confirmaron <em>su lugar</em></h1>
+    <p>Plaza Principal de Porongo · 19:00 hs</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="sv" id="s-personas">–</div><div class="sl">Personas</div></div>
+    <div class="stat"><div class="sv" id="s-registros">–</div><div class="sl">Registros</div></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="vacio" id="vacio" style="display:none">Todavía nadie se registró... ¡sé el primero! 🍵</div>
+
+  <a class="cta" href="https://tipicos.online/lanzamiento/">Todavía no te registraste? Hacelo acá →</a>
+  <div class="foot"><span class="live-dot"></span>Esta lista se actualiza sola cada pocos segundos.</div>
+</div>
+
+<script>
+const API_URL = 'https://tipicos-9e69ae.pages.dev/api/confirmados';
+async function cargar(){
+  try{
+    const res = await fetch(API_URL + '?_=' + Date.now());
+    const data = await res.json();
+    document.getElementById('s-personas').textContent = data.personas;
+    document.getElementById('s-registros').textContent = data.total;
+    const grid = document.getElementById('grid');
+    const vacio = document.getElementById('vacio');
+    if(!data.lista.length){ vacio.style.display = 'block'; grid.innerHTML = ''; return; }
+    vacio.style.display = 'none';
+    grid.innerHTML = data.lista.map(p => (
+      '<div class="persona"><div class="pn">' + escapeHtml(p.nombre) + '</div>' +
+      (p.personas > 1 ? '<div class="pg">+' + (p.personas - 1) + '</div>' : '') +
+      '</div>'
+    )).join('');
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.persona').forEach((el,i) => {
+        setTimeout(() => el.classList.add('show'), i * 25);
+      });
+    });
+  }catch(e){ /* silencioso, reintenta en el próximo poll */ }
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+cargar();
+setInterval(cargar, 8000);
+</script>
+</body>
+</html>
