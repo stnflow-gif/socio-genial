@@ -1,3 +1,5 @@
 ﻿ABRIR.bat
 *.bat
 tu-cuenta-files/
+.wrangler/
+dist/
